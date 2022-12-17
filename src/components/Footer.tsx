@@ -113,11 +113,11 @@ const Footer = () => {
       </footer>
       <div className="bg-subfooter text-white">
         <div className="container py-3">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex flex-column flex-lg-row justify-content-between">
             <span className="fs-12">
               &copy; Video Translator 2022 - All Rights Reserved
             </span>
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
               {socials.map(({ id, icon, href }) => (
                 <a
                   key={id}
