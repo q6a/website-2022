@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withPrefix } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
+  const [showNav, setShowNav] = useState(false);
+
   return (
     <nav className="navbar navbar-expand-lg bg-white sticky-top shadow">
       <div className="container">
@@ -18,10 +20,14 @@ const Navbar = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={() => setShowNav(!showNav)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse">
+        <div
+          className={`collapse navbar-collapse ${showNav ? "show" : ""}`}
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
             <li className="nav-item">
               <Link
@@ -62,7 +68,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <div className="d-flex gap-3">
+          <div className="d-flex flex-column flex-lg-row gap-3">
             <button className="btn btn-link text-decoration-none" type="button">
               Login
             </button>
