@@ -48,6 +48,14 @@
   font-size: 0.875rem;
 }
 
+.fw-900 {
+  font-weight: 900;
+}
+
+.text-brand-green {
+  color: var(--brand-green);
+}
+
 .text-gray {
   color: var(--text-gray);
 }
@@ -68,12 +76,10 @@
 }
 
 .join {
-  background: linear-gradient(
-    256.84deg,
-    #7dd85a -0.53%,
-    #4270c2 48.17%,
-    #6f32b5 100%
-  );
+  background-image: url("../../static/images/bg-bottom-cta.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .content-item {
@@ -112,6 +118,10 @@
 
 .section-sm {
   padding: 4rem 0;
+}
+
+.section-md {
+  padding: 8rem 0;
 }
 
 .section-gradient {
