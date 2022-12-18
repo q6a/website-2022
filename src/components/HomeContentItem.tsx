@@ -21,10 +21,10 @@ const HomeContentItem = ({
   authorOrg,
 }: HomeContentItemProps) => {
   return (
-    <div className="mx-5 mt-3">
+    <div className="mx-0 mx-md-5 mt-3">
       <div className="content-item rounded-2 text-white mx-4">
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-lg-6">
             <img
               src={withPrefix(img)}
               alt={title}
@@ -33,7 +33,7 @@ const HomeContentItem = ({
               loading="lazy"
             />
           </div>
-          <div className="col text-end d-flex flex-column justify-content-around gap-5 p-5">
+          <div className="col-12 col-lg-6 text-end d-flex flex-column justify-content-around gap-5 p-5">
             <H2>{title}</H2>
             <Link
               to={link}

@@ -11,7 +11,7 @@ const BottomCta = () => {
           Join <span className="text-brand-green fw-900">10,000+</span> fellow
           content creators
         </div>
-        <BodyText classes="my-3">
+        <BodyText classes="brand-text my-3">
           That produce engaging and accessible <br />
           materials with <span className="fw-semibold">videotranslator.ai</span>
         </BodyText>
