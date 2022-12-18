@@ -75,6 +75,10 @@
   color: white;
 }
 
+.img-hero {
+  width: 420px;
+}
+
 .join {
   background-image: url("../../static/images/bg-bottom-cta.png");
   background-position: center;
@@ -91,17 +95,15 @@
   );
 }
 
-.content-link > span::after {
-  width: 120px !important;
-}
-
 .hero-title > span,
-.content-link > span {
+.content-link > span,
+.brand-text > span {
   position: relative;
 }
 
 .hero-title > span:after,
-.content-link > span:after {
+.content-link > span:after,
+.brand-text > span:after {
   background: linear-gradient(256.84deg, #7dd85a -0.53%, #4270c2 100%);
   border-radius: 24px;
   bottom: -4px;
@@ -109,7 +111,11 @@
   content: "";
   height: 4px;
   position: absolute;
-  width: 270px;
+  width: 100%;
+}
+
+.logo-item {
+  max-width: 100%;
 }
 
 .section {
@@ -201,4 +207,34 @@ span.fi {
 
 .img-editor {
   max-width: 1024px;
+}
+
+/* Responsives */
+@media screen and (max-width: 768px) {
+  .img-editor {
+    padding-top: 2rem;
+    max-width: 100%;
+  }
+
+  .section {
+    padding: 8rem 0;
+  }
+
+  .section-sm {
+    padding: 4rem 0;
+  }
+
+  .section-md {
+    padding: 6rem 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .img-hero {
+    width: 100%;
+  }
+
+  .section {
+    padding: 6rem 0;
+  }
 }

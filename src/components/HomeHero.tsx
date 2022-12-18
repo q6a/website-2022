@@ -30,7 +30,7 @@ const HomeHero = () => {
             <img
               src={withPrefix("images/img-hero.png")}
               alt="Play video"
-              width={420}
+              className="img-hero"
               loading="lazy"
             />
           </div>

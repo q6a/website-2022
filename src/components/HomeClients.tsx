@@ -55,11 +55,11 @@ const HomeClients = () => {
         </H2>
         <div className="row mt-5">
           {clients.map(({ id, img, name }) => (
-            <div key={id} className="col-6 col-lg-3">
+            <div key={id} className="col-6 col-md-4 col-lg-3">
               <img
                 src={withPrefix(img)}
                 alt={name}
-                className="p-4"
+                className="p-4 logo-item"
                 loading="lazy"
               />
             </div>
