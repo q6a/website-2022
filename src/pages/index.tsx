@@ -4,11 +4,12 @@ import type { HeadFC, PageProps } from "gatsby";
 import Layout from "../components/Layout";
 import Section from "../components/Section";
 import Helper from "../components/Helper";
+import HomeHero from "../components/HomeHero";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
-      <Section title="Hero" hasGradient />
+      <HomeHero />
       <Section title="Try out our editor demo" classes="bg-brand-light" />
       <Section title="Find out how users create meaningful contents" />
       <Section

@@ -24,6 +24,20 @@
   background: var(--bg-subfooter);
 }
 
+.bg-hero {
+  background: url("../../static/images/bg-hero.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-focus-hero {
+  background: url("../../static/images/focus-hero.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 360px;
+}
+
 /* Fonts */
 .fs-12 {
   font-size: 0.75rem;
@@ -46,6 +60,21 @@
     var(--brand-blue) 100%
   );
   color: white;
+}
+
+.hero-title > span {
+  position: relative;
+}
+
+.hero-title > span:after {
+  background: linear-gradient(256.84deg, #7dd85a -0.53%, #4270c2 100%);
+  border-radius: 24px;
+  bottom: -4px;
+  right: 0;
+  content: "";
+  height: 4px;
+  position: absolute;
+  width: 270px;
 }
 
 .section {
