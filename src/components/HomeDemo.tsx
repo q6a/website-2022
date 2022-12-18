@@ -1,12 +1,15 @@
 import React from "react";
 import { withPrefix } from "gatsby";
+
 import { H2 } from "./Typography";
 
 const HomeDemo = () => {
   return (
     <div className="section-sm bg-brand-light">
       <div className="container text-center">
-        <H2 classes="text-gray">Try out our editor demo</H2>
+        <H2 classes="text-gray" hasSeparator>
+          Try out our editor demo
+        </H2>
         <img
           src={withPrefix("images/demo.webp")}
           alt="Editor demo"

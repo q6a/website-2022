@@ -10,5 +10,8 @@ import "./src/styles/custom.css";
 // Flags
 import "flag-icons/css/flag-icons.min.css";
 
+// Slider
+import "@splidejs/splide/css";
+
 // Bootstrap
 import "bootstrap/js/dist/dropdown.js";
