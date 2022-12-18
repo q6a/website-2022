@@ -67,6 +67,15 @@
   color: white;
 }
 
+.join {
+  background: linear-gradient(
+    256.84deg,
+    #7dd85a -0.53%,
+    #4270c2 48.17%,
+    #6f32b5 100%
+  );
+}
+
 .content-item {
   background: linear-gradient(
     76.86deg,

@@ -7,6 +7,7 @@ import Helper from "../components/Helper";
 import HomeHero from "../components/HomeHero";
 import HomeDemo from "../components/HomeDemo";
 import HomeContents from "../components/HomeContents";
+import HomeClients from "../components/HomeClients";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -15,6 +16,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <HomeDemo />
       <HomeContents />
       <Helper />
+      <HomeClients />
       <Section title="Bottom CTA" hasGradient />
     </Layout>
   );
