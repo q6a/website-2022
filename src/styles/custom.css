@@ -5,6 +5,7 @@
   --brand-light: #f1f0ec;
   --bg-clients: #fafafa;
   --bg-subfooter: #692ab0;
+  --text-gray: #363636;
 }
 
 /* Background */
@@ -47,6 +48,10 @@
   font-size: 0.875rem;
 }
 
+.text-gray {
+  color: var(--text-gray);
+}
+
 /* Header */
 .navbar-brand > img {
   max-width: 260px;
@@ -78,7 +83,11 @@
 }
 
 .section {
-  padding: 12rem 0;
+  padding: 10rem 0;
+}
+
+.section-sm {
+  padding: 4rem 0;
 }
 
 .section-gradient {
@@ -137,4 +146,8 @@ span.fi {
   border-radius: 0.5rem;
   width: 28px;
   overflow: hidden;
+}
+
+.img-editor {
+  max-width: 1024px;
 }

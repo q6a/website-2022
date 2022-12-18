@@ -5,12 +5,13 @@ import Layout from "../components/Layout";
 import Section from "../components/Section";
 import Helper from "../components/Helper";
 import HomeHero from "../components/HomeHero";
+import HomeDemo from "../components/HomeDemo";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <HomeHero />
-      <Section title="Try out our editor demo" classes="bg-brand-light" />
+      <HomeDemo />
       <Section title="Find out how users create meaningful contents" />
       <Section
         title="Find out how users use VideoTranslator to create meaningful contents"

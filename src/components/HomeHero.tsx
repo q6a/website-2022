@@ -1,20 +1,22 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 
+import { H1, BodyText } from "./Typography";
+
 const HomeHero = () => {
   return (
     <div className="section bg-hero text-white">
       <div className="container">
         <div className="row">
           <div className="col-12 col-lg-6 d-flex flex-column justify-content-center gap-3">
-            <h1 className="hero-title fs-2 fw-bold">
+            <H1>
               Your partner in <span>video marketing</span>
-            </h1>
-            <p className="fs-5 fw-light">
+            </H1>
+            <BodyText>
               Transcribe, translate and dub videos in few sample steps
               <br />
               Try it now. No account required!
-            </p>
+            </BodyText>
             <div className="d-flex gap-3">
               <Link className="btn btn-light text-primary" to="/">
                 Login
