@@ -24,7 +24,7 @@ const HomeContentItem = ({
     <div className="mx-0 mx-md-5 mt-3">
       <div className="content-item rounded-2 text-white mx-4">
         <div className="row">
-          <div className="col-12 col-lg-6">
+          <div className="col-12 col-lg-6 d-flex align-items-end">
             <img
               src={withPrefix(img)}
               alt={title}
