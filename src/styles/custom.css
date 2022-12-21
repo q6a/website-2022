@@ -95,15 +95,15 @@
   );
 }
 
-.hero-title > span,
+.brand-text > span,
 .content-link > span,
-.brand-text > span {
+.hero-title > span {
   position: relative;
 }
 
-.hero-title > span:after,
+.brand-text > span:after,
 .content-link > span:after,
-.brand-text > span:after {
+.hero-title > span:after {
   background: linear-gradient(256.84deg, #7dd85a -0.53%, #4270c2 100%);
   border-radius: 24px;
   bottom: -4px;
@@ -116,6 +116,10 @@
 
 .logo-item {
   max-width: 100%;
+}
+
+.min-h-page {
+  min-height: 60vh;
 }
 
 .section {
@@ -164,6 +168,12 @@ ul.footer-menu {
 
 ul.footer-menu > li {
   padding: 0.25rem 0;
+}
+
+ul.footer-menu > li,
+ul.footer-menu > li > a {
+  color: white;
+  text-decoration: none;
 }
 
 .footer-title {

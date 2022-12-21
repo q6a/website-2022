@@ -1,5 +1,5 @@
 import React from "react";
-import { withPrefix } from "gatsby";
+import { Link, withPrefix } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -83,7 +83,9 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Company</span>
               <ul className="footer-menu">
-                <li>About Us</li>
+                <li>
+                  <Link to="/about">About Us</Link>
+                </li>
                 <li>Contact Us</li>
                 <li>Privacy Policy</li>
                 <li>Terms of Use</li>
