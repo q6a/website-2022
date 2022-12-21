@@ -18,12 +18,8 @@ const HomeContents = () => {
             <SplideSlide>
               <HomeContentItem
                 img="images/family-photo.png"
-                title={
-                  <>
-                    Leaving A Long-Lasting Legacy: <br />
-                    Curating Your Family’s History
-                  </>
-                }
+                title="Leaving A Long-Lasting Legacy:
+                Curating Your Family’s History"
                 link="/"
                 authorName="Jeff Dormish"
                 authorRoles="President"

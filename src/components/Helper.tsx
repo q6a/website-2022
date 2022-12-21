@@ -30,7 +30,7 @@ const Helper = () => {
 
   return (
     <div className="sticky-bottom">
-      <div className="container py-3 d-none d-lg-flex justify-content-between align-items-center">
+      <div className="mx-3 py-3 d-none d-lg-flex justify-content-between align-items-center">
         <div className="btn-group dropup shadow">
           <button
             type="button"

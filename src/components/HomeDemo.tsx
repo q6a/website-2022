@@ -10,13 +10,7 @@ const HomeDemo = () => {
         <H2 classes="text-gray" hasSeparator>
           Try out our editor demo
         </H2>
-        <img
-          src={withPrefix("images/demo.webp")}
-          alt="Editor demo"
-          className="img-editor"
-          loading="lazy"
-        />
-        <div className="d-flex align-items-center justify-content-center gap-3">
+        <div className="d-flex align-items-center justify-content-center gap-3 mt-5">
           <button
             className="btn btn-outline-primary text-primary"
             type="button"
@@ -28,6 +22,12 @@ const HomeDemo = () => {
             Translate
           </button>
         </div>
+        <img
+          src={withPrefix("images/demo.webp")}
+          alt="Editor demo"
+          className="img-editor"
+          loading="lazy"
+        />
       </div>
     </div>
   );
