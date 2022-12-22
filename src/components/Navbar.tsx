@@ -13,11 +13,11 @@ const Navbar = () => {
           <img src={withPrefix("images/logo.svg")} alt="VideoTranslator.AI" />
         </Link>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler shadow-none"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
           onClick={() => setShowNav(!showNav)}
@@ -26,7 +26,7 @@ const Navbar = () => {
         </button>
         <div
           className={`collapse navbar-collapse ${showNav ? "show" : ""}`}
-          id="navbarSupportedContent"
+          id="navbarContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
             <li className="nav-item">
