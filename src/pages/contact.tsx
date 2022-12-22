@@ -6,6 +6,7 @@ import * as z from "zod";
 
 import Layout from "../components/Layout";
 import { H1, BodyContentText } from "../components/Typography";
+import encode from "../utils/encodeForm";
 
 const contactSchema = z.object({
   name: z.string().min(3),
@@ -24,17 +25,15 @@ const ContactPage: React.FC<PageProps> = () => {
   });
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const sendMessage = (event: any) => {
-    event.preventDefault();
-
-    const form = event.target;
-    const formData = new FormData(form);
-
+  const sendMessage = (data: any) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       // @ts-ignore
-      body: new URLSearchParams(formData).toString(),
+      body: encode({
+        "form-name": "contact",
+        ...data,
+      }),
     })
       .then(() => {
         setIsSubmit(true);
@@ -95,9 +94,12 @@ const ContactPage: React.FC<PageProps> = () => {
               </div>
               <div className="mb-3">
                 <textarea
-                  className={`form-control ${errors.name ? "is-invalid" : ""}`}
+                  className={`form-control ${
+                    errors.message ? "is-invalid" : ""
+                  }`}
                   placeholder="Talk to us - what language would you like your content in? Can we help you in a different way?"
                   rows={5}
+                  required
                   {...register("message")}
                 ></textarea>
                 {errors.message && (
@@ -113,7 +115,7 @@ const ContactPage: React.FC<PageProps> = () => {
               </div>
             </form>
             {isSubmit && (
-              <div className="alert alert-primary" role="alert">
+              <div className="alert alert-success" role="alert">
                 Message successfully submitted!
               </div>
             )}
