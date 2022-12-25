@@ -1,8 +1,10 @@
+// @ts-nocheck
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import Recaptcha from "react-google-recaptcha";
 
 import Layout from "../components/Layout";
 import { H1, BodyContentText } from "../components/Typography";
@@ -24,14 +26,19 @@ const ContactPage: React.FC<PageProps> = () => {
     resolver: zodResolver(contactSchema),
   });
   const [isSubmit, setIsSubmit] = React.useState(false);
+  const [btnDisabled, setBtnDisabled] = React.useState(true);
+  const recaptchaRef = React.createRef();
 
   const sendMessage = (data: any) => {
+    const recaptchaValue = recaptchaRef.current.getValue();
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       // @ts-ignore
       body: encode({
         "form-name": "contact",
+        "g-recaptcha-response": recaptchaValue,
         ...data,
       }),
     })
@@ -64,7 +71,10 @@ const ContactPage: React.FC<PageProps> = () => {
             </BodyContentText>
           </div>
           <div className="col-12 col-md-8">
-            <form onSubmit={handleSubmit(sendMessage)}>
+            <form
+              onSubmit={handleSubmit(sendMessage)}
+              data-netlify-recaptcha="true"
+            >
               <input type="hidden" name="form-name" value="contact" />
               <div className="mb-3">
                 <input
@@ -109,7 +119,20 @@ const ContactPage: React.FC<PageProps> = () => {
                 )}
               </div>
               <div className="mb-3">
-                <button type="submit" className="btn btn-secondary mb-3">
+                <Recaptcha
+                  ref={recaptchaRef}
+                  sitekey={process.env.GATSBY_RECAPTCHA_KEY}
+                  size="normal"
+                  id="recaptcha-google"
+                  onChange={() => setBtnDisabled(false)}
+                />
+              </div>
+              <div className="mb-3">
+                <button
+                  type="submit"
+                  className="btn btn-secondary mb-3"
+                  disabled={btnDisabled}
+                >
                   Send
                 </button>
               </div>
