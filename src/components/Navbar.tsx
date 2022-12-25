@@ -43,7 +43,7 @@ const Navbar = () => {
               <Link
                 className="nav-link"
                 activeClassName="text-primary"
-                to="/about"
+                to="/page/about-us"
               >
                 About
               </Link>

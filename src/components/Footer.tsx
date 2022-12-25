@@ -84,13 +84,17 @@ const Footer = () => {
               <span className="footer-title fw-semibold">Company</span>
               <ul className="footer-menu">
                 <li>
-                  <Link to="/about">About Us</Link>
+                  <Link to="/page/about-us">About Us</Link>
                 </li>
                 <li>
                   <Link to="/contact">Contact Us</Link>
                 </li>
-                <li>Privacy Policy</li>
-                <li>Terms of Use</li>
+                <li>
+                  <Link to="/page/privacy-policy">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link to="/page/terms-of-use">Terms of Use</Link>
+                </li>
                 <li>Site Map</li>
                 <li>Jobs</li>
               </ul>
