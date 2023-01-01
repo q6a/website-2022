@@ -31,6 +31,9 @@ const config: GatsbyConfig = {
           {
             singularName: `custom-page`,
           },
+          {
+            singularName: `faq`,
+          },
         ],
       },
     },
