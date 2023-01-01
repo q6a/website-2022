@@ -57,7 +57,7 @@ const Helper = () => {
           </ul>
         </div>
         <Link
-          to="/"
+          to="/faq"
           className="bg-secondary text-white fs-5 px-3 py-2 rounded-2"
           title="Help"
         >

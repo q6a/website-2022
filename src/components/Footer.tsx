@@ -102,7 +102,9 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Product</span>
               <ul className="footer-menu">
-                <li>FAQ's</li>
+                <li>
+                  <Link to="/faq">FAQ's</Link>
+                </li>
                 <li>Available languages</li>
                 <li>Roadmap</li>
               </ul>

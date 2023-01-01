@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/Layout";
+import Helper from "../components/Helper";
 import { H1 } from "../components/Typography";
 
 const CustomPage: React.FC<PageProps> = ({ data }: any) => {
@@ -19,6 +20,7 @@ const CustomPage: React.FC<PageProps> = ({ data }: any) => {
           </ReactMarkdown>
         </div>
       </div>
+      <Helper />
     </Layout>
   );
 };

@@ -7,6 +7,7 @@ import * as z from "zod";
 import Recaptcha from "react-google-recaptcha";
 
 import Layout from "../components/Layout";
+import Helper from "../components/Helper";
 import { H1, BodyContentText } from "../components/Typography";
 import encode from "../utils/encodeForm";
 
@@ -145,6 +146,7 @@ const ContactPage: React.FC<PageProps> = () => {
           </div>
         </div>
       </div>
+      <Helper />
     </Layout>
   );
 };
