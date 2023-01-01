@@ -103,7 +103,7 @@ const Footer = () => {
               <span className="footer-title fw-semibold">Product</span>
               <ul className="footer-menu">
                 <li>
-                  <Link to="/faq">FAQ's</Link>
+                  <Link to="/faqs">FAQ's</Link>
                 </li>
                 <li>Available languages</li>
                 <li>Roadmap</li>
