@@ -9,4 +9,7 @@ $font-family-base: "Poppins", Arial, Helvetica, Verdana, sans-serif;
 $btn-padding-x: 20px;
 $btn-padding-y: 10px;
 
+// Navbar
+$navbar-light-toggler-border-color: transparent;
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
