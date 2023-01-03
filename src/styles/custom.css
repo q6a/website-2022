@@ -95,6 +95,25 @@
   );
 }
 
+.custom-page-content > h1 {
+  font-size: 1.75rem;
+}
+
+.custom-page-content > h2 {
+  font-size: 1.5rem;
+}
+
+.custom-page-content > h3 {
+  font-size: 1.25rem;
+}
+
+.custom-page-content > h1,
+.custom-page-content > h2,
+.custom-page-content > h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 .brand-text > span,
 .content-link > span,
 .hero-title > span {

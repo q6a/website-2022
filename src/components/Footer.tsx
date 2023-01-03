@@ -84,13 +84,17 @@ const Footer = () => {
               <span className="footer-title fw-semibold">Company</span>
               <ul className="footer-menu">
                 <li>
-                  <Link to="/about">About Us</Link>
+                  <Link to="/page/about-us">About Us</Link>
                 </li>
                 <li>
                   <Link to="/contact">Contact Us</Link>
                 </li>
-                <li>Privacy Policy</li>
-                <li>Terms of Use</li>
+                <li>
+                  <Link to="/page/privacy-policy">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link to="/page/terms-of-use">Terms of Use</Link>
+                </li>
                 <li>Site Map</li>
                 <li>Jobs</li>
               </ul>
@@ -98,7 +102,9 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Product</span>
               <ul className="footer-menu">
-                <li>FAQ's</li>
+                <li>
+                  <Link to="/faqs">FAQ's</Link>
+                </li>
                 <li>Available languages</li>
                 <li>Roadmap</li>
               </ul>

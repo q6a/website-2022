@@ -16,4 +16,5 @@ import "flag-icons/css/flag-icons.min.css";
 import "@splidejs/splide/css";
 
 // Bootstrap
+import "bootstrap/js/dist/collapse.js";
 import "bootstrap/js/dist/dropdown.js";

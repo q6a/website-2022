@@ -23,6 +23,20 @@ const config: GatsbyConfig = {
         implementation: require("sass"),
       },
     },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: process.env.STRAPI_API_URL,
+        collectionTypes: [
+          {
+            singularName: `custom-page`,
+          },
+          {
+            singularName: `faq`,
+          },
+        ],
+      },
+    },
   ],
 };
 
