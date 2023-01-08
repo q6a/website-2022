@@ -141,6 +141,35 @@
   min-height: 60vh;
 }
 
+.page-header-bg {
+  background: linear-gradient(
+    76.86deg,
+    var(--brand-purple) -0.63%,
+    var(--brand-blue) 48.11%,
+    var(--brand-green) 100%
+  );
+}
+
+.pricing-content {
+  background: linear-gradient(
+    76.86deg,
+    var(--brand-purple) -0.63%,
+    var(--brand-blue) 40.11%,
+    var(--brand-blue) 70.11%,
+    var(--brand-green) 100%
+  );
+}
+
+.pricing-content > div > div {
+  color: var(--brand-green);
+}
+
+.pricing-content > div > div > span {
+  color: white;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
 .section {
   padding: 10rem 0;
 }

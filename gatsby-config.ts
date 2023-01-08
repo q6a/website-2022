@@ -38,6 +38,7 @@ const config: GatsbyConfig = {
             singularName: `faq`,
           },
         ],
+        singleTypes: [`pricing`],
       },
     },
     {
