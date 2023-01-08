@@ -32,6 +32,7 @@
     "gatsby-plugin-purgecss": "^6.1.2",
     "gatsby-plugin-sass": "^6.3.1",
     "gatsby-plugin-sharp": "^5.2.0",
+    "gatsby-plugin-sitemap": "^6.3.1",
     "gatsby-source-filesystem": "^5.2.0",
     "gatsby-source-strapi": "^2.0.0",
     "gatsby-transformer-remark": "^6.2.0",
