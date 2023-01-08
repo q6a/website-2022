@@ -1,13 +1,16 @@
+// @ts-nocheck
 import type { GatsbyConfig } from "gatsby";
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const siteUrl = process.env.SITE_URL || `https://videotranslator.ai`;
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `VideoTranslatorAI`,
-    siteUrl: `https://videotranslator.ai`,
+    siteUrl,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -36,6 +39,9 @@ const config: GatsbyConfig = {
           },
         ],
       },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
     },
   ],
 };
