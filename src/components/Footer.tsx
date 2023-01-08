@@ -95,7 +95,14 @@ const Footer = () => {
                 <li>
                   <Link to="/page/terms-of-use">Terms of Use</Link>
                 </li>
-                <li>Site Map</li>
+                <li>
+                  <a
+                    href={withPrefix("/sitemap-0.xml")}
+                    rel="noopener noreferrer"
+                  >
+                    Site Map
+                  </a>
+                </li>
                 <li>Jobs</li>
               </ul>
             </div>
