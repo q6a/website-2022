@@ -3,7 +3,10 @@ import { Link, withPrefix } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+import useHeaderNavigation from "../hooks/useHeaderNavigation";
+
 const Navbar = () => {
+  const navigation = useHeaderNavigation();
   const [showNav, setShowNav] = useState(false);
 
   return (
@@ -29,44 +32,37 @@ const Navbar = () => {
           id="navbarContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                activeClassName="text-primary"
-                aria-current="page"
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                activeClassName="text-primary"
-                to="/page/about-us"
-              >
-                About
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link d-flex align-items-center gap-1"
-                activeClassName="text-primary"
-                to="/learn"
-              >
-                Learn
-                <FontAwesomeIcon icon={faChevronDown} />
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                activeClassName="text-primary"
-                to="/pricing"
-              >
-                Pricing
-              </Link>
-            </li>
+            {navigation &&
+              navigation.length > 0 &&
+              navigation.map(({ node }: any) => {
+                const hasChild = node?.items.length > 0;
+                return (
+                  <li
+                    key={node?.id}
+                    className={`nav-item ${hasChild ? "dropdown" : ""}`}
+                  >
+                    {hasChild ? (
+                      <Link
+                        className="nav-link d-flex align-items-center gap-1"
+                        activeClassName="text-primary"
+                        to={node?.path}
+                      >
+                        {node?.title}
+                        <FontAwesomeIcon icon={faChevronDown} />
+                      </Link>
+                    ) : (
+                      <Link
+                        className="nav-link"
+                        activeClassName="text-primary"
+                        aria-current="page"
+                        to={node?.path}
+                      >
+                        {node?.title}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
           </ul>
           <div className="d-flex flex-column flex-lg-row gap-3">
             <button className="btn btn-link text-decoration-none" type="button">

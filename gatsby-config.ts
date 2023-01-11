@@ -42,6 +42,14 @@ const config: GatsbyConfig = {
       },
     },
     {
+      resolve: "gatsby-source-strapi-plugin-navigation-v2",
+      options: {
+        apiURL: process.env.STRAPI_API_URL,
+        navigationIdsOrSlugs: [`api/navigation/render/header`],
+        type: `TREE`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-sitemap`,
     },
   ],

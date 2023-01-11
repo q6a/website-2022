@@ -35,6 +35,7 @@
     "gatsby-plugin-sitemap": "^6.3.1",
     "gatsby-source-filesystem": "^5.2.0",
     "gatsby-source-strapi": "^2.0.0",
+    "gatsby-source-strapi-plugin-navigation-v2": "^1.0.2",
     "gatsby-transformer-remark": "^6.2.0",
     "gatsby-transformer-sharp": "^5.2.0",
     "react": "^18.2.0",
