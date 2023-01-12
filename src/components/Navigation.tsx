@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-import useHeaderNavigation from "../hooks/useHeaderNavigation";
+import useHeaderNavigation from "../hooks/useHeaderNav";
 
 const Navigation = () => {
   const navigation = useHeaderNavigation();

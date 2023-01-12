@@ -9,7 +9,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import useFooterCompanyNavigation from "../hooks/useFooterCompanyNavigation";
+import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
 
 const socials = [
   {
@@ -87,12 +87,11 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Company</span>
               <ul className="footer-menu">
-                {companyNavigation &&
-                  companyNavigation?.map(({ node }: any) => (
-                    <li key={node?.id}>
-                      <Link to={node?.path}>{node?.title}</Link>
-                    </li>
-                  ))}
+                {companyNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <Link to={node?.path}>{node?.title}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
