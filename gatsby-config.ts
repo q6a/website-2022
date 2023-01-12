@@ -6,6 +6,7 @@ require("dotenv").config({
 });
 
 const siteUrl = process.env.SITE_URL || `https://videotranslator.ai`;
+const strapiUrl = process.env.STRAPI_API_URL || "http://127.0.0.1:1337";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -27,9 +28,17 @@ const config: GatsbyConfig = {
       },
     },
     {
+      resolve: "gatsby-source-strapi-plugin-navigation-v2",
+      options: {
+        apiURL: strapiUrl,
+        navigationIdsOrSlugs: [`api/navigation/render/header`],
+        type: `TREE`,
+      },
+    },
+    {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: process.env.STRAPI_API_URL,
+        apiURL: strapiUrl,
         collectionTypes: [
           {
             singularName: `custom-page`,
@@ -39,14 +48,6 @@ const config: GatsbyConfig = {
           },
         ],
         singleTypes: [`pricing`],
-      },
-    },
-    {
-      resolve: "gatsby-source-strapi-plugin-navigation-v2",
-      options: {
-        apiURL: process.env.STRAPI_API_URL,
-        navigationIdsOrSlugs: [`api/navigation/render/header`],
-        type: `TREE`,
       },
     },
     {

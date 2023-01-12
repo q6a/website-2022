@@ -190,6 +190,19 @@
   z-index: 99;
 }
 
+.text-404 {
+  font-size: 16rem;
+  line-height: 1;
+  background: -webkit-linear-gradient(
+    76.86deg,
+    var(--brand-purple) -0.63%,
+    var(--brand-blue) 48.11%,
+    var(--brand-green) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .text-gradient h1 {
   font-size: 72px;
   background: -webkit-linear-gradient(
@@ -285,6 +298,10 @@ span.fi {
   .section-md {
     padding: 6rem 0;
   }
+
+  .text-404 {
+    font-size: 14rem;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -294,5 +311,9 @@ span.fi {
 
   .section {
     padding: 6rem 0;
+  }
+
+  .text-404 {
+    font-size: 10rem;
   }
 }
