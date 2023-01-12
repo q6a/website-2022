@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
+import useFooterProductNavigation from "../hooks/useFooterProductNav";
 
 const socials = [
   {
@@ -45,7 +46,9 @@ const socials = [
 ];
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   const companyNavigation = useFooterCompanyNavigation();
+  const productNavigation = useFooterProductNavigation();
 
   return (
     <>
@@ -97,11 +100,11 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Product</span>
               <ul className="footer-menu">
-                <li>
-                  <Link to="/faqs">FAQ's</Link>
-                </li>
-                <li>Available languages</li>
-                <li>Roadmap</li>
+                {productNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <Link to={node?.path}>{node?.title}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
@@ -120,7 +123,7 @@ const Footer = () => {
         <div className="container py-3">
           <div className="d-flex flex-column flex-lg-row justify-content-between">
             <span className="fs-12">
-              &copy; Video Translator 2022 - All Rights Reserved
+              &copy; Video Translator {currentYear} - All Rights Reserved
             </span>
             <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
               {socials.map(({ id, icon, href }) => (
