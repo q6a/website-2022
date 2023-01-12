@@ -38,6 +38,11 @@ After successfully build, then runs command below to start/serve default product
 $ npm run serve
 ```
 
+## Administrator guides
+
+- [How to create a new page?](docs/how-to-create-a-new-page)
+- How to modify header, and footer menus?
+
 ## Useful links
 
 - [Development URL](https://q6a-website-dev.netlify.app/)
