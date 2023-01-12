@@ -65,6 +65,16 @@
   max-width: 260px;
 }
 
+.menu-dropdown:hover .menu-drodpown-content {
+  display: block;
+}
+
+.menu-drodpown-content {
+  display: none;
+  background: white;
+  min-width: 120px;
+}
+
 /* Components */
 .btn-gradient {
   background: linear-gradient(
