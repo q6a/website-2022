@@ -40,8 +40,8 @@ $ npm run serve
 
 ## Administrator guides
 
-- [How to create a new page?](docs/how-to-create-a-new-page)
-- How to modify header, and footer menus?
+- [How to create a new page?](docs/how-to-create-a-new-page.md)
+- [How to modify header, and footer menus?](docs/how-to-modify-header-and-footer-menus.md)
 
 ## Useful links
 
