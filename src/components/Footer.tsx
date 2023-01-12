@@ -11,6 +11,7 @@ import {
 
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
 import useFooterProductNavigation from "../hooks/useFooterProductNav";
+import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
 
 const socials = [
   {
@@ -49,6 +50,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const companyNavigation = useFooterCompanyNavigation();
   const productNavigation = useFooterProductNavigation();
+  const resourcesNavigation = useFooterResourcesNavigation();
 
   return (
     <>
@@ -110,10 +112,11 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Resources</span>
               <ul className="footer-menu">
-                <li>Help Center</li>
-                <li>Blog</li>
-                <li>Updates</li>
-                <li>Forum</li>
+                {resourcesNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <Link to={node?.path}>{node?.title}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

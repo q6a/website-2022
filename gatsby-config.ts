@@ -35,6 +35,7 @@ const config: GatsbyConfig = {
           headerMenu: `api/navigation/render/header`,
           footerCompanyMenu: `api/navigation/render/footer-company`,
           footerProductMenu: `api/navigation/render/footer-product`,
+          footerResourcesMenu: `api/navigation/render/footer-resources`,
         },
         type: `TREE`,
       },
