@@ -9,6 +9,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
+import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
 import useFooterProductNavigation from "../hooks/useFooterProductNav";
 import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
@@ -94,7 +95,11 @@ const Footer = () => {
               <ul className="footer-menu">
                 {companyNavigation?.map(({ node }: any) => (
                   <li key={node?.id}>
-                    <Link to={node?.path}>{node?.title}</Link>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={node?.title}
+                    />
                   </li>
                 ))}
               </ul>
@@ -104,7 +109,11 @@ const Footer = () => {
               <ul className="footer-menu">
                 {productNavigation?.map(({ node }: any) => (
                   <li key={node?.id}>
-                    <Link to={node?.path}>{node?.title}</Link>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={node?.title}
+                    />
                   </li>
                 ))}
               </ul>
@@ -114,7 +123,11 @@ const Footer = () => {
               <ul className="footer-menu">
                 {resourcesNavigation?.map(({ node }: any) => (
                   <li key={node?.id}>
-                    <Link to={node?.path}>{node?.title}</Link>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={node?.title}
+                    />
                   </li>
                 ))}
               </ul>

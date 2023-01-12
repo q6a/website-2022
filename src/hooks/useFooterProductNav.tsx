@@ -12,6 +12,7 @@ const useFooterProductNavigation = () => {
             id
             title
             path
+            menuAttached
           }
         }
       }

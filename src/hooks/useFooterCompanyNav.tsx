@@ -12,6 +12,7 @@ const useFooterCompanyNavigation = () => {
             id
             title
             path
+            menuAttached
           }
         }
       }
