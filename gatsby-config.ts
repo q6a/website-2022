@@ -31,7 +31,10 @@ const config: GatsbyConfig = {
       resolve: "gatsby-source-strapi-plugin-navigation-v2",
       options: {
         apiURL: strapiUrl,
-        navigationIdsOrSlugs: [`api/navigation/render/header`],
+        navigationIdsOrSlugs: {
+          headerMenu: `api/navigation/render/header`,
+          footerCompanyMenu: `api/navigation/render/footer-company`,
+        },
         type: `TREE`,
       },
     },

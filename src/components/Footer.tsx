@@ -9,6 +9,8 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
+import useFooterCompanyNavigation from "../hooks/useFooterCompanyNavigation";
+
 const socials = [
   {
     id: "social-1",
@@ -43,6 +45,8 @@ const socials = [
 ];
 
 const Footer = () => {
+  const companyNavigation = useFooterCompanyNavigation();
+
   return (
     <>
       <footer className="bg-brand-purple text-white">
@@ -83,27 +87,12 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Company</span>
               <ul className="footer-menu">
-                <li>
-                  <Link to="/page/about-us">About Us</Link>
-                </li>
-                <li>
-                  <Link to="/contact">Contact Us</Link>
-                </li>
-                <li>
-                  <Link to="/page/privacy-policy">Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link to="/page/terms-of-use">Terms of Use</Link>
-                </li>
-                <li>
-                  <a
-                    href={withPrefix("/sitemap-0.xml")}
-                    rel="noopener noreferrer"
-                  >
-                    Site Map
-                  </a>
-                </li>
-                <li>Jobs</li>
+                {companyNavigation &&
+                  companyNavigation?.map(({ node }: any) => (
+                    <li key={node?.id}>
+                      <Link to={node?.path}>{node?.title}</Link>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">

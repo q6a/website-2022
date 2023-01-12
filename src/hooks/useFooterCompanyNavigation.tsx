@@ -1,22 +1,17 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-const useHeaderNavigation = () => {
+const useFooterCompanyNavigation = () => {
   const data = useStaticQuery(graphql`
     query {
       allStrapiNavigation(
         sort: { order: ASC }
-        filter: { key: { eq: "headerMenu" } }
+        filter: { key: { eq: "footerCompanyMenu" } }
       ) {
         edges {
           node {
             id
             title
             path
-            items {
-              id
-              title
-              path
-            }
           }
         }
       }
@@ -26,4 +21,4 @@ const useHeaderNavigation = () => {
   return data?.allStrapiNavigation?.edges;
 };
 
-export default useHeaderNavigation;
+export default useFooterCompanyNavigation;
