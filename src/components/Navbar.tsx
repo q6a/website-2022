@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, withPrefix } from "gatsby";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
+import Navigation from "./Navigation";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -28,46 +28,7 @@ const Navbar = () => {
           className={`collapse navbar-collapse ${showNav ? "show" : ""}`}
           id="navbarContent"
         >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                activeClassName="text-primary"
-                aria-current="page"
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                activeClassName="text-primary"
-                to="/page/about-us"
-              >
-                About
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link d-flex align-items-center gap-1"
-                activeClassName="text-primary"
-                to="/learn"
-              >
-                Learn
-                <FontAwesomeIcon icon={faChevronDown} />
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                activeClassName="text-primary"
-                to="/pricing"
-              >
-                Pricing
-              </Link>
-            </li>
-          </ul>
+          <Navigation />
           <div className="d-flex flex-column flex-lg-row gap-3">
             <button className="btn btn-link text-decoration-none" type="button">
               Login

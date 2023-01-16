@@ -9,6 +9,11 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
+import WrapperLink from "./WrapperLink";
+import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
+import useFooterProductNavigation from "../hooks/useFooterProductNav";
+import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
+
 const socials = [
   {
     id: "social-1",
@@ -43,6 +48,11 @@ const socials = [
 ];
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  const companyNavigation = useFooterCompanyNavigation();
+  const productNavigation = useFooterProductNavigation();
+  const resourcesNavigation = useFooterResourcesNavigation();
+
   return (
     <>
       <footer className="bg-brand-purple text-white">
@@ -83,46 +93,43 @@ const Footer = () => {
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Company</span>
               <ul className="footer-menu">
-                <li>
-                  <Link to="/page/about-us">About Us</Link>
-                </li>
-                <li>
-                  <Link to="/contact">Contact Us</Link>
-                </li>
-                <li>
-                  <Link to="/page/privacy-policy">Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link to="/page/terms-of-use">Terms of Use</Link>
-                </li>
-                <li>
-                  <a
-                    href={withPrefix("/sitemap-0.xml")}
-                    rel="noopener noreferrer"
-                  >
-                    Site Map
-                  </a>
-                </li>
-                <li>Jobs</li>
+                {companyNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={node?.title}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Product</span>
               <ul className="footer-menu">
-                <li>
-                  <Link to="/faqs">FAQ's</Link>
-                </li>
-                <li>Available languages</li>
-                <li>Roadmap</li>
+                {productNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={node?.title}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">Resources</span>
               <ul className="footer-menu">
-                <li>Help Center</li>
-                <li>Blog</li>
-                <li>Updates</li>
-                <li>Forum</li>
+                {resourcesNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={node?.title}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -132,7 +139,7 @@ const Footer = () => {
         <div className="container py-3">
           <div className="d-flex flex-column flex-lg-row justify-content-between">
             <span className="fs-12">
-              &copy; Video Translator 2022 - All Rights Reserved
+              &copy; Video Translator {currentYear} - All Rights Reserved
             </span>
             <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
               {socials.map(({ id, icon, href }) => (
