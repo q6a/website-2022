@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
+import { withPrefix } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -8,6 +8,7 @@ import {
   faYoutube,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
@@ -52,6 +53,7 @@ const Footer = () => {
   const companyNavigation = useFooterCompanyNavigation();
   const productNavigation = useFooterProductNavigation();
   const resourcesNavigation = useFooterResourcesNavigation();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -65,19 +67,16 @@ const Footer = () => {
                   alt="VideoTranslator"
                   className="footer-logo"
                 />
-                <span className="fs-14">
-                  The easy way to create stunning videos, add subtitles and grow
-                  your audience.
-                </span>
+                <span className="fs-14">{t("tagline")}</span>
                 <span className="fs-14 fw-semibold">
-                  Subscribe to our newsletter
+                  {t("subscribeNewsletter")}
                 </span>
                 <div className="input-group mb-3">
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="Your email address"
-                    aria-label="Your email address"
+                    placeholder={t("inputNewsletterPlaceholder") || ""}
+                    aria-label={t("inputNewsletterPlaceholder") || ""}
                     aria-describedby="button-subscribe"
                   />
                   <button
@@ -85,13 +84,13 @@ const Footer = () => {
                     type="button"
                     id="button-subscribe"
                   >
-                    Subscribe
+                    {t("subscribe")}
                   </button>
                 </div>
               </div>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
-              <span className="footer-title fw-semibold">Company</span>
+              <span className="footer-title fw-semibold">{t("company")}</span>
               <ul className="footer-menu">
                 {companyNavigation?.map(({ node }: any) => (
                   <li key={node?.id}>
@@ -105,7 +104,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
-              <span className="footer-title fw-semibold">Product</span>
+              <span className="footer-title fw-semibold">{t("product")}</span>
               <ul className="footer-menu">
                 {productNavigation?.map(({ node }: any) => (
                   <li key={node?.id}>
@@ -119,7 +118,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
-              <span className="footer-title fw-semibold">Resources</span>
+              <span className="footer-title fw-semibold">{t("resources")}</span>
               <ul className="footer-menu">
                 {resourcesNavigation?.map(({ node }: any) => (
                   <li key={node?.id}>

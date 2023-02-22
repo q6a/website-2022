@@ -1,10 +1,12 @@
 // @ts-nocheck
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
+import { graphql } from "gatsby";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Recaptcha from "react-google-recaptcha";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
@@ -29,6 +31,7 @@ const ContactPage: React.FC<PageProps> = () => {
   const [isSubmit, setIsSubmit] = React.useState(false);
   const [btnDisabled, setBtnDisabled] = React.useState(true);
   const recaptchaRef = React.createRef();
+  const { t } = useTranslation();
 
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
@@ -53,11 +56,11 @@ const ContactPage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <div className="container my-5 min-h-page">
-        <H1 classes="mb-3">Contact us</H1>
+        <H1 classes="mb-3">{t("contactUs")}</H1>
         <div className="row">
           <div className="col-12 col-md-4">
             <BodyContentText classes="lh-lg">
-              <span className="fw-bolder">Office location:</span>
+              <span className="fw-bolder">{t("officeLocation")}:</span>
               <br />
               105/166D Glebel Point Road
               <br />
@@ -66,7 +69,7 @@ const ContactPage: React.FC<PageProps> = () => {
               Sydney, NSW, Australia.
               <br />
               <br />
-              <span className="fw-bolder">Email:</span>
+              <span className="fw-bolder">{t("email")}:</span>
               <br />
               hello@videotranslator.ai
             </BodyContentText>
@@ -150,6 +153,22 @@ const ContactPage: React.FC<PageProps> = () => {
     </Layout>
   );
 };
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(
+      filter: { ns: { in: ["index", "contact"] }, language: { eq: $language } }
+    ) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
 
 export default ContactPage;
 

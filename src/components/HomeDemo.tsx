@@ -1,14 +1,17 @@
 import React from "react";
 import { withPrefix } from "gatsby";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { H2 } from "./Typography";
 
 const HomeDemo = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="section-sm bg-brand-light">
       <div className="container text-center">
         <H2 classes="text-gray" hasSeparator>
-          Try out our editor demo
+          {t("tryEditor")}
         </H2>
         <div className="d-flex align-items-center justify-content-center gap-3 mt-5">
           <button
@@ -16,10 +19,10 @@ const HomeDemo = () => {
             type="button"
             disabled
           >
-            Transcribe
+            {t("transcribe")}
           </button>
           <button className="btn btn-primary" type="button" disabled>
-            Translate
+            {t("translate")}
           </button>
         </div>
         <img

@@ -1,22 +1,28 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 
 import { BodyText } from "../components/Typography";
 
 const BottomCta = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="section-md join text-white text-center">
       <div className="container py-5">
         <div className="fs-2 fw-semibold">
-          Join <span className="text-brand-green fw-900">10,000+</span> fellow
-          content creators
+          <Trans
+            i18nKey="bottomCtaTitle"
+            components={[<span className="text-brand-green fw-900" />]}
+          />
         </div>
         <BodyText classes="brand-text my-3">
-          That produce engaging and accessible <br />
-          materials with <span className="fw-semibold">videotranslator.ai</span>
+          <Trans
+            i18nKey="bottomCtaDescription"
+            components={[<br />, <span className="fw-semibold" />]}
+          />
         </BodyText>
         <Link className="btn btn-primary mt-3" to="/">
-          Start Creating
+          {t("bottomCtaButtonLabel")}
         </Link>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { graphql } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
 
 import Layout from "../components/Layout";
@@ -23,5 +24,21 @@ const IndexPage: React.FC<PageProps> = () => {
 };
 
 export default IndexPage;
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(
+      filter: { ns: { in: ["index"] }, language: { eq: $language } }
+    ) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
 
 export const Head: HeadFC = () => <title>Home Page</title>;

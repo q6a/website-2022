@@ -10,26 +10,69 @@ import { H1 } from "../components/Typography";
 const CustomPage: React.FC<PageProps> = ({ data }: any) => {
   return (
     <Layout>
-      <div className="container my-5 min-h-page">
-        <H1 classes={`mb-3 text-${data?.strapiCustomPage?.align}`}>
-          {data?.strapiCustomPage?.title}
-        </H1>
-        <div className="custom-page-content fw-light lh-lg py-3">
-          <ReactMarkdown>
-            {data?.strapiCustomPage?.content?.data?.content}
-          </ReactMarkdown>
+      {data?.localeCustomPage?.title && (
+        <div className="container my-5 min-h-page">
+          <H1 classes={`mb-3 text-${data?.localeCustomPage?.align}`}>
+            {data?.localeCustomPage?.title}
+          </H1>
+          <div className="custom-page-content fw-light lh-lg py-3">
+            <ReactMarkdown>
+              {data?.localeCustomPage?.content?.data?.content}
+            </ReactMarkdown>
+          </div>
         </div>
-      </div>
+      )}
+      {!data?.localeCustomPage?.title && (
+        <div className="container my-5 min-h-page">
+          <H1 classes={`mb-3 text-${data?.fallbackCustomPage?.align}`}>
+            {data?.fallbackCustomPage?.title}
+          </H1>
+          <div className="custom-page-content fw-light lh-lg py-3">
+            <ReactMarkdown>
+              {data?.fallbackCustomPage?.content?.data?.content}
+            </ReactMarkdown>
+          </div>
+        </div>
+      )}
       <Helper />
     </Layout>
   );
 };
 
 export const query = graphql`
-  query ($id: String!) {
-    strapiCustomPage(id: { eq: $id }) {
+  query ($page: String!, $language: String!) {
+    locales: allLocale(
+      filter: { ns: { in: ["index"] }, language: { eq: $language } }
+    ) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+    localeCustomPage: strapiCustomPage(
+      pageName: { eq: $page }
+      locale: { eq: $language }
+    ) {
+      id
+      pageName
       title
-      slug
+      align
+      content {
+        data {
+          content
+        }
+      }
+    }
+    fallbackCustomPage: strapiCustomPage(
+      pageName: { eq: $page }
+      locale: { eq: "en" }
+    ) {
+      id
+      pageName
+      title
       align
       content {
         data {

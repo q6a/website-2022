@@ -1,9 +1,12 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
+import { withPrefix } from "gatsby";
+import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 
 import { H1, BodyText } from "./Typography";
 
 const HomeHero = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-brand-light pt-3">
       <div className="section-sm bg-hero text-white rounded-2 mx-3">
@@ -11,19 +14,17 @@ const HomeHero = () => {
           <div className="row">
             <div className="col-12 col-lg-6 d-flex flex-column justify-content-center gap-3">
               <H1>
-                Your partner in <span>video marketing</span>
+                <Trans i18nKey="heroTitle" components={[<span />]} />
               </H1>
               <BodyText>
-                Transcribe, translate and dub videos in few sample steps
-                <br />
-                Try it now. No account required!
+                <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
               <div className="d-flex gap-3">
                 <Link className="btn btn-light text-primary" to="/">
-                  Login
+                  {t("login")}
                 </Link>
                 <Link className="btn btn-primary" to="/">
-                  Sign up
+                  {t("signUp")}
                 </Link>
               </div>
             </div>

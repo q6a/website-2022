@@ -19,6 +19,36 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/locales`,
+        name: `locale`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locale`,
+        languages: [`en`, `id`],
+        defaultLanguage: `en`,
+        siteUrl: siteUrl,
+        trailingSlash: "always",
+        i18nextOptions: {
+          interpolation: {
+            escapeValue: false,
+          },
+          keySeparator: false,
+          nsSeparator: false,
+        },
+        pages: [
+          {
+            matchPath: "/:lang?/blog/:slug",
+            getLanguageFromPath: true,
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-transformer-sharp`,
     },
     {
@@ -47,9 +77,19 @@ const config: GatsbyConfig = {
         collectionTypes: [
           {
             singularName: `custom-page`,
+            pluginOptions: {
+              i18n: {
+                locale: "all",
+              },
+            },
           },
           {
             singularName: `faq`,
+            pluginOptions: {
+              i18n: {
+                locale: "all",
+              },
+            },
           },
         ],
         singleTypes: [`pricing`],

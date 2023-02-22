@@ -1,32 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "gatsby";
+import React from "react";
+import { Link, useI18next } from "gatsby-plugin-react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 
-const languages = [
-  {
-    id: "lang-1",
-    name: "English",
-    flag: "gb",
-    value: "en",
-  },
-  {
-    id: "lang-2",
-    name: "Italiano",
-    flag: "it",
-    value: "it",
-  },
-  {
-    id: "lang-3",
-    name: "Espanol",
-    flag: "es",
-    value: "es",
-  },
-];
+import availableLanguage from "../common/languages";
 
 const Helper = () => {
-  const [lang, setLang] = useState("en");
-  const selectedLang = languages.find(({ value }) => value === lang);
+  const { language, changeLanguage } = useI18next();
+  const selectedLang = availableLanguage.find(
+    ({ value }) => value === language
+  );
 
   return (
     <div className="sticky-bottom">
@@ -42,18 +25,20 @@ const Helper = () => {
             {selectedLang?.name}
           </button>
           <ul className="dropdown-menu">
-            {languages.map(({ id, name, flag, value }) => (
-              <li key={id}>
-                <button
-                  className="dropdown-item d-flex align-items-center gap-1"
-                  type="button"
-                  onClick={() => setLang(value)}
-                >
-                  <span className={`fi fi-${flag}`}></span>
-                  {name}
-                </button>
-              </li>
-            ))}
+            {availableLanguage
+              .filter(({ showInHelper }) => showInHelper)
+              .map(({ name, flag, value }) => (
+                <li key={value}>
+                  <button
+                    className="dropdown-item d-flex align-items-center gap-1"
+                    type="button"
+                    onClick={() => changeLanguage(value)}
+                  >
+                    <span className={`fi fi-${flag}`}></span>
+                    {name}
+                  </button>
+                </li>
+              ))}
           </ul>
         </div>
         <Link

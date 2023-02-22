@@ -1,12 +1,15 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
+import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import { H1 } from "../components/Typography";
 
 const PricingPage: React.FC<PageProps> = ({ data }: any) => {
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <div className="container my-5 min-h-page">
@@ -14,23 +17,21 @@ const PricingPage: React.FC<PageProps> = ({ data }: any) => {
         <div className="pricing-content text-center text-white my-5 p-5 rounded-2">
           <div className="d-flex flex-column align-items-center justify-content-center gap-4">
             <span className="fs-5 text-uppercase">
-              Artificial Intelligence
-              <br />
-              Video Transcription and translation
+              <Trans i18nKey="pricingSectionTitle" components={[<br />]} />
             </span>
             <div className="fs-1 fw-bold">
               {`${data?.strapiPricing?.price} ${data?.strapiPricing?.currency}`}
               <span className="fs-3">{`/${data?.strapiPricing?.units}`}</span>
             </div>
             <button className="btn btn-primary px-5" type="button">
-              Try Now
+              {t("pricingTryNow")}
             </button>
           </div>
         </div>
         <div className="text-center">
-          Transcribe and translate your videos into more than 120+ languages.
+          {t("pricingTranscribeTranslate")}
           <br />
-          <Link to="/">Find out more here!</Link>
+          <Link to="/">{t("pricingFindOut")}</Link>
         </div>
       </div>
       <Helper />
@@ -39,11 +40,22 @@ const PricingPage: React.FC<PageProps> = ({ data }: any) => {
 };
 
 export const query = graphql`
-  query {
+  query ($language: String!) {
     strapiPricing {
       price
       currency
       units
+    }
+    locales: allLocale(
+      filter: { ns: { in: ["index", "pricing"] }, language: { eq: $language } }
+    ) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
     }
   }
 `;
