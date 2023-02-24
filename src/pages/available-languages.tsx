@@ -24,13 +24,15 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
   const filterData = () => {
     if (input.length > 0) {
       const filteredTranscription = data.transcriptionLang.edges.filter(
-        ({ node }: any) => node?.language?.toLowerCase() === input.toLowerCase()
+        ({ node }: any) =>
+          node?.language?.toLowerCase()?.includes(input.toLowerCase())
       );
       const filteredTranslation = data.translationLang.edges.filter(
-        ({ node }: any) => node?.language?.toLowerCase() === input.toLowerCase()
+        ({ node }: any) =>
+          node?.language?.toLowerCase()?.includes(input.toLowerCase())
       );
-      const filteredDubbing = data.dubbingLang.edges.filter(
-        ({ node }: any) => node?.language?.toLowerCase() === input.toLowerCase()
+      const filteredDubbing = data.dubbingLang.edges.filter(({ node }: any) =>
+        node?.language?.toLowerCase()?.includes(input.toLowerCase())
       );
       setTranscriptionData(filteredTranscription);
       setTranslationData(filteredTranslation);
