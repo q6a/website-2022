@@ -1,5 +1,6 @@
 import React from "react";
 import { withPrefix } from "gatsby";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { H2 } from "./Typography";
 
@@ -47,11 +48,13 @@ const clients = [
 ];
 
 const HomeClients = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="section-sm bg-brand-light">
       <div className="container text-center">
         <H2 classes="text-gray" hasSeparator>
-          Our Partners and Clients
+          {t("partnerSectionTitle")}
         </H2>
         <div className="row mt-5">
           {clients.map(({ id, img, name }) => (

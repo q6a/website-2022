@@ -12,14 +12,15 @@ exports.createPages = ({ graphql, actions }) => {
               edges {
                 node {
                   id
+                  pageName
                   title
-                  slug
                   align
                   content {
                     data {
                       content
                     }
                   }
+                  locale
                 }
               }
             }
@@ -35,10 +36,11 @@ exports.createPages = ({ graphql, actions }) => {
         pages.edges.forEach(({ node }) => {
           const component = path.resolve("src/templates/custom-page.tsx");
           createPage({
-            path: `/page/${node.slug}`,
+            path: `/page/${node.pageName}`,
             component,
             context: {
-              id: node.id,
+              page: node.pageName,
+              language: node.locale,
             },
           });
         });

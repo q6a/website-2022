@@ -1,5 +1,6 @@
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Trans } from "gatsby-plugin-react-i18next";
 
 import { H2 } from "./Typography";
 import HomeContentItem from "./HomeContentItem";
@@ -9,9 +10,7 @@ const HomeContents = () => {
     <div className="section-sm">
       <div className="container">
         <H2 classes="text-gray text-center" hasSeparator>
-          Find our how users use VideoTanslator
-          <br />
-          to create meaningful contents
+          <Trans i18nKey="blogSectionTitle" components={[<br />]} />
         </H2>
         <div className="mt-5">
           <Splide options={{ autoplay: true }} aria-label="Contents">

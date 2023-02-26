@@ -42,6 +42,7 @@ $ npm run serve
 
 - [How to create a new page?](docs/how-to-create-a-new-page.md)
 - [How to modify header, and footer menus?](docs/how-to-modify-header-and-footer-menus.md)
+- [How to add item on available languages?](docs/how-to-add-item-on-available-languages.md)
 
 ## Useful links
 

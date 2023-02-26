@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Link, withPrefix } from "gatsby";
+import { withPrefix } from "gatsby";
+import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
 import Navigation from "./Navigation";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <nav className="navbar navbar-expand-lg bg-white sticky-top shadow">
@@ -31,10 +33,10 @@ const Navbar = () => {
           <Navigation />
           <div className="d-flex flex-column flex-lg-row gap-3">
             <button className="btn btn-link text-decoration-none" type="button">
-              Login
+              {t("login")}
             </button>
             <button className="btn btn-primary" type="button">
-              Sign up
+              {t("signUp")}
             </button>
           </div>
         </div>
