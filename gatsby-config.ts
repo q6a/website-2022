@@ -11,6 +11,8 @@ const strapiUrl = process.env.STRAPI_API_URL || "http://127.0.0.1:1337";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `VideoTranslatorAI`,
+    description: `Video Translator provides a real time AI transcription, translation and dubbing. Transform your text, image, audio and video content with support for 150+ dialects and 60+ languages. Pricing starts at 15 cents/minute.`,
+    keywords: `video translation,video translator,caption maker,closed captioning software,open captioning software,add captions to video,video captions,subtitle maker,subtitles for video,embed subtitles in video,subtitles video,ai transcription,ai translation,ai dubbing,ai reader,`,
     siteUrl,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -76,6 +78,12 @@ const config: GatsbyConfig = {
         apiURL: strapiUrl,
         collectionTypes: [
           {
+            singularName: `blog-category`,
+          },
+          {
+            singularName: `blog-tag`,
+          },
+          {
             singularName: `custom-page`,
             pluginOptions: {
               i18n: {
@@ -100,6 +108,14 @@ const config: GatsbyConfig = {
     },
     {
       resolve: `gatsby-plugin-sitemap`,
+    },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "STRAPI",
+        fieldName: "strapiQueries",
+        url: `${strapiUrl}/graphql`,
+      },
     },
   ],
 };
