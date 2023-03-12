@@ -156,13 +156,6 @@ export const query = graphql`
               }
             }
             coverAlt
-            blogCategories {
-              data {
-                attributes {
-                  categoryName
-                }
-              }
-            }
           }
         }
       }

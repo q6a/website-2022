@@ -2,8 +2,6 @@ import React from "react";
 import { withPrefix } from "gatsby";
 import { Link } from "gatsby-plugin-react-i18next";
 
-import { H2 } from "./Typography";
-
 interface IBlogCard {
   title: string;
   slug: string;
