@@ -52,14 +52,14 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
           </div>
         </div>
       </div>
-      <div className="bg-clients py-5">
-        <div className="container">
-          <H2 classes="text-gray text-center mb-5" hasSeparator>
-            {t("relatedBlogPost")}
-          </H2>
-          <div className="row">
-            {relatedBlogPost.length > 0 &&
-              relatedBlogPost.map(({ id, attributes }: any) => (
+      {relatedBlogPost && relatedBlogPost.length > 0 && (
+        <div className="bg-clients py-5">
+          <div className="container">
+            <H2 classes="text-gray text-center mb-5" hasSeparator>
+              {t("relatedBlogPost")}
+            </H2>
+            <div className="row">
+              {relatedBlogPost.map(({ id, attributes }: any) => (
                 <div key={`post-${id}`} className="col-12 col-lg-4">
                   <BlogCard
                     cover={attributes?.cover?.data?.attributes?.url}
@@ -70,9 +70,10 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
                   />
                 </div>
               ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <Helper />
     </Layout>
   );
