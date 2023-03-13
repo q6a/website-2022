@@ -18,13 +18,13 @@ const EditorPick = ({
   coverAlt,
 }: IEditorPick) => {
   return (
-    <div className="blog-card">
+    <div className="blog-card editors-pick">
       <Link className="pb-3" to={`/blog/${slug}`}>
-        <div className="d-flex align-items-center justify-content-between rounded-2 shadow">
+        <div className="d-flex flex-column flex-lg-row align-items-center rounded-2 shadow">
           <div className="rounded-2 overflow-hidden">
             <img src={cover} alt={coverAlt} width="100%" loading="lazy" />
           </div>
-          <div className="blog-card-text px-5">
+          <div className="blog-card-text px-3 px-lg-5 pt-3">
             <span className="badge fw-semibold bg-secondary">
               Editor's pick
             </span>

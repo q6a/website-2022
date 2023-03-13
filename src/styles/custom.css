@@ -144,6 +144,10 @@
   text-decoration: none !important;
 }
 
+.blog-card-text {
+  width: 100%;
+}
+
 .blog-cover {
   padding-top: 48px;
   padding-bottom: 64px;
@@ -174,6 +178,10 @@
 
 .blog-single > ol {
   padding-left: 1.5rem;
+}
+
+.editors-pick {
+  max-width: 100%;
 }
 
 .brand-text > span,

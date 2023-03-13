@@ -20,6 +20,7 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
   const editorPick = language === "en" ? editorPickEn : editorPickId;
   const [blogPosts, setBlogPosts] = React.useState([]);
   const [activePage, setActivePage] = React.useState(0);
+  const [sortAsc, setSortAsc] = React.useState(true);
 
   React.useEffect(() => {
     setActivePage(1);
@@ -32,17 +33,39 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
 
   React.useEffect(() => {
     if (activePage > 0) {
+      setBlogPosts([]);
+      setActivePage(1);
+    }
+  }, [sortAsc]);
+
+  React.useEffect(() => {
+    if (activePage > 0) {
       generatePosts();
     }
   }, [activePage]);
 
+  React.useEffect(() => {
+    if (activePage > 0) {
+      if (blogPosts.length === 0) {
+        generatePosts();
+      }
+    }
+  }, [JSON.stringify(blogPosts)]);
+
   const generatePosts = () => {
     const indexStart = (activePage - 1) * postPerLoad;
     const indexEnd = activePage * postPerLoad;
-    const filterByLang = blogPostData.filter(
-      ({ id, attributes }: any) =>
-        attributes.locale === language && id !== editorPick[0]?.id
-    );
+    const filterByLang = blogPostData
+      .sort((a: any, b: any) => {
+        if (sortAsc) {
+          return a.id - b.id;
+        }
+        return b.id - a.id;
+      })
+      .filter(
+        ({ id, attributes }: any) =>
+          attributes.locale === language && id !== editorPick[0]?.id
+      );
     const filterByLimit = filterByLang.slice(indexStart, indexEnd);
     // @ts-ignore
     setBlogPosts([...blogPosts, ...filterByLimit]);
@@ -63,6 +86,35 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
             />
           </div>
           <div className="row">
+            <div className="dropdown text-end pb-3">
+              <button
+                type="button"
+                className="btn btn-outline-primary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-bs-offset="10,20"
+              >
+                Sort by
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button
+                    className={`dropdown-item ${sortAsc ? "active" : ""}`}
+                    onClick={() => setSortAsc(true)}
+                  >
+                    Newer to older
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={`dropdown-item ${sortAsc ? "" : "active"}`}
+                    onClick={() => setSortAsc(false)}
+                  >
+                    Older to newer
+                  </button>
+                </li>
+              </ul>
+            </div>
             {blogPosts &&
               blogPosts.map(({ id, attributes }: any) => (
                 <div key={`post-${id}`} className="col-12 col-lg-4 mb-4">
@@ -182,6 +234,7 @@ export const query = graphql`
             }
             coverAlt
             locale
+            createdAt
           }
         }
       }
