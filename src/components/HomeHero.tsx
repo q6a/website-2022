@@ -19,14 +19,14 @@ const HomeHero = () => {
               <BodyText>
                 <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
-              <div className="d-flex gap-3">
+              {/* <div className="d-flex gap-3">
                 <Link className="btn btn-light text-primary" to="/">
                   {t("login")}
                 </Link>
                 <Link className="btn btn-primary" to="/">
                   {t("signUp")}
                 </Link>
-              </div>
+              </div> */}
             </div>
             <div className="col-12 col-lg-6 bg-focus-hero d-flex align-items-center justify-content-center">
               <img
