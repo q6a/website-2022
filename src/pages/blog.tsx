@@ -10,6 +10,8 @@ import Helper from "../components/Helper";
 import Seo from "../components/Seo";
 import { H1 } from "../components/Typography";
 
+const sortByData = ["Newer to older", "Older to newer"];
+
 const BlogPage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
   const { language } = useI18next();
@@ -94,7 +96,10 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
                 aria-expanded="false"
                 data-bs-offset="10,20"
               >
-                Sort by
+                Sort by{" "}
+                {sortAsc
+                  ? sortByData[0].toLowerCase()
+                  : sortByData[1].toLowerCase()}
               </button>
               <ul className="dropdown-menu">
                 <li>
@@ -102,7 +107,7 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
                     className={`dropdown-item ${sortAsc ? "active" : ""}`}
                     onClick={() => setSortAsc(true)}
                   >
-                    Newer to older
+                    {sortByData[0]}
                   </button>
                 </li>
                 <li>
@@ -110,7 +115,7 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
                     className={`dropdown-item ${sortAsc ? "" : "active"}`}
                     onClick={() => setSortAsc(false)}
                   >
-                    Older to newer
+                    {sortByData[1]}
                   </button>
                 </li>
               </ul>
