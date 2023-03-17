@@ -32,7 +32,7 @@ const Navigation = () => {
                       <Link
                         key={`child-${id}`}
                         className="text-decoration-none nav-link"
-                        to={path}
+                        to={title === "Blog" ? "/blog" : path}
                       >
                         {t(`menu${title}`)}
                       </Link>

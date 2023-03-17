@@ -31,14 +31,14 @@ const Navbar = () => {
           id="navbarContent"
         >
           <Navigation />
-          <div className="d-flex flex-column flex-lg-row gap-3">
+          {/* <div className="d-flex flex-column flex-lg-row gap-3">
             <button className="btn btn-link text-decoration-none" type="button">
               {t("login")}
             </button>
             <button className="btn btn-primary" type="button">
               {t("signUp")}
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
