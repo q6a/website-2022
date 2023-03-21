@@ -31,7 +31,7 @@ const PricingPage: React.FC<PageProps> = ({ data }: any) => {
         <div className="text-center">
           {t("pricingTranscribeTranslate")}
           <br />
-          <Link to="/">{t("pricingFindOut")}</Link>
+          <Link to="/available-languages">{t("pricingFindOut")}</Link>
         </div>
       </div>
       <Helper />
