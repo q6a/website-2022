@@ -1,6 +1,7 @@
 import React from "react";
 import { withPrefix } from "gatsby";
 import { Link } from "gatsby-plugin-react-i18next";
+import dayjs from "dayjs";
 
 interface IEditorPick {
   title: string;
@@ -8,6 +9,7 @@ interface IEditorPick {
   description: string;
   cover?: string;
   coverAlt: string;
+  postedDate: string;
 }
 
 const EditorPick = ({
@@ -16,6 +18,7 @@ const EditorPick = ({
   description,
   cover = withPrefix("/images/no-image.jpg"),
   coverAlt,
+  postedDate,
 }: IEditorPick) => {
   return (
     <div className="blog-card editors-pick">
@@ -28,8 +31,11 @@ const EditorPick = ({
             <span className="badge fw-semibold bg-secondary">
               Editor's pick
             </span>
-            <div className="fs-4 fw-bold fs-5 pb-2 ">{title}</div>
+            <div className="fs-4 fw-bold fs-5 pb-2 lh-md">{title}</div>
             <p>{description}</p>
+            <span className="blog-card-date">
+              {dayjs(postedDate).format("MMM DD, YYYY")}
+            </span>
           </div>
         </div>
       </Link>

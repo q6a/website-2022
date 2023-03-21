@@ -15,7 +15,8 @@ const sortByData = ["Newer to older", "Older to newer"];
 const BlogPage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
   const { language } = useI18next();
-  const blogPostData = data?.blogPostData?.blogs?.data;
+  const blogPostDataDesc = data?.blogPostDataDesc?.blogs?.data;
+  const blogPostDataAsc = data?.blogPostDataAsc?.blogs?.data;
   const editorPickId = data?.editorPicksId?.blogs?.data;
   const editorPickEn = data?.editorPicksEn?.blogs?.data;
   const postPerLoad = 6;
@@ -23,6 +24,7 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
   const [blogPosts, setBlogPosts] = React.useState([]);
   const [activePage, setActivePage] = React.useState(0);
   const [sortAsc, setSortAsc] = React.useState(true);
+  const blogPostData = sortAsc ? blogPostDataDesc : blogPostDataAsc;
 
   React.useEffect(() => {
     setActivePage(1);
@@ -57,17 +59,10 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
   const generatePosts = () => {
     const indexStart = (activePage - 1) * postPerLoad;
     const indexEnd = activePage * postPerLoad;
-    const filterByLang = blogPostData
-      .sort((a: any, b: any) => {
-        if (sortAsc) {
-          return a.id - b.id;
-        }
-        return b.id - a.id;
-      })
-      .filter(
-        ({ id, attributes }: any) =>
-          attributes.locale === language && id !== editorPick[0]?.id
-      );
+    const filterByLang = blogPostData.filter(
+      ({ id, attributes }: any) =>
+        attributes.locale === language && id !== editorPick[0]?.id
+    );
     const filterByLimit = filterByLang.slice(indexStart, indexEnd);
     // @ts-ignore
     setBlogPosts([...blogPosts, ...filterByLimit]);
@@ -85,6 +80,7 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
               title={editorPick[0]?.attributes?.title}
               slug={editorPick[0]?.attributes?.slug}
               description={editorPick[0]?.attributes?.description}
+              postedDate={editorPick[0]?.attributes?.postedDate}
             />
           </div>
           <div className="row">
@@ -122,13 +118,17 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
             </div>
             {blogPosts &&
               blogPosts.map(({ id, attributes }: any) => (
-                <div key={`post-${id}`} className="col-12 col-lg-4 mb-4">
+                <div
+                  key={`post-${id}`}
+                  className="col-12 col-md-6 col-lg-4 mb-4"
+                >
                   <BlogCard
                     cover={attributes?.cover?.data?.attributes?.url}
                     coverAlt={attributes?.coverAlt}
                     title={attributes?.title}
                     slug={attributes?.slug}
                     description={attributes?.description}
+                    postedDate={attributes?.postedDate}
                   />
                 </div>
               ))}
@@ -136,7 +136,9 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
         </div>
         {blogPostData.filter(
           ({ attributes }: any) => attributes.locale === language
-        ).length !== blogPosts.length && (
+        ).length -
+          1 >
+          blogPosts.length && (
           <div className="text-center">
             <button
               className="btn btn-outline-primary"
@@ -172,7 +174,7 @@ export const query = graphql`
         locale: "id"
         publicationState: LIVE
         pagination: { limit: 1 }
-        sort: "createdAt"
+        sort: "postedDate:desc"
       ) {
         data {
           id
@@ -188,6 +190,7 @@ export const query = graphql`
               }
             }
             coverAlt
+            postedDate
           }
         }
       }
@@ -197,7 +200,7 @@ export const query = graphql`
         locale: "en"
         publicationState: LIVE
         pagination: { limit: 1 }
-        sort: "createdAt"
+        sort: "postedDate:desc"
       ) {
         data {
           id
@@ -213,16 +216,17 @@ export const query = graphql`
               }
             }
             coverAlt
+            postedDate
           }
         }
       }
     }
-    blogPostData: strapiQueries {
+    blogPostDataDesc: strapiQueries {
       blogs(
         locale: "all"
         publicationState: LIVE
         pagination: { limit: 1000 }
-        sort: "createdAt"
+        sort: "postedDate:desc"
       ) {
         data {
           id
@@ -240,6 +244,35 @@ export const query = graphql`
             coverAlt
             locale
             createdAt
+            postedDate
+          }
+        }
+      }
+    }
+    blogPostDataAsc: strapiQueries {
+      blogs(
+        locale: "all"
+        publicationState: LIVE
+        pagination: { limit: 1000 }
+        sort: "postedDate:asc"
+      ) {
+        data {
+          id
+          attributes {
+            title
+            slug
+            description
+            cover {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+            coverAlt
+            locale
+            createdAt
+            postedDate
           }
         }
       }

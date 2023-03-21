@@ -44,6 +44,13 @@
   font-size: 0.875rem;
 }
 
+.blog-posted-date {
+  color: #73737d;
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 0.35;
+}
+
 /* Fonts */
 .fs-12 {
   font-size: 0.75rem;
@@ -139,13 +146,30 @@
   margin-bottom: 1rem;
 }
 
+.blog-card {
+  height: 100%;
+}
+
 .blog-card > a {
   color: rgb(33, 37, 41);
   text-decoration: none !important;
 }
 
 .blog-card-text {
+  padding: 0 1rem 1.5rem 1rem;
   width: 100%;
+}
+
+.blog-card-text > p {
+  font-weight: 300;
+  line-height: 32px;
+}
+
+.blog-card-date {
+  color: #73737d;
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 0.35;
 }
 
 .blog-cover {
