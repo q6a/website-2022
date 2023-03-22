@@ -3,6 +3,7 @@ import type { HeadFC, PageProps } from "gatsby";
 import { graphql, withPrefix } from "gatsby";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "gatsby-plugin-react-i18next";
+import dayjs from "dayjs";
 
 import BlogCard from "../components/BlogCard";
 import Layout from "../components/Layout";
@@ -22,6 +23,9 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
         <div className="text-center">
           <span className="blog-authors">
             by <strong>{blogData?.attributes?.authors}</strong>
+          </span>
+          <span className="blog-posted-date ms-1">
+            | {dayjs(blogData?.attributes?.postedDate).format("MMM DD, YYYY")}
           </span>
         </div>
         <div className="blog-cover">
@@ -67,6 +71,7 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
                     title={attributes?.title}
                     slug={attributes?.slug}
                     description={attributes?.description}
+                    postedDate={attributes?.postedDate}
                   />
                 </div>
               ))}
@@ -127,6 +132,7 @@ export const query = graphql`
             coverAlt
             updatedAt
             content
+            postedDate
           }
         }
       }
@@ -140,7 +146,7 @@ export const query = graphql`
         }
         publicationState: LIVE
         pagination: { limit: 3 }
-        sort: "createdAt"
+        sort: "postedDate:desc"
       ) {
         data {
           id
@@ -156,6 +162,7 @@ export const query = graphql`
               }
             }
             coverAlt
+            postedDate
           }
         }
       }

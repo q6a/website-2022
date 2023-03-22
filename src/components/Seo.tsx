@@ -8,9 +8,18 @@ interface ISeo {
   keywords?: string;
   url?: string;
   image?: string;
+  children?: React.ReactNode;
 }
 
-function Seo({ title, description, lang = "en", keywords, url, image }: ISeo) {
+function Seo({
+  title,
+  description,
+  lang = "en",
+  keywords,
+  url,
+  image,
+  children,
+}: ISeo) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -94,6 +103,7 @@ function Seo({ title, description, lang = "en", keywords, url, image }: ISeo) {
       />
       <meta name="msapplication-TileColor" content="#6f32b5" />
       <meta name="theme-color" content="#6f32b5" />
+      {children}
     </>
   );
 }
