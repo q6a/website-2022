@@ -147,7 +147,13 @@
 }
 
 .blog-card {
+  background: white;
   height: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.blog-card:hover {
+  transform: scale(1.05);
 }
 
 .blog-card > a {

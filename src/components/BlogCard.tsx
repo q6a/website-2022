@@ -21,7 +21,7 @@ const BlogCard = ({
   postedDate,
 }: IBlogCard) => {
   return (
-    <div className="blog-card">
+    <div className="blog-card rounded-2 border border-1">
       <Link className="pb-3" to={`/blog/${slug}`}>
         <div className="rounded-2 overflow-hidden">
           <img src={cover} alt={coverAlt} width="100%" loading="lazy" />
