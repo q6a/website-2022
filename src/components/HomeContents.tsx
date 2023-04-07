@@ -10,7 +10,7 @@ const HomeContents = () => {
     <div className="section-sm">
       <div className="container">
         <H2 classes="text-gray text-center" hasSeparator>
-          <Trans i18nKey="blogSectionTitle" components={[<br />]} />
+          <Trans i18nKey="caseStudiesTitle" components={[<br />]} />
         </H2>
         <div className="mt-5">
           <Splide options={{ autoplay: true }} aria-label="Contents">
