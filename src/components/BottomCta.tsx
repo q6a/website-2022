@@ -21,7 +21,7 @@ const BottomCta = () => {
             components={[<br />, <span className="fw-semibold" />]}
           />
         </BodyText>
-        <Link className="btn btn-primary mt-3" to="/">
+        <Link className="btn btn-primary mt-3" to="/available-languages">
           {t("bottomCtaButtonLabel")}
         </Link>
       </div>
