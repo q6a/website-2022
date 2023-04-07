@@ -115,6 +115,7 @@
     var(--brand-blue) 48.11%,
     var(--brand-purple) 100%
   );
+  min-height: 448px;
 }
 
 .custom-page-content > h1,

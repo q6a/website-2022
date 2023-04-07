@@ -17,12 +17,13 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
   const blogPostId = data?.blogPostDataId?.blogs?.data;
   const blogPostEn = data?.blogPostDataEn?.blogs?.data;
   const blogPosts = language === "en" ? blogPostEn : blogPostId;
+  const caseStudies = data?.caseStudies?.blogs?.data;
 
   return (
     <Layout>
       <HomeHero />
-      <HomeBlog blogPosts={blogPosts} />
-      <HomeContents />
+      <HomeBlog data={blogPosts} />
+      <HomeContents data={caseStudies} />
       <Helper />
       <HomeClients />
       <BottomCta />
@@ -75,6 +76,37 @@ export const query = graphql`
     }
     blogPostDataEn: strapiQueries {
       blogs(
+        locale: "en"
+        publicationState: LIVE
+        pagination: { limit: 3 }
+        sort: "postedDate:desc"
+      ) {
+        data {
+          id
+          attributes {
+            title
+            slug
+            description
+            cover {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+            coverAlt
+            locale
+            createdAt
+            postedDate
+          }
+        }
+      }
+    }
+    caseStudies: strapiQueries {
+      blogs(
+        filters: {
+          blogCategories: { categoryName: { contains: "Case Study" } }
+        }
         locale: "en"
         publicationState: LIVE
         pagination: { limit: 3 }

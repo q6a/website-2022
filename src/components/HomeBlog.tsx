@@ -4,7 +4,7 @@ import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 import BlogCard from "./BlogCard";
 import { H2 } from "./Typography";
 
-const HomeBlog = ({ blogPosts }: any) => {
+const HomeBlog = ({ data }: any) => {
   const { t } = useTranslation();
 
   return (
@@ -15,8 +15,8 @@ const HomeBlog = ({ blogPosts }: any) => {
         </H2>
         <div className="mt-5">
           <div className="row">
-            {blogPosts &&
-              blogPosts.map(({ id, attributes }: any) => (
+            {data &&
+              data.map(({ id, attributes }: any) => (
                 <div
                   key={`post-${id}`}
                   className="col-12 col-md-6 col-lg-4 mb-4"

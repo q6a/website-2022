@@ -5,7 +5,7 @@ import { Trans } from "gatsby-plugin-react-i18next";
 import { H2 } from "./Typography";
 import HomeContentItem from "./HomeContentItem";
 
-const HomeContents = () => {
+const HomeContents = ({ data }: any) => {
   return (
     <div className="section-sm">
       <div className="container">
@@ -14,37 +14,20 @@ const HomeContents = () => {
         </H2>
         <div className="mt-5">
           <Splide options={{ autoplay: true }} aria-label="Contents">
-            <SplideSlide>
-              <HomeContentItem
-                img="images/family-photo.png"
-                title="Leaving A Long-Lasting Legacy:
-                Curating Your Family’s History"
-                link="/"
-                authorName="Jeff Dormish"
-                authorRoles="President"
-                authorOrg="Slovenian Genealogy Society International"
-              />
-            </SplideSlide>
-            <SplideSlide>
-              <HomeContentItem
-                img="images/family-photo.png"
-                title="How This Catering Solutions Is Reaching Clients In A Tough Market"
-                link="/"
-                authorName="David Cox"
-                authorRoles="CEO"
-                authorOrg="QAChef"
-              />
-            </SplideSlide>
-            <SplideSlide>
-              <HomeContentItem
-                img="images/family-photo.png"
-                title="How This University Is Fighting Covid With Video Translation"
-                link="/"
-                authorName="Pradesh Kumar"
-                authorRoles="Head of Health"
-                authorOrg="VYASA University"
-              />
-            </SplideSlide>
+            {data &&
+              data.map(({ id, attributes }: any) => (
+                <SplideSlide key={`content-${id}`}>
+                  <HomeContentItem
+                    img={attributes?.cover?.data?.attributes?.url}
+                    title={attributes?.title}
+                    description={attributes?.description}
+                    link={`/blog/${attributes?.slug}`}
+                    authorName="Jeff Dormish"
+                    authorRoles="President"
+                    authorOrg="Slovenian Genealogy Society International"
+                  />
+                </SplideSlide>
+              ))}
           </Splide>
         </div>
       </div>
