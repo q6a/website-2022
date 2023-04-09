@@ -18,6 +18,8 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
   const blogPostEn = data?.blogPostDataEn?.blogs?.data;
   const blogPosts = language === "en" ? blogPostEn : blogPostId;
   const caseStudies = data?.caseStudies?.blogs?.data;
+  const partnerLogos =
+    data?.strapiQueries?.partnerLogo?.data?.attributes?.logos?.data;
 
   return (
     <Layout>
@@ -25,7 +27,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
       <HomeBlog data={blogPosts} />
       <HomeContents data={caseStudies} />
       <Helper />
-      <HomeClients />
+      <HomeClients data={partnerLogos} />
       <BottomCta />
     </Layout>
   );
@@ -129,6 +131,24 @@ export const query = graphql`
             locale
             createdAt
             postedDate
+          }
+        }
+      }
+    }
+    strapiQueries {
+      partnerLogo {
+        data {
+          id
+          attributes {
+            logos {
+              data {
+                id
+                attributes {
+                  alternativeText
+                  url
+                }
+              }
+            }
           }
         }
       }
