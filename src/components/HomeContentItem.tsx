@@ -25,9 +25,9 @@ const HomeContentItem = ({
   return (
     <div className="mx-0 mx-md-5 mt-3">
       <div className="content-item rounded-2 text-white mx-4">
-        <div className="row">
-          <div className="col-12 col-lg-6 d-flex align-items-end">
-            <div className="px-4 py-4">
+        <div className="row h-100">
+          <div className="col-12 col-lg-6 d-flex">
+            <div className="px-4 py-4 w-100">
               <div className="rounded-2 overflow-hidden">
                 <img
                   src={withPrefix(img)}
@@ -38,7 +38,7 @@ const HomeContentItem = ({
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-6 text-end d-flex flex-column align-items-end justify-content-around gap-5 p-5">
+          <div className="col-12 col-lg-6 text-end d-flex flex-column align-items-end justify-content-around gap-5 p-5 h-100">
             <div className="w-75 text-right">
               <H1>{title}</H1>
             </div>

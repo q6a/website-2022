@@ -13,7 +13,10 @@ const HomeContents = ({ data }: any) => {
           <Trans i18nKey="caseStudiesTitle" components={[<br />]} />
         </H2>
         <div className="mt-5">
-          <Splide options={{ autoplay: true }} aria-label="Contents">
+          <Splide
+            options={{ type: "loop", autoplay: true, rewind: true }}
+            aria-label="Contents"
+          >
             {data &&
               data.map(({ id, attributes }: any) => (
                 <SplideSlide key={`content-${id}`}>
