@@ -84,14 +84,6 @@ const config: GatsbyConfig = {
             singularName: `blog-tag`,
           },
           {
-            singularName: `custom-page`,
-            pluginOptions: {
-              i18n: {
-                locale: "all",
-              },
-            },
-          },
-          {
             singularName: `faq`,
             pluginOptions: {
               i18n: {

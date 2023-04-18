@@ -42,7 +42,11 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
           </div>
         </div>
         <div className="blog-single fw-light lh-lg py-5">
-          <ReactMarkdown>{blogData?.attributes?.content}</ReactMarkdown>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: blogData?.attributes?.richContent,
+            }}
+          />
           <div className="pt-5">
             <div className="d-flex flex-wrap gap-2">
               {blogData?.attributes?.blogCategories?.data.map(
@@ -131,7 +135,7 @@ export const query = graphql`
             }
             coverAlt
             updatedAt
-            content
+            richContent
             postedDate
           }
         }

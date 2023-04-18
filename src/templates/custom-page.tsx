@@ -8,28 +8,35 @@ import Helper from "../components/Helper";
 import { H1 } from "../components/Typography";
 
 const CustomPage: React.FC<PageProps> = ({ data }: any) => {
+  const localeCustomPage = data?.localeCustomPage?.customPage?.data;
+  const allData = data?.fallbackCustomPage?.customPages?.data;
+  const fallbackCustomPage = allData.find(
+    (item: any) =>
+      item?.attributes?.pageName === localeCustomPage?.attributes?.pageName
+  );
+
   return (
     <Layout>
-      {data?.localeCustomPage?.title && (
+      {localeCustomPage?.attributes?.title && (
         <div className="container my-5 min-h-page">
-          <H1 classes={`mb-3 text-${data?.localeCustomPage?.align}`}>
-            {data?.localeCustomPage?.title}
+          <H1 classes={`mb-3 text-${localeCustomPage?.attributes?.align}`}>
+            {localeCustomPage?.attributes?.title}
           </H1>
           <div className="custom-page-content fw-light lh-lg py-3">
             <ReactMarkdown>
-              {data?.localeCustomPage?.content?.data?.content}
+              {localeCustomPage?.attributes?.content}
             </ReactMarkdown>
           </div>
         </div>
       )}
-      {!data?.localeCustomPage?.title && (
+      {!localeCustomPage?.attributes?.title && (
         <div className="container my-5 min-h-page">
-          <H1 classes={`mb-3 text-${data?.fallbackCustomPage?.align}`}>
-            {data?.fallbackCustomPage?.title}
+          <H1 classes={`mb-3 text-${fallbackCustomPage?.attributes?.align}`}>
+            {fallbackCustomPage?.attributes?.title}
           </H1>
           <div className="custom-page-content fw-light lh-lg py-3">
             <ReactMarkdown>
-              {data?.fallbackCustomPage?.content?.data?.content}
+              {fallbackCustomPage?.attributes?.content}
             </ReactMarkdown>
           </div>
         </div>
@@ -40,7 +47,7 @@ const CustomPage: React.FC<PageProps> = ({ data }: any) => {
 };
 
 export const query = graphql`
-  query ($page: String!, $language: String!) {
+  query ($id: ID!, $page: String!, $language: String!) {
     locales: allLocale(
       filter: { ns: { in: ["index"] }, language: { eq: $language } }
     ) {
@@ -52,31 +59,34 @@ export const query = graphql`
         }
       }
     }
-    localeCustomPage: strapiCustomPage(
-      pageName: { eq: $page }
-      locale: { eq: $language }
-    ) {
-      id
-      pageName
-      title
-      align
-      content {
+    localeCustomPage: strapiQueries {
+      customPage(id: $id) {
         data {
-          content
+          id
+          attributes {
+            pageName
+            title
+            align
+            content
+            locale
+          }
         }
       }
     }
-    fallbackCustomPage: strapiCustomPage(
-      pageName: { eq: $page }
-      locale: { eq: "en" }
-    ) {
-      id
-      pageName
-      title
-      align
-      content {
+    fallbackCustomPage: strapiQueries {
+      customPages(
+        filters: { pageName: { eq: $page } }
+        publicationState: LIVE
+      ) {
         data {
-          content
+          id
+          attributes {
+            pageName
+            title
+            align
+            content
+            locale
+          }
         }
       }
     }

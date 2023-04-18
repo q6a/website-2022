@@ -31,19 +31,17 @@ exports.createPages = ({ graphql, actions }) => {
                 }
               }
             }
-            pages: allStrapiCustomPage {
-              edges {
-                node {
+            pages: strapiQueries {
+              customPages(publicationState: LIVE, locale: "all") {
+                data {
                   id
-                  pageName
-                  title
-                  align
-                  content {
-                    data {
-                      content
-                    }
+                  attributes {
+                    pageName
+                    title
+                    align
+                    content
+                    locale
                   }
-                  locale
                 }
               }
             }
@@ -55,7 +53,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const blogs = result.data.allBlogPosts.blogs.data;
-        const pages = result.data.pages;
+        const pages = result.data.pages.customPages.data;
 
         blogs.forEach(({ id, attributes }) => {
           const categories = attributes?.blogCategories?.data.map(
@@ -77,13 +75,14 @@ exports.createPages = ({ graphql, actions }) => {
           });
         });
 
-        pages.edges.forEach(({ node }) => {
+        pages.forEach((node) => {
           createPage({
-            path: `/page/${node.pageName}`,
+            path: `/page/${node.attributes.pageName}`,
             component: path.resolve("src/templates/custom-page.tsx"),
             context: {
-              page: node.pageName,
-              language: node.locale,
+              id: node.id,
+              page: node.attributes.pageName,
+              language: node.attributes.locale,
             },
           });
         });
