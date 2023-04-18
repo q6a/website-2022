@@ -51,7 +51,10 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
             <div className="d-flex flex-wrap gap-2">
               {blogData?.attributes?.blogCategories?.data.map(
                 (category: any) => (
-                  <div className="btn btn-sm btn-outline-dark">
+                  <div
+                    key={`${blogData?.id}-${category.attributes.categoryName}`}
+                    className="btn btn-sm btn-outline-dark"
+                  >
                     {category.attributes.categoryName}
                   </div>
                 )
