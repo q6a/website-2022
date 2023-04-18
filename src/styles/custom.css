@@ -185,7 +185,8 @@
 }
 
 .blog-cover,
-.blog-single > div {
+.blog-single > div,
+.blog-title {
   max-width: 720px;
   margin: 0 auto;
 }

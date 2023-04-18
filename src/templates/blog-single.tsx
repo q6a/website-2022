@@ -19,7 +19,9 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
   return (
     <Layout>
       <div className="container my-5 min-h-page">
-        <H1 classes="mb-3 text-center">{blogData?.attributes?.title}</H1>
+        <H1 classes="mb-3 text-center blog-title">
+          {blogData?.attributes?.title}
+        </H1>
         <div className="text-center">
           <span className="blog-authors">
             by <strong>{blogData?.attributes?.authors}</strong>
