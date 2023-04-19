@@ -108,13 +108,10 @@ export const query = graphql`
     }
     caseStudies: strapiQueries {
       blogs(
-        filters: {
-          blogCategories: { categoryName: { contains: "Case Study" } }
-        }
+        filters: { id: { in: ["97", "65", "104"] } }
         locale: "en"
         publicationState: LIVE
         pagination: { limit: 3 }
-        sort: "postedDate:desc"
       ) {
         data {
           id
