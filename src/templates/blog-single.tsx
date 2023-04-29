@@ -1,7 +1,6 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql, withPrefix } from "gatsby";
-import ReactMarkdown from "react-markdown";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 import dayjs from "dayjs";
 

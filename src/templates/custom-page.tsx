@@ -1,10 +1,10 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
-import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
+import Seo from "../components/Seo";
 import { H1 } from "../components/Typography";
 
 const CustomPage: React.FC<PageProps> = ({ data, pageContext }: any) => {
@@ -23,22 +23,24 @@ const CustomPage: React.FC<PageProps> = ({ data, pageContext }: any) => {
           <H1 classes={`mb-3 text-${localeCustomPage?.attributes?.align}`}>
             {localeCustomPage?.attributes?.title}
           </H1>
-          <div className="custom-page-content fw-light lh-lg py-3">
-            <ReactMarkdown>
-              {localeCustomPage?.attributes?.content}
-            </ReactMarkdown>
-          </div>
+          <div
+            className="custom-page-content fw-light lh-lg py-3"
+            dangerouslySetInnerHTML={{
+              __html: localeCustomPage?.attributes?.richContent,
+            }}
+          />
         </div>
       ) : (
         <div className="container my-5 min-h-page">
           <H1 classes={`mb-3 text-${fallbackCustomPage?.attributes?.align}`}>
             {fallbackCustomPage?.attributes?.title}
           </H1>
-          <div className="custom-page-content fw-light lh-lg py-3">
-            <ReactMarkdown>
-              {fallbackCustomPage?.attributes?.content}
-            </ReactMarkdown>
-          </div>
+          <div
+            className="custom-page-content fw-light lh-lg py-3"
+            dangerouslySetInnerHTML={{
+              __html: fallbackCustomPage?.attributes?.richContent,
+            }}
+          />
         </div>
       )}
       <Helper />
@@ -71,7 +73,7 @@ export const query = graphql`
             pageName
             title
             align
-            content
+            richContent
             locale
           }
         }
@@ -82,4 +84,26 @@ export const query = graphql`
 
 export default CustomPage;
 
-export const Head: HeadFC = () => <title>Custom Page</title>;
+export const Head: HeadFC = ({ data, pageContext }: any) => {
+  const allData = data?.fallbackCustomPage?.customPages?.data;
+  const localeCustomPage = allData.find(
+    (item: any) => item?.attributes?.locale === pageContext?.language
+  );
+  const fallbackCustomPage = allData.find(
+    (item: any) => item?.attributes?.locale === "en"
+  );
+  const selectedCustomPage = localeCustomPage?.attributes?.title
+    ? localeCustomPage
+    : fallbackCustomPage;
+
+  return (
+    <Seo
+      title={selectedCustomPage?.attributes?.title}
+      url={
+        selectedCustomPage?.attributes?.locale === "en"
+          ? `/page/${selectedCustomPage?.attributes?.pageName}`
+          : `/${selectedCustomPage?.attributes?.locale}/page/${selectedCustomPage?.attributes?.pageName}`
+      }
+    />
+  );
+};

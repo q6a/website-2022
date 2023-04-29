@@ -39,7 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
                     pageName
                     title
                     align
-                    content
+                    richContent
                     locale
                   }
                 }
