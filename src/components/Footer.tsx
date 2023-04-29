@@ -14,45 +14,14 @@ import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
 import useFooterProductNavigation from "../hooks/useFooterProductNav";
 import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
-
-const socials = [
-  {
-    id: "social-1",
-    icon: faFacebookF,
-    name: "Facebook",
-    href: "https://www.facebook.com/",
-  },
-  {
-    id: "social-2",
-    icon: faLinkedinIn,
-    name: "Linkedin",
-    href: "https://linkedin.com/",
-  },
-  {
-    id: "social-3",
-    icon: faTwitter,
-    name: "Twitter",
-    href: "https://twitter.com/",
-  },
-  {
-    id: "social-4",
-    icon: faYoutube,
-    name: "Youtube",
-    href: "https://youtube.com/",
-  },
-  {
-    id: "social-5",
-    icon: faInstagram,
-    name: "Instagram",
-    href: "https://instagram.com/",
-  },
-];
+import useSocialLinks from "../hooks/useSocialLinks";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const companyNavigation = useFooterCompanyNavigation();
   const productNavigation = useFooterProductNavigation();
   const resourcesNavigation = useFooterResourcesNavigation();
+  const socialLinks = useSocialLinks();
   const { t } = useTranslation();
 
   return (
@@ -122,16 +91,51 @@ const Footer = () => {
               &copy; Video Translator {currentYear} - All Rights Reserved
             </span>
             <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
-              {socials.map(({ id, icon, href }) => (
+              {socialLinks?.facebookActive && (
                 <a
-                  key={id}
-                  href={href}
+                  href={socialLinks?.facebookUrl}
                   className="text-white"
                   rel="noopener noreferrer"
                 >
-                  <FontAwesomeIcon icon={icon} />
+                  <FontAwesomeIcon icon={faFacebookF} />
                 </a>
-              ))}
+              )}
+              {socialLinks?.linkedinActive && (
+                <a
+                  href={socialLinks?.linkedinUrl}
+                  className="text-white"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faLinkedinIn} />
+                </a>
+              )}
+              {socialLinks?.twitterActive && (
+                <a
+                  href={socialLinks?.twitterUrl}
+                  className="text-white"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+              )}
+              {socialLinks?.youtubeActive && (
+                <a
+                  href={socialLinks?.youtubeUrl}
+                  className="text-white"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faYoutube} />
+                </a>
+              )}
+              {socialLinks?.instagramActive && (
+                <a
+                  href={socialLinks?.instagramUrl}
+                  className="text-white"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+              )}
             </div>
           </div>
         </div>

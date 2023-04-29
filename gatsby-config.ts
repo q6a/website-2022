@@ -95,7 +95,7 @@ const config: GatsbyConfig = {
             singularName: `available-language`,
           },
         ],
-        singleTypes: [`pricing`],
+        singleTypes: [`pricing`, `social-link`],
       },
     },
     {
