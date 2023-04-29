@@ -1,5 +1,7 @@
 # VideoTranslator.AI website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c7a92058-929e-44bb-a3f6-0f6af001a548/deploy-status)](https://app.netlify.com/sites/q6a-website-dev/deploys)
+
 This repo contains [https://videotranslator.ai/](https://videotranslator.ai/) new website. Built with Gatsby v5, Bootstrap, Netlify and Strapi
 
 ## Prerequisite
