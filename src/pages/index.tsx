@@ -1,10 +1,11 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
-import { useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
+import Seo from "../components/Seo";
 import HomeHero from "../components/HomeHero";
 import HomeBlog from "../components/HomeBlog";
 import HomeContents from "../components/HomeContents";
@@ -48,6 +49,14 @@ export const query = graphql`
           data
           language
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        siteUrl
+        description
+        keywords
       }
     }
     blogPostDataId: strapiQueries {
@@ -164,4 +173,4 @@ export const query = graphql`
   }
 `;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC = ({ data }: any) => <Seo />;

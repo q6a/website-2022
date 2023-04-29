@@ -47,7 +47,7 @@ const Footer = () => {
                     <WrapperLink
                       condition={node?.menuAttached}
                       to={node?.path}
-                      label={node?.title}
+                      label={t(`footerMenu${node?.title}`)}
                     />
                   </li>
                 ))}
@@ -61,7 +61,7 @@ const Footer = () => {
                     <WrapperLink
                       condition={node?.menuAttached}
                       to={node?.path}
-                      label={node?.title}
+                      label={t(`footerMenu${node?.title}`)}
                     />
                   </li>
                 ))}
@@ -75,7 +75,7 @@ const Footer = () => {
                     <WrapperLink
                       condition={node?.menuAttached}
                       to={node?.path}
-                      label={node?.title}
+                      label={t(`footerMenu${node?.title}`)}
                     />
                   </li>
                 ))}
@@ -88,7 +88,7 @@ const Footer = () => {
         <div className="container py-3">
           <div className="d-flex flex-column flex-lg-row justify-content-between">
             <span className="fs-12">
-              &copy; Video Translator {currentYear} - All Rights Reserved
+              &copy; Video Translator {currentYear} - {t("allRights")}
             </span>
             <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
               {socialLinks?.facebookActive && (

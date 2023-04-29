@@ -22,11 +22,11 @@ const HomeHero = () => {
               <div className="hero-title fs-1 fw-bold">
                 <Trans i18nKey="heroTitle" components={[<span />]} />
               </div>
-              <BodyText>
+              <BodyText classes="text-center">
                 <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
               <button type="button" className="btn btn-primary" disabled>
-                Coming soon!
+                {t("comingSoon")}
               </button>
             </div>
           </div>
