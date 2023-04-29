@@ -46,6 +46,7 @@ $ npm run serve
 - [How to modify header, and footer menus?](docs/how-to-modify-header-and-footer-menus.md)
 - [How to add item on available languages?](docs/how-to-add-item-on-available-languages.md)
 - [How to modify partner/client logos?](docs/how-to-modify-partner-client-logos.md)
+- [How to modify social media links?](docs/how-to-modify-social-media-links.md)
 
 ## Useful links
 
