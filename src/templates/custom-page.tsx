@@ -7,17 +7,18 @@ import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import { H1 } from "../components/Typography";
 
-const CustomPage: React.FC<PageProps> = ({ data }: any) => {
-  const localeCustomPage = data?.localeCustomPage?.customPage?.data;
+const CustomPage: React.FC<PageProps> = ({ data, pageContext }: any) => {
   const allData = data?.fallbackCustomPage?.customPages?.data;
+  const localeCustomPage = allData.find(
+    (item: any) => item?.attributes?.locale === pageContext?.language
+  );
   const fallbackCustomPage = allData.find(
-    (item: any) =>
-      item?.attributes?.pageName === localeCustomPage?.attributes?.pageName
+    (item: any) => item?.attributes?.locale === "en"
   );
 
   return (
     <Layout>
-      {localeCustomPage?.attributes?.title && (
+      {localeCustomPage?.attributes?.title ? (
         <div className="container my-5 min-h-page">
           <H1 classes={`mb-3 text-${localeCustomPage?.attributes?.align}`}>
             {localeCustomPage?.attributes?.title}
@@ -28,8 +29,7 @@ const CustomPage: React.FC<PageProps> = ({ data }: any) => {
             </ReactMarkdown>
           </div>
         </div>
-      )}
-      {!localeCustomPage?.attributes?.title && (
+      ) : (
         <div className="container my-5 min-h-page">
           <H1 classes={`mb-3 text-${fallbackCustomPage?.attributes?.align}`}>
             {fallbackCustomPage?.attributes?.title}
@@ -47,7 +47,7 @@ const CustomPage: React.FC<PageProps> = ({ data }: any) => {
 };
 
 export const query = graphql`
-  query ($id: ID!, $page: String!, $language: String!) {
+  query ($page: String!, $language: String!) {
     locales: allLocale(
       filter: { ns: { in: ["index"] }, language: { eq: $language } }
     ) {
@@ -59,24 +59,11 @@ export const query = graphql`
         }
       }
     }
-    localeCustomPage: strapiQueries {
-      customPage(id: $id) {
-        data {
-          id
-          attributes {
-            pageName
-            title
-            align
-            content
-            locale
-          }
-        }
-      }
-    }
     fallbackCustomPage: strapiQueries {
       customPages(
         filters: { pageName: { eq: $page } }
         publicationState: LIVE
+        locale: "all"
       ) {
         data {
           id

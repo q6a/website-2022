@@ -75,14 +75,17 @@ exports.createPages = ({ graphql, actions }) => {
           });
         });
 
-        pages.forEach((node) => {
+        pages.forEach(({ id, attributes }) => {
           createPage({
-            path: `/page/${node.attributes.pageName}`,
+            path:
+              attributes.locale === "en"
+                ? `/page/${attributes.pageName}`
+                : `/${attributes.locale}/page/${attributes.pageName}`,
             component: path.resolve("src/templates/custom-page.tsx"),
             context: {
-              id: node.id,
-              page: node.attributes.pageName,
-              language: node.attributes.locale,
+              id: id,
+              page: attributes.pageName,
+              language: attributes.locale,
             },
           });
         });
