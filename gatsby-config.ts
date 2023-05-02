@@ -109,6 +109,13 @@ const config: GatsbyConfig = {
         url: `${strapiUrl}/graphql`,
       },
     },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: process.env.GATSBY_GTM_ID || "",
+        includeInDevelopment: false,
+      },
+    },
   ],
 };
 
