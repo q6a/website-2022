@@ -5,9 +5,9 @@ import { useTranslation } from "gatsby-plugin-react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-import Layout from "../components/Layout";
-import Helper from "../components/Helper";
-import { H1 } from "../components/Typography";
+import Layout from "../../components/Layout";
+import Helper from "../../components/Helper";
+import { H1 } from "../../components/Typography";
 
 const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
@@ -15,10 +15,6 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
   const [transcriptionData, setTranscriptionData] = useState(
     data.transcriptionLang.edges || []
   );
-  const [translationData, setTranslationData] = useState(
-    data.translationLang.edges || []
-  );
-  const [dubbingData, setDubbingData] = useState(data.dubbingLang.edges || []);
   const [toggle, setToggle] = useState(false);
 
   const filterData = () => {
@@ -27,20 +23,9 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
         ({ node }: any) =>
           node?.language?.toLowerCase()?.includes(input.toLowerCase())
       );
-      const filteredTranslation = data.translationLang.edges.filter(
-        ({ node }: any) =>
-          node?.language?.toLowerCase()?.includes(input.toLowerCase())
-      );
-      const filteredDubbing = data.dubbingLang.edges.filter(({ node }: any) =>
-        node?.language?.toLowerCase()?.includes(input.toLowerCase())
-      );
       setTranscriptionData(filteredTranscription);
-      setTranslationData(filteredTranslation);
-      setDubbingData(filteredDubbing);
     } else {
       setTranscriptionData(data.transcriptionLang.edges);
-      setTranslationData(data.translationLang.edges);
-      setDubbingData(data.dubbingLang.edges);
     }
   };
 
@@ -89,24 +74,11 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
           </form>
         </div>
         <div className="row my-5">
+          <div className="col-12 col-md-6 col-lg-4"></div>
           <div className="col-12 col-md-6 col-lg-4">
             <div className="mb-3 fw-bold">{t("transcription")}</div>
             <div className="d-flex flex-column gap-1">
               {transcriptionData.map(({ node }: any) => (
-                <button
-                  key={`transcription-${node?.id}`}
-                  className="btn btn-outline-dark text-start"
-                  onClick={() => onClickLanguage(node?.language)}
-                >
-                  {node?.language}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="mb-3 fw-bold">{t("translation")}</div>
-            <div className="d-flex flex-column gap-1">
-              {translationData.map(({ node }: any) => (
                 <button
                   key={`translation-${node?.id}`}
                   className="btn btn-outline-dark text-start"
@@ -117,20 +89,7 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
               ))}
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="mb-3 fw-bold">{t("dubbing")}</div>
-            <div className="d-flex flex-column gap-1">
-              {dubbingData.map(({ node }: any) => (
-                <button
-                  key={`dubbing-${node?.id}`}
-                  className="btn btn-outline-dark text-start"
-                  onClick={() => onClickLanguage(node?.language)}
-                >
-                  {node?.language}
-                </button>
-              ))}
-            </div>
-          </div>
+          <div className="col-12 col-md-6 col-lg-4"></div>
         </div>
       </div>
       <Helper />
@@ -143,30 +102,6 @@ export const query = graphql`
     transcriptionLang: allStrapiAvailableLanguage(
       filter: { transcription: { eq: true } }
     ) {
-      edges {
-        node {
-          id
-          language
-          transcription
-          translation
-          dubbing
-        }
-      }
-    }
-    translationLang: allStrapiAvailableLanguage(
-      filter: { translation: { eq: true } }
-    ) {
-      edges {
-        node {
-          id
-          language
-          transcription
-          translation
-          dubbing
-        }
-      }
-    }
-    dubbingLang: allStrapiAvailableLanguage(filter: { dubbing: { eq: true } }) {
       edges {
         node {
           id
