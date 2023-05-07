@@ -147,6 +147,21 @@
   margin-bottom: 1rem;
 }
 
+.blog-single > div img {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.blog-single > div figcaption {
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 400;
+  opacity: 0.4;
+  text-align: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.75rem;
+}
+
 .blog-card {
   background: white;
   height: 100%;
