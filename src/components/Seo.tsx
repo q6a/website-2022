@@ -45,7 +45,7 @@ function Seo({
   const defaultTitle = title
     ? `${title} | ${site.siteMetadata?.title}`
     : `
-    ${site.siteMetadata?.title}`;
+    ${site.siteMetadata?.title} | ${site.siteMetadata.description}`;
   const key = keywords
     ?.split(",")
     .map((item) => {
