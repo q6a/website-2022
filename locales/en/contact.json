@@ -1,5 +1,10 @@
 {
     "contactUs": "Contact us",
     "officeLocation": "Office location",
-    "email": "Email"
+    "email": "Email",
+    "placeholderName": "Name",
+    "placeholderEmail": "Email",
+    "placeholderMessage": "Talk to us - what language would you like your content in? Can we help you in a different way?",
+    "buttonSubmit": "Send",
+    "successNotification": "Message successfully submitted!"
 }

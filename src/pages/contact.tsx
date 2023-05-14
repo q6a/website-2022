@@ -84,7 +84,7 @@ const ContactPage: React.FC<PageProps> = () => {
                 <input
                   type="text"
                   className={`form-control ${errors.name ? "is-invalid" : ""}`}
-                  placeholder="Name"
+                  placeholder={t("placeholderName")}
                   {...register("name")}
                 />
                 {errors.name && (
@@ -97,7 +97,7 @@ const ContactPage: React.FC<PageProps> = () => {
                 <input
                   type="email"
                   className={`form-control ${errors.email ? "is-invalid" : ""}`}
-                  placeholder="Email"
+                  placeholder={t("placeholderEmail")}
                   {...register("email")}
                 />
                 {errors.email && (
@@ -111,7 +111,7 @@ const ContactPage: React.FC<PageProps> = () => {
                   className={`form-control ${
                     errors.message ? "is-invalid" : ""
                   }`}
-                  placeholder="Talk to us - what language would you like your content in? Can we help you in a different way?"
+                  placeholder={t("placeholderMessage")}
                   rows={5}
                   required
                   {...register("message")}
@@ -137,13 +137,13 @@ const ContactPage: React.FC<PageProps> = () => {
                   className="btn btn-secondary mb-3"
                   disabled={btnDisabled}
                 >
-                  Send
+                  {t("buttonSubmit")}
                 </button>
               </div>
             </form>
             {isSubmit && (
               <div className="alert alert-success" role="alert">
-                Message successfully submitted!
+                {t("successNotification")}
               </div>
             )}
           </div>

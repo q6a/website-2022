@@ -1,5 +1,10 @@
 {
     "contactUs": "Hubungi Kami",
     "officeLocation": "Lokasi kantor",
-    "email": "Surel"
+    "email": "Surel",
+    "placeholderName": "Nama",
+    "placeholderEmail": "Email",
+    "placeholderMessage": "Sampaikan pada kami - Bahasa apa yang anda inginkan untuk konten anda? Dapatkah kami membantu anda dengan cara yang berbeda?",
+    "buttonSubmit": "Kirim",
+    "successNotification": "Pesan berhasil dikirimkan!"
 }
