@@ -18,7 +18,9 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
   const blogPostId = data?.blogPostDataId?.blogs?.data;
   const blogPostEn = data?.blogPostDataEn?.blogs?.data;
   const blogPosts = language === "en" ? blogPostEn : blogPostId;
-  const caseStudies = data?.caseStudies?.blogs?.data;
+  const caseStudiesId = data?.caseStudiesId?.blogs?.data;
+  const caseStudiesEn = data?.caseStudiesEn?.blogs?.data;
+  const caseStudies = language === "en" ? caseStudiesEn : caseStudiesId;
   const partnerLogos =
     data?.strapiQueries?.partnerLogo?.data?.attributes?.partnerLogos?.data;
   const clientLogos =
@@ -115,10 +117,38 @@ export const query = graphql`
         }
       }
     }
-    caseStudies: strapiQueries {
+    caseStudiesEn: strapiQueries {
       blogs(
         filters: { id: { in: ["97", "65", "104"] } }
         locale: "en"
+        publicationState: LIVE
+        pagination: { limit: 3 }
+      ) {
+        data {
+          id
+          attributes {
+            title
+            slug
+            description
+            cover {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+            coverAlt
+            locale
+            createdAt
+            postedDate
+          }
+        }
+      }
+    }
+    caseStudiesId: strapiQueries {
+      blogs(
+        filters: { id: { in: ["212", "213", "214"] } }
+        locale: "id"
         publicationState: LIVE
         pagination: { limit: 3 }
       ) {
