@@ -2,7 +2,7 @@
 const path = require("path");
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
   return new Promise((resolve, reject) => {
     resolve(
       graphql(
@@ -73,6 +73,18 @@ exports.createPages = ({ graphql, actions }) => {
                 categories[Math.floor(Math.random() * categories.length)],
             },
           });
+
+          if (attributes.locale === "en") {
+            createRedirect({
+              fromPath: `/news/${attributes.slug}`,
+              toPath: `/blog/${attributes.slug}`,
+            });
+          } else {
+            createRedirect({
+              fromPath: `/news/${attributes.slug}`,
+              toPath: `/${attributes.locale}/blog/${attributes.slug}`,
+            });
+          }
         });
 
         pages.forEach(({ id, attributes }) => {
@@ -87,6 +99,11 @@ exports.createPages = ({ graphql, actions }) => {
               page: attributes.pageName,
               language: attributes.locale,
             },
+          });
+
+          createRedirect({
+            fromPath: `/${attributes.pageName}`,
+            toPath: `/page/${attributes.pageName}`,
           });
         });
       })
