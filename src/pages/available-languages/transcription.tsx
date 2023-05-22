@@ -101,6 +101,7 @@ export const query = graphql`
   query ($language: String!) {
     transcriptionLang: allStrapiAvailableLanguage(
       filter: { transcription: { eq: true } }
+      sort: { language: ASC }
     ) {
       edges {
         node {

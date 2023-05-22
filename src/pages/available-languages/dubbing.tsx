@@ -96,7 +96,10 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
 
 export const query = graphql`
   query ($language: String!) {
-    dubbingLang: allStrapiAvailableLanguage(filter: { dubbing: { eq: true } }) {
+    dubbingLang: allStrapiAvailableLanguage(
+      filter: { dubbing: { eq: true } }
+      sort: { language: ASC }
+    ) {
       edges {
         node {
           id
