@@ -123,13 +123,19 @@ exports.createPages = ({ graphql, actions }) => {
                 .map(({ attributes }) => {
                   const localizations = attributes.localizations.data;
                   localizations.map(({ attributes: attr }) => {
+                    console.info(
+                      `/blog/${attributes.slug} => /blog/${attr.slug}`
+                    );
+                    console.info(
+                      `/${attributes.locale}/blog/${attr.slug} => /${attributes.locale}/blog/${attributes.slug}`
+                    );
                     createRedirect({
                       fromPath: `/blog/${attributes.slug}`,
                       toPath: `/blog/${attr.slug}`,
                     });
                     createRedirect({
-                      fromPath: `/blog/${attr.slug}`,
-                      toPath: `/blog/${attributes.slug}`,
+                      fromPath: `/${attributes.locale}/blog/${attr.slug}`,
+                      toPath: `/${attributes.locale}/blog/${attributes.slug}`,
                     });
                   });
                 });
