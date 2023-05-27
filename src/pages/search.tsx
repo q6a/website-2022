@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
-import { useTranslation } from "gatsby-plugin-react-i18next";
+import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 import { navigate } from "@reach/router";
 import queryString from "query-string";
 
@@ -52,7 +52,7 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
     <Layout>
       <div className="container my-5 min-h-page">
         <H2 classes={`mb-3 text-left`}>
-          {t("vtaiBlogSeach", { total: totalData, keyword: params?.q })}
+          {t("vtaiBlogSeach", { keyword: params?.q })}
         </H2>
         <div className="custom-page-content fw-light lh-lg py-3">
           <div className="row">
@@ -95,7 +95,7 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
               </div>
             </div>
 
-            {blogPosts &&
+            {totalData > 0 ? (
               blogPosts.map(({ id, attributes }: any) => (
                 <div
                   key={`post-${id}`}
@@ -110,7 +110,22 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
                     postedDate={attributes?.postedDate}
                   />
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className="mx-0">
+                <div className="border rounded col-12 py-5 mx-auto text-center">
+                  <div className="d-flex flex-column align-items-center justify-content-center gap-3 py-5">
+                    <span className="text-404 fw-bold">404</span>
+                    <span className="fs-4">{t("emptyResult")}</span>
+                    <Link to="/">
+                      <button className="btn btn-link" type="button">
+                        {t("backToHomepage")}
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

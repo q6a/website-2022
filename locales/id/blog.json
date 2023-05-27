@@ -1,7 +1,9 @@
 {
     "vtaiBlog": "Video Translator AI Blog",
-    "vtaiBlogSeach": "Ditemukan {{total}} post yang mengandung kata kunci '{{keyword}}'",
+    "vtaiBlogSeach": "Hasil pencarian artikel yang mengandung kata kunci '{{keyword}}'",
     "relatedBlogPost": "Postingan terkait",
     "loadMore": "Muat lebih banyak",
-    "typeHere": "Cari postingan disini..."
+    "typeHere": "Cari postingan disini...",
+    "emptyResult": "Ups, postingan tidak ditemukan!",
+    "backToHomepage": "Kembali ke beranda"
 }
