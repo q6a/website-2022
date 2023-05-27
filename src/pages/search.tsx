@@ -1,92 +1,66 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
-import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
+import { useTranslation } from "gatsby-plugin-react-i18next";
+import { navigate } from "@reach/router";
+import queryString from "query-string";
 
 import BlogCard from "../components/BlogCard";
 import BlogSearch from "../components/BlogSearch";
-import EditorPick from "../components/EditorPick";
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import Seo from "../components/Seo";
-import { H1 } from "../components/Typography";
+import { H2 } from "../components/Typography";
 
 const sortByData = ["Newer to older", "Older to newer"];
 
-const BlogPage: React.FC<PageProps> = ({ data }: any) => {
+const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
   const { t } = useTranslation();
-  const { language } = useI18next();
   const blogPostDataDesc = data?.blogPostDataDesc?.blogs?.data;
   const blogPostDataAsc = data?.blogPostDataAsc?.blogs?.data;
-  const editorPickId = data?.editorPicksId?.blogs?.data;
-  const editorPickEn = data?.editorPicksEn?.blogs?.data;
-  const postPerLoad = 6;
-  const editorPick = language === "en" ? editorPickEn : editorPickId;
   const [blogPosts, setBlogPosts] = React.useState([]);
-  const [activePage, setActivePage] = React.useState(0);
   const [sortAsc, setSortAsc] = React.useState(true);
   const blogPostData = sortAsc ? blogPostDataDesc : blogPostDataAsc;
+  const [totalData, setTotalData] = React.useState(0);
+  const params = queryString.parse(location.search);
 
   React.useEffect(() => {
-    setActivePage(1);
+    if (!params?.q) {
+      navigate(`/blog/`);
+    } else {
+      // @ts-ignore
+      const filterData = blogPostData.filter(
+        ({ attributes }: any) =>
+          attributes.title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
+          attributes.description.match(new RegExp(`\\b${params.q}\\b`, "i"))
+      );
+      setTotalData(filterData.length);
+      setBlogPosts(filterData);
+    }
   }, []);
 
   React.useEffect(() => {
-    setActivePage(1);
-    generatePosts();
-  }, [language]);
-
-  React.useEffect(() => {
-    if (activePage > 0) {
-      setBlogPosts([]);
-      setActivePage(1);
-    }
-  }, [sortAsc]);
-
-  React.useEffect(() => {
-    if (activePage > 0) {
-      generatePosts();
-    }
-  }, [activePage]);
-
-  React.useEffect(() => {
-    if (activePage > 0) {
-      if (blogPosts.length === 0) {
-        generatePosts();
-      }
-    }
-  }, [JSON.stringify(blogPosts)]);
-
-  const generatePosts = () => {
-    const indexStart = (activePage - 1) * postPerLoad;
-    const indexEnd = activePage * postPerLoad;
-    const filterByLang = blogPostData.filter(
-      ({ id, attributes }: any) =>
-        attributes.locale === language && id !== editorPick[0]?.id
+    const filterData = blogPostData.filter(
+      ({ attributes }: any) =>
+        attributes.title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
+        attributes.description.match(new RegExp(`\\b${params.q}\\b`, "i"))
     );
-    const filterByLimit = filterByLang.slice(indexStart, indexEnd);
-    // @ts-ignore
-    setBlogPosts([...blogPosts, ...filterByLimit]);
-  };
+    setBlogPosts(filterData);
+  }, [sortAsc]);
 
   return (
     <Layout>
       <div className="container my-5 min-h-page">
-        <H1 classes={`mb-3 text-left`}>{t("vtaiBlog")}</H1>
+        <H2 classes={`mb-3 text-left`}>
+          {t("vtaiBlogSeach", { total: totalData, keyword: params?.q })}
+        </H2>
         <div className="custom-page-content fw-light lh-lg py-3">
-          <div className="row mb-5">
-            <EditorPick
-              cover={editorPick[0]?.attributes?.cover?.data?.attributes?.url}
-              coverAlt={editorPick[0]?.attributes?.coverAlt}
-              title={editorPick[0]?.attributes?.title}
-              slug={editorPick[0]?.attributes?.slug}
-              description={editorPick[0]?.attributes?.description}
-              postedDate={editorPick[0]?.attributes?.postedDate}
-            />
-          </div>
           <div className="row">
             <div className="d-flex justify-content-between pb-3">
-              <BlogSearch placeholder={t("typeHere") || ""} />
+              <BlogSearch
+                placeholder={t("typeHere") || ""}
+                defaultValue={params?.q}
+              />
               <div className="dropdown text-end">
                 <button
                   type="button"
@@ -120,6 +94,7 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
                 </ul>
               </div>
             </div>
+
             {blogPosts &&
               blogPosts.map(({ id, attributes }: any) => (
                 <div
@@ -138,27 +113,13 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
               ))}
           </div>
         </div>
-        {blogPostData.filter(
-          ({ attributes }: any) => attributes.locale === language
-        ).length -
-          1 >
-          blogPosts.length && (
-          <div className="text-center">
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setActivePage(activePage + 1)}
-            >
-              {t("loadMore")}
-            </button>
-          </div>
-        )}
       </div>
       <Helper />
     </Layout>
   );
 };
 
-export default BlogPage;
+export default SearchPage;
 
 export const query = graphql`
   query ($language: String!) {
@@ -170,58 +131,6 @@ export const query = graphql`
           ns
           data
           language
-        }
-      }
-    }
-    editorPicksId: strapiQueries {
-      blogs(
-        locale: "id"
-        publicationState: LIVE
-        pagination: { limit: 1 }
-        sort: "postedDate:desc"
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            coverAlt
-            postedDate
-          }
-        }
-      }
-    }
-    editorPicksEn: strapiQueries {
-      blogs(
-        locale: "en"
-        publicationState: LIVE
-        pagination: { limit: 1 }
-        sort: "postedDate:desc"
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            coverAlt
-            postedDate
-          }
         }
       }
     }
@@ -284,4 +193,4 @@ export const query = graphql`
   }
 `;
 
-export const Head: HeadFC = () => <Seo title="Blog" />;
+export const Head: HeadFC = () => <Seo title="Blog Search" />;

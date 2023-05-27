@@ -1,5 +1,7 @@
 {
     "vtaiBlog": "Video Translator AI Blog",
+    "vtaiBlogSeach": "Found {{total}} posts contains keywords '{{keyword}}'",
     "relatedBlogPost": "Related Posts",
-    "loadMore": "Load more"
+    "loadMore": "Load more",
+    "typeHere": "Type post keyword here..."
 }

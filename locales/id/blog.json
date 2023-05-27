@@ -1,5 +1,7 @@
 {
     "vtaiBlog": "Video Translator AI Blog",
-    "relatedBlogPost": "Related Posts",
-    "loadMore": "Load more"
+    "vtaiBlogSeach": "Ditemukan {{total}} post yang mengandung kata kunci '{{keyword}}'",
+    "relatedBlogPost": "Postingan terkait",
+    "loadMore": "Muat lebih banyak",
+    "typeHere": "Cari postingan disini..."
 }
