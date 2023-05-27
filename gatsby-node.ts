@@ -1,5 +1,6 @@
 // @ts-nocheck
 const path = require("path");
+const fetch = require("node-fetch");
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
@@ -106,6 +107,35 @@ exports.createPages = ({ graphql, actions }) => {
             toPath: `/page/${attributes.pageName}`,
           });
         });
+
+        // Handle fallback redirection for each language
+        fetch(
+          `${process.env.STRAPI_API_URL}/api/blogs?locale=id&populate=localizations`
+        )
+          .then((response) => response.json())
+          .then(({ data }) => {
+            if (data.length > 0) {
+              data
+                .filter(({ attributes }) => {
+                  const localizations = attributes.localizations.data;
+                  return localizations.length > 0;
+                })
+                .map(({ attributes }) => {
+                  const localizations = attributes.localizations.data;
+                  localizations.map(({ attributes: attr }) => {
+                    createRedirect({
+                      fromPath: `/blog/${attributes.slug}`,
+                      toPath: `/blog/${attr.slug}`,
+                    });
+                    createRedirect({
+                      fromPath: `/blog/${attr.slug}`,
+                      toPath: `/blog/${attributes.slug}`,
+                    });
+                  });
+                });
+            }
+          })
+          .catch((error) => console.warn(error));
       })
     );
   });

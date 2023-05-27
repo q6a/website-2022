@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
+import { withPrefix } from "gatsby";
+import { Link } from "gatsby-plugin-react-i18next";
 
 import { H1, BodyContentText } from "./Typography";
 
@@ -29,12 +30,7 @@ const HomeContentItem = ({
           <div className="col-12 col-lg-6 d-flex">
             <div className="px-4 py-4 w-100">
               <div className="rounded-2 overflow-hidden">
-                <img
-                  src={withPrefix(img)}
-                  alt={title}
-                  width="100%"
-                  loading="lazy"
-                />
+                <img src={withPrefix(img)} alt={title} width="100%" />
               </div>
             </div>
           </div>
