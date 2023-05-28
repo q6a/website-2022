@@ -26,7 +26,9 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
 
   React.useEffect(() => {
     if (!params?.q) {
-      navigate(`/blog/`);
+      if (typeof window !== "undefined") {
+        window.location.replace("/blog");
+      }
     } else {
       // @ts-ignore
       const filterData = blogPostData.filter(
