@@ -2,7 +2,6 @@ import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import { Link, useTranslation } from "gatsby-plugin-react-i18next";
-import { navigate } from "@reach/router";
 import queryString from "query-string";
 
 import BlogCard from "../components/BlogCard";

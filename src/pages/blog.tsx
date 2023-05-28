@@ -2,6 +2,12 @@ import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
+import queryString from "query-string";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import BlogCard from "../components/BlogCard";
 import BlogSearch from "../components/BlogSearch";
@@ -10,38 +16,47 @@ import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import Seo from "../components/Seo";
 import { H1 } from "../components/Typography";
+import pagination from "../utils/pagination";
 
 const sortByData = ["Newer to older", "Older to newer"];
 
-const BlogPage: React.FC<PageProps> = ({ data }: any) => {
+const BlogPage: React.FC<PageProps> = ({ data, location }: any) => {
   const { t } = useTranslation();
   const { language } = useI18next();
   const blogPostDataDesc = data?.blogPostDataDesc?.blogs?.data;
   const blogPostDataAsc = data?.blogPostDataAsc?.blogs?.data;
   const editorPickId = data?.editorPicksId?.blogs?.data;
   const editorPickEn = data?.editorPicksEn?.blogs?.data;
-  const postPerLoad = 6;
+  const postPerLoad = 12;
   const editorPick = language === "en" ? editorPickEn : editorPickId;
   const [blogPosts, setBlogPosts] = React.useState([]);
   const [activePage, setActivePage] = React.useState(0);
-  const [sortAsc, setSortAsc] = React.useState(true);
-  const blogPostData = sortAsc ? blogPostDataDesc : blogPostDataAsc;
+  const [sortAsc, setSortAsc] = React.useState(false);
+  const [totalPage, setTotalPage] = React.useState(1);
+  const [numPage, setNumPage] = React.useState([]);
+  const blogPostData = sortAsc ? blogPostDataAsc : blogPostDataDesc;
+  const { page, sort } = queryString.parse(location.search);
 
   React.useEffect(() => {
-    setActivePage(1);
+    if (!page) {
+      setActivePage(1);
+    } else {
+      setActivePage(parseInt(page.toString()));
+    }
+
+    if (!sort) {
+      setSortAsc(false);
+    } else {
+      setSortAsc(sort === "asc");
+    }
   }, []);
 
   React.useEffect(() => {
-    setActivePage(1);
-    generatePosts();
-  }, [language]);
-
-  React.useEffect(() => {
     if (activePage > 0) {
-      setBlogPosts([]);
       setActivePage(1);
+      setSortAsc(false);
     }
-  }, [sortAsc]);
+  }, [language]);
 
   React.useEffect(() => {
     if (activePage > 0) {
@@ -62,28 +77,40 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
     const indexEnd = activePage * postPerLoad;
     const filterByLang = blogPostData.filter(
       ({ id, attributes }: any) =>
-        attributes.locale === language && id !== editorPick[0]?.id
+        attributes.locale === language &&
+        (activePage > 1 ? true : id !== editorPick[0]?.id)
     );
-    const filterByLimit = filterByLang.slice(indexStart, indexEnd);
+    const filterByLimit =
+      activePage > 1 && !sortAsc
+        ? filterByLang.slice(indexStart + 1, indexEnd + 1)
+        : filterByLang.slice(indexStart, indexEnd);
+    const total = Math.ceil(filterByLang.length / postPerLoad);
     // @ts-ignore
-    setBlogPosts([...blogPosts, ...filterByLimit]);
+    setBlogPosts(filterByLimit);
+    setTotalPage(total);
+    setNumPage(pagination(activePage, total));
   };
+
+  const generateQueryString = (page: number, isAsc: boolean) =>
+    `?page=${page}&sort=${isAsc ? "asc" : "desc"}`;
 
   return (
     <Layout>
       <div className="container my-5 min-h-page">
         <H1 classes={`mb-3 text-left`}>{t("vtaiBlog")}</H1>
         <div className="custom-page-content fw-light lh-lg py-3">
-          <div className="row mb-5">
-            <EditorPick
-              cover={editorPick[0]?.attributes?.cover?.data?.attributes?.url}
-              coverAlt={editorPick[0]?.attributes?.coverAlt}
-              title={editorPick[0]?.attributes?.title}
-              slug={editorPick[0]?.attributes?.slug}
-              description={editorPick[0]?.attributes?.description}
-              postedDate={editorPick[0]?.attributes?.postedDate}
-            />
-          </div>
+          {activePage === 1 && (
+            <div className="row mb-5">
+              <EditorPick
+                cover={editorPick[0]?.attributes?.cover?.data?.attributes?.url}
+                coverAlt={editorPick[0]?.attributes?.coverAlt}
+                title={editorPick[0]?.attributes?.title}
+                slug={editorPick[0]?.attributes?.slug}
+                description={editorPick[0]?.attributes?.description}
+                postedDate={editorPick[0]?.attributes?.postedDate}
+              />
+            </div>
+          )}
           <div className="row">
             <div className="d-flex justify-content-between pb-3">
               <BlogSearch placeholder={t("typeHere") || ""} />
@@ -96,23 +123,29 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
                   data-bs-offset="10,20"
                 >
                   Sort by{" "}
-                  {sortAsc
+                  {!sortAsc
                     ? sortByData[0].toLowerCase()
                     : sortByData[1].toLowerCase()}
                 </button>
                 <ul className="dropdown-menu">
                   <li>
                     <button
-                      className={`dropdown-item ${sortAsc ? "active" : ""}`}
-                      onClick={() => setSortAsc(true)}
+                      className={`dropdown-item ${sortAsc ? "" : "active"}`}
+                      onClick={() => {
+                        setSortAsc(false);
+                        window.location.href = "?sort=desc";
+                      }}
                     >
                       {sortByData[0]}
                     </button>
                   </li>
                   <li>
                     <button
-                      className={`dropdown-item ${sortAsc ? "" : "active"}`}
-                      onClick={() => setSortAsc(false)}
+                      className={`dropdown-item ${sortAsc ? "active" : ""}`}
+                      onClick={() => {
+                        setSortAsc(true);
+                        window.location.href = "?sort=asc";
+                      }}
                     >
                       {sortByData[1]}
                     </button>
@@ -143,14 +176,53 @@ const BlogPage: React.FC<PageProps> = ({ data }: any) => {
         ).length -
           1 >
           blogPosts.length && (
-          <div className="text-center">
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setActivePage(activePage + 1)}
-            >
-              {t("loadMore")}
-            </button>
-          </div>
+          <nav aria-label="Blog pagination" className="my-5">
+            <ul className="pagination justify-content-center">
+              <li className={`page-item ${activePage === 1 ? "disabled" : ""}`}>
+                <a
+                  className="page-link"
+                  href={generateQueryString(activePage - 1, sortAsc)}
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                  </span>
+                </a>
+              </li>
+              {numPage.map((x, i) => (
+                <li
+                  key={`page-${x}`}
+                  className={`page-item ${activePage === x ? "active" : ""}`}
+                >
+                  {x !== "..." ? (
+                    <a
+                      className="page-link"
+                      href={generateQueryString(x, sortAsc)}
+                    >
+                      {x}
+                    </a>
+                  ) : (
+                    <span className="page-link">{x}</span>
+                  )}
+                </li>
+              ))}
+              <li
+                className={`page-item ${
+                  activePage === totalPage ? "disabled" : ""
+                }`}
+              >
+                <a
+                  className="page-link"
+                  href={generateQueryString(activePage + 1, sortAsc)}
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         )}
       </div>
       <Helper />
