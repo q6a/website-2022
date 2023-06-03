@@ -7,6 +7,7 @@ require("dotenv").config({
 
 const siteUrl = process.env.SITE_URL || `https://videotranslator.ai`;
 const strapiUrl = process.env.STRAPI_API_URL || "http://127.0.0.1:1337";
+const strapiToken = process.env.STRAPI_TOKEN || "";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -77,12 +78,29 @@ const config: GatsbyConfig = {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: strapiUrl,
+        accessToken: strapiToken,
         collectionTypes: [
+          {
+            singularName: `blog`,
+            pluginOptions: {
+              i18n: {
+                locale: "all",
+              },
+            },
+          },
           {
             singularName: `blog-category`,
           },
           {
             singularName: `blog-tag`,
+          },
+          {
+            singularName: `custom-page`,
+            pluginOptions: {
+              i18n: {
+                locale: "all",
+              },
+            },
           },
           {
             singularName: `faq`,
