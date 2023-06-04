@@ -127,6 +127,7 @@ const config: GatsbyConfig = {
         includeInDevelopment: false,
       },
     },
+    `gatsby-plugin-offline`,
   ],
 };
 
