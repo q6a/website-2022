@@ -96,6 +96,7 @@ const Footer = () => {
                   href={socialLinks?.facebookUrl}
                   className="text-white"
                   rel="noopener noreferrer"
+                  aria-label="Facebook"
                 >
                   <FontAwesomeIcon icon={faFacebookF} />
                 </a>
@@ -105,6 +106,7 @@ const Footer = () => {
                   href={socialLinks?.linkedinUrl}
                   className="text-white"
                   rel="noopener noreferrer"
+                  aria-label="Linkedin"
                 >
                   <FontAwesomeIcon icon={faLinkedinIn} />
                 </a>
@@ -114,6 +116,7 @@ const Footer = () => {
                   href={socialLinks?.twitterUrl}
                   className="text-white"
                   rel="noopener noreferrer"
+                  aria-label="Twitter"
                 >
                   <FontAwesomeIcon icon={faTwitter} />
                 </a>
@@ -123,6 +126,7 @@ const Footer = () => {
                   href={socialLinks?.youtubeUrl}
                   className="text-white"
                   rel="noopener noreferrer"
+                  aria-label="Youtube"
                 >
                   <FontAwesomeIcon icon={faYoutube} />
                 </a>
@@ -132,6 +136,7 @@ const Footer = () => {
                   href={socialLinks?.instagramUrl}
                   className="text-white"
                   rel="noopener noreferrer"
+                  aria-label="Instagram"
                 >
                   <FontAwesomeIcon icon={faInstagram} />
                 </a>
