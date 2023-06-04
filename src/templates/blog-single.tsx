@@ -3,7 +3,6 @@ import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { useTranslation } from "gatsby-plugin-react-i18next";
-import dayjs from "dayjs";
 
 import BlogCard from "../components/BlogCard";
 import Layout from "../components/Layout";
@@ -26,7 +25,7 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
             by <strong>{blogData?.authors}</strong>
           </span>
           <span className="blog-posted-date ms-1">
-            | {dayjs(blogData?.postedDate).format("MMM DD, YYYY")}
+            | {blogData?.postedDate}
           </span>
         </div>
         <div className="blog-cover">

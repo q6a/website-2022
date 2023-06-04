@@ -1,7 +1,6 @@
 import React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Link } from "gatsby-plugin-react-i18next";
-import dayjs from "dayjs";
 
 interface IEditorPick {
   title: string;
@@ -35,9 +34,7 @@ const EditorPick = ({
             </span>
             <div className="fs-4 fw-bold fs-5 pb-2 lh-md">{title}</div>
             <p>{description}</p>
-            <span className="blog-card-date">
-              {dayjs(postedDate).format("MMM DD, YYYY")}
-            </span>
+            <span className="blog-card-date">{postedDate}</span>
           </div>
         </div>
       </Link>

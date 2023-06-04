@@ -27,7 +27,6 @@
     "@splidejs/splide": "^4.1.4",
     "bootstrap": "^5.2.3",
     "cross-env": "^7.0.3",
-    "dayjs": "^1.11.7",
     "flag-icons": "^6.6.6",
     "gatsby": "^5.2.0",
     "gatsby-plugin-google-tagmanager": "^5.9.0",
