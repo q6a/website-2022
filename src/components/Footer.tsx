@@ -35,6 +35,7 @@ const Footer = () => {
                   src={withPrefix("images/logo-white.png")}
                   alt="VideoTranslator"
                   className="footer-logo"
+                  loading="lazy"
                 />
                 <span className="fs-14">{t("tagline")}</span>
               </div>

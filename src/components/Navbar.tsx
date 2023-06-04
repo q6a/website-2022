@@ -12,7 +12,11 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-white sticky-top shadow">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src={withPrefix("images/logo.svg")} alt="VideoTranslator.AI" />
+          <img
+            src={withPrefix("images/logo.svg")}
+            alt="VideoTranslator.AI"
+            loading="eager"
+          />
         </Link>
         <button
           className="navbar-toggler shadow-none"
