@@ -21,12 +21,13 @@ const BlogCard = ({
   postedDate,
 }: IBlogCard) => {
   const image = getImage(cover?.localFile);
+  const imageAlt = coverAlt.trim();
   return (
     <div className="blog-card rounded-2 border border-1">
       <Link className="pb-3" to={`/blog/${slug}`}>
         <div className="rounded-2 overflow-hidden">
           {/* @ts-ignore */}
-          <GatsbyImage image={image} alt={coverAlt} />
+          <GatsbyImage image={image} alt={!imageAlt ? title : imageAlt} />
         </div>
         <div className="blog-card-text">
           <div className="fs-5 fw-bold fs-5 pt-3 pb-2">{title}</div>
