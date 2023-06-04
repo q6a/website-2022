@@ -121,14 +121,6 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-sitemap`,
     },
     {
-      resolve: "gatsby-source-graphql",
-      options: {
-        typeName: "STRAPI",
-        fieldName: "strapiQueries",
-        url: `${strapiUrl}/graphql`,
-      },
-    },
-    {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
         id: process.env.GATSBY_GTM_ID || "",
