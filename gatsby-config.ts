@@ -52,9 +52,9 @@ const config: GatsbyConfig = {
         ],
       },
     },
-    {
-      resolve: `gatsby-transformer-sharp`,
-    },
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -114,7 +114,7 @@ const config: GatsbyConfig = {
             singularName: `available-language`,
           },
         ],
-        singleTypes: [`pricing`, `social-link`],
+        singleTypes: [`pricing`, `social-link`, `partner-logo`],
       },
     },
     {

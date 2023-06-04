@@ -9,40 +9,33 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           query {
-            allBlogPosts: strapiQueries {
-              blogs(
-                publicationState: LIVE
-                locale: "all"
-                pagination: { limit: 1000 }
-                sort: "createdAt"
-              ) {
-                data {
+            allStrapiBlog(sort: { postedDate: DESC }) {
+              group(field: { locale: SELECT }, limit: 1000) {
+                nodes {
                   id
-                  attributes {
-                    slug
-                    locale
-                    blogCategories {
-                      data {
-                        attributes {
-                          categoryName
-                        }
+                  slug
+                  blogCategories {
+                    categoryName
+                  }
+                  locale
+                  localizations {
+                    data {
+                      id
+                      attributes {
+                        locale
+                        slug
                       }
                     }
                   }
                 }
               }
             }
-            pages: strapiQueries {
-              customPages(publicationState: LIVE, locale: "all") {
-                data {
+            pages: allStrapiCustomPage {
+              group(field: { locale: SELECT }) {
+                nodes {
                   id
-                  attributes {
-                    pageName
-                    title
-                    align
-                    richContent
-                    locale
-                  }
+                  pageName
+                  locale
                 }
               }
             }
@@ -53,95 +46,120 @@ exports.createPages = ({ graphql, actions }) => {
           throw result.errors;
         }
 
-        const blogs = result.data.allBlogPosts.blogs.data;
-        const pages = result.data.pages.customPages.data;
+        const blogGroup = result.data.allStrapiBlog.group;
+        const pageGroup = result.data.pages.group;
 
-        blogs.forEach(({ id, attributes }) => {
-          const categories = attributes?.blogCategories?.data.map(
-            (category) => category.attributes.categoryName
+        blogGroup.forEach(({ nodes: blogs }) => {
+          // Blog single page
+          blogs.forEach(
+            ({ id, slug, blogCategories, locale, localizations }) => {
+              const categories = blogCategories.map(
+                (category) => category?.categoryName
+              );
+
+              createPage({
+                path:
+                  locale === "en" ? `/blog/${slug}` : `/${locale}/blog/${slug}`,
+                component: path.resolve("src/templates/blog-single.tsx"),
+                context: {
+                  id: id,
+                  language: locale,
+                  category:
+                    categories[Math.floor(Math.random() * categories.length)],
+                },
+              });
+
+              // Redirect from previous path '/news' to new path '/blog'
+              if (locale === "en") {
+                createRedirect({
+                  fromPath: `/news/${slug}`,
+                  toPath: `/blog/${slug}`,
+                });
+              } else {
+                createRedirect({
+                  fromPath: `/news/${slug}`,
+                  toPath: `/${locale}/blog/${slug}`,
+                });
+              }
+
+              // Handle fallback redirection for each language
+              const localize = localizations?.data;
+              if (localize.length > 0) {
+                localize.map(({ attributes: attr }) => {
+                  console.info(`/blog/${slug} => /blog/${attr.slug}`);
+                  console.info(
+                    `/${locale}/blog/${attr.slug} => /${locale}/blog/${slug}`
+                  );
+                  createRedirect({
+                    fromPath: `/blog/${slug}`,
+                    toPath: `/blog/${attr.slug}`,
+                  });
+                  createRedirect({
+                    fromPath: `/${locale}/blog/${attr.slug}`,
+                    toPath: `/${locale}/blog/${slug}`,
+                  });
+                });
+              }
+            }
           );
-
-          createPage({
-            path:
-              attributes.locale === "en"
-                ? `/blog/${attributes.slug}`
-                : `/${attributes.locale}/blog/${attributes.slug}`,
-            component: path.resolve("src/templates/blog-single.tsx"),
-            context: {
-              id: id,
-              language: attributes.locale,
-              category:
-                categories[Math.floor(Math.random() * categories.length)],
-            },
-          });
-
-          if (attributes.locale === "en") {
-            createRedirect({
-              fromPath: `/news/${attributes.slug}`,
-              toPath: `/blog/${attributes.slug}`,
-            });
-          } else {
-            createRedirect({
-              fromPath: `/news/${attributes.slug}`,
-              toPath: `/${attributes.locale}/blog/${attributes.slug}`,
-            });
-          }
         });
 
-        pages.forEach(({ id, attributes }) => {
-          createPage({
-            path:
-              attributes.locale === "en"
-                ? `/page/${attributes.pageName}`
-                : `/${attributes.locale}/page/${attributes.pageName}`,
-            component: path.resolve("src/templates/custom-page.tsx"),
-            context: {
-              id: id,
-              page: attributes.pageName,
-              language: attributes.locale,
-            },
-          });
+        pageGroup.forEach(({ nodes: pages }) => {
+          pages.forEach(({ id, pageName, locale }) => {
+            createPage({
+              path:
+                locale === "en"
+                  ? `/page/${pageName}`
+                  : `/${locale}/page/${pageName}`,
+              component: path.resolve("src/templates/custom-page.tsx"),
+              context: {
+                id: id,
+                page: pageName,
+                language: locale,
+              },
+            });
 
-          createRedirect({
-            fromPath: `/${attributes.pageName}`,
-            toPath: `/page/${attributes.pageName}`,
+            createRedirect({
+              fromPath: `/${pageName}`,
+              toPath: `/page/${pageName}`,
+            });
           });
         });
 
         // Handle fallback redirection for each language
-        fetch(
-          `${process.env.STRAPI_API_URL}/api/blogs?locale=id&populate=localizations`
-        )
-          .then((response) => response.json())
-          .then(({ data }) => {
-            if (data.length > 0) {
-              data
-                .filter(({ attributes }) => {
-                  const localizations = attributes.localizations.data;
-                  return localizations.length > 0;
-                })
-                .map(({ attributes }) => {
-                  const localizations = attributes.localizations.data;
-                  localizations.map(({ attributes: attr }) => {
-                    console.info(
-                      `/blog/${attributes.slug} => /blog/${attr.slug}`
-                    );
-                    console.info(
-                      `/${attributes.locale}/blog/${attr.slug} => /${attributes.locale}/blog/${attributes.slug}`
-                    );
-                    createRedirect({
-                      fromPath: `/blog/${attributes.slug}`,
-                      toPath: `/blog/${attr.slug}`,
-                    });
-                    createRedirect({
-                      fromPath: `/${attributes.locale}/blog/${attr.slug}`,
-                      toPath: `/${attributes.locale}/blog/${attributes.slug}`,
-                    });
-                  });
-                });
-            }
-          })
-          .catch((error) => console.warn(error));
+        // fetch(
+        //   `${process.env.STRAPI_API_URL}/api/blogs?locale=id&populate=localizations`
+        // )
+        //   .then((response) => response.json())
+        //   .then(({ data }) => {
+        //     if (data.length > 0) {
+        //       data
+        //         .filter(({ attributes }) => {
+        //           const localizations = attributes.localizations.data;
+        //           return localizations.length > 0;
+        //         })
+        //         .map(({ attributes }) => {
+        //           const localizations = attributes.localizations.data;
+        //           localizations.map(({ attributes: attr }) => {
+        //             console.info(
+        //               `/blog/${attributes.slug} => /blog/${attr.slug}`
+        //             );
+        //             console.info(
+        //               `/${attributes.locale}/blog/${attr.slug} => /${attributes.locale}/blog/${attributes.slug}`
+        //             );
+        //             createRedirect({
+        //               fromPath: `/blog/${attributes.slug}`,
+        //               toPath: `/blog/${attr.slug}`,
+        //             });
+        //             createRedirect({
+        //               fromPath: `/${attributes.locale}/blog/${attr.slug}`,
+        //               toPath: `/${attributes.locale}/blog/${attributes.slug}`,
+        //             });
+        //           });
+        //         });
+        //     }
+        //   })
+        //   .catch((error) => console.warn(error));
       })
     );
   });

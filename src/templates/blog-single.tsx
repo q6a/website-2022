@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { graphql, withPrefix } from "gatsby";
+import { graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 import dayjs from "dayjs";
 
@@ -12,54 +13,44 @@ import { H1, H2 } from "../components/Typography";
 
 const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
-  const blogData = data?.blogData?.blog?.data;
-  const relatedBlogPost = data?.relatedBlogPost?.blogs?.data;
+  const blogData = data?.blogData;
+  const relatedBlogPost = data?.relatedBlogPost?.nodes;
+  const image = getImage(blogData?.cover?.localFile);
 
   return (
     <Layout>
       <div className="container my-5 min-h-page">
-        <H1 classes="mb-3 text-center blog-title">
-          {blogData?.attributes?.title}
-        </H1>
+        <H1 classes="mb-3 text-center blog-title">{blogData?.title}</H1>
         <div className="text-center">
           <span className="blog-authors">
-            by <strong>{blogData?.attributes?.authors}</strong>
+            by <strong>{blogData?.authors}</strong>
           </span>
           <span className="blog-posted-date ms-1">
-            | {dayjs(blogData?.attributes?.postedDate).format("MMM DD, YYYY")}
+            | {dayjs(blogData?.postedDate).format("MMM DD, YYYY")}
           </span>
         </div>
         <div className="blog-cover">
           <div className="rounded-2 overflow-hidden">
-            <img
-              src={
-                blogData?.attributes?.cover?.data?.attributes?.url ||
-                withPrefix("/images/no-image.jpg")
-              }
-              alt={blogData?.attributes?.coverAlt}
-              width="100%"
-              loading="lazy"
-            />
+            {/* @ts-ignore */}
+            <GatsbyImage image={image} alt={blogData?.coverAlt} />
           </div>
         </div>
         <div className="blog-single fw-light lh-lg py-5">
           <div
             dangerouslySetInnerHTML={{
-              __html: blogData?.attributes?.richContent,
+              __html: blogData?.richContent?.data?.richContent,
             }}
           />
           <div className="pt-5">
             <div className="d-flex flex-wrap gap-2">
-              {blogData?.attributes?.blogCategories?.data.map(
-                (category: any) => (
-                  <div
-                    key={`${blogData?.id}-${category.attributes.categoryName}`}
-                    className="btn btn-sm btn-outline-dark"
-                  >
-                    {category.attributes.categoryName}
-                  </div>
-                )
-              )}
+              {blogData?.blogCategories.map((category: any) => (
+                <div
+                  key={`${blogData?.id}-${category.categoryName}`}
+                  className="btn btn-sm btn-outline-dark"
+                >
+                  {category.categoryName}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -71,18 +62,28 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
               {t("relatedBlogPost")}
             </H2>
             <div className="row">
-              {relatedBlogPost.map(({ id, attributes }: any) => (
-                <div key={`post-${id}`} className="col-12 col-lg-4">
-                  <BlogCard
-                    cover={attributes?.cover?.data?.attributes?.url}
-                    coverAlt={attributes?.coverAlt}
-                    title={attributes?.title}
-                    slug={attributes?.slug}
-                    description={attributes?.description}
-                    postedDate={attributes?.postedDate}
-                  />
-                </div>
-              ))}
+              {relatedBlogPost.map(
+                ({
+                  id,
+                  cover,
+                  coverAlt,
+                  title,
+                  slug,
+                  description,
+                  postedDate,
+                }: any) => (
+                  <div key={`post-${id}`} className="col-12 col-lg-4">
+                    <BlogCard
+                      cover={cover}
+                      coverAlt={coverAlt}
+                      title={title}
+                      slug={slug}
+                      description={description}
+                      postedDate={postedDate}
+                    />
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -93,7 +94,7 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
 };
 
 export const query = graphql`
-  query ($id: ID!, $language: String!, $category: String) {
+  query ($id: String!, $language: String!, $category: String) {
     locales: allLocale(
       filter: { ns: { in: ["index", "blog"] }, language: { eq: $language } }
     ) {
@@ -105,73 +106,65 @@ export const query = graphql`
         }
       }
     }
-    blogData: strapiQueries {
-      blog(id: $id) {
-        data {
-          id
-          attributes {
-            locale
-            title
-            slug
-            description
-            authors
-            blogCategories {
-              data {
-                attributes {
-                  categoryName
-                }
-              }
-            }
-            blogTags {
-              data {
-                attributes {
-                  tagName
-                }
-              }
-            }
-            keywords
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            coverAlt
-            updatedAt
-            richContent
-            postedDate
+    blogData: strapiBlog(id: { eq: $id }) {
+      id
+      locale
+      title
+      slug
+      description
+      authors
+      blogCategories {
+        categoryName
+      }
+      blogTags {
+        tagName
+      }
+      keywords
+      cover {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+        formats {
+          small {
+            url
           }
         }
       }
-    }
-    relatedBlogPost: strapiQueries {
-      blogs(
-        filters: {
-          blogCategories: { categoryName: { eq: $category } }
-          id: { ne: $id }
-          locale: { eq: $language }
-        }
-        publicationState: LIVE
-        pagination: { limit: 3 }
-        sort: "postedDate:desc"
-      ) {
+      coverAlt
+      richContent {
         data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
+          richContent
+        }
+      }
+      postedDate(formatString: "MMM DD, YYYY")
+    }
+    relatedBlogPost: allStrapiBlog(
+      filter: {
+        blogCategories: { elemMatch: { categoryName: { eq: $category } } }
+        id: { ne: $id }
+        locale: { eq: $language }
+      }
+      sort: { postedDate: DESC }
+      limit: 3
+    ) {
+      nodes {
+        id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
             }
-            coverAlt
-            postedDate
           }
+        }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
+        blogCategories {
+          categoryName
         }
       }
     }
@@ -181,19 +174,19 @@ export const query = graphql`
 export default BlogSinglePage;
 
 export const Head: HeadFC = ({ data }: any) => {
-  const blogData = data?.blogData?.blog?.data;
+  const blogData = data?.blogData;
 
   return (
     <Seo
-      title={blogData?.attributes?.title}
-      description={blogData?.attributes?.description}
-      keywords={blogData?.attributes?.keywords}
+      title={blogData?.title}
+      description={blogData?.description}
+      keywords={blogData?.keywords}
       url={
-        blogData?.attributes?.locale === "en"
-          ? `/blog/${blogData?.attributes?.slug}`
-          : `/${blogData?.attributes?.locale}/blog/${blogData?.attributes?.slug}`
+        blogData?.locale === "en"
+          ? `/blog/${blogData?.slug}`
+          : `/${blogData?.locale}/blog/${blogData?.slug}`
       }
-      image={`${blogData?.attributes?.cover?.data?.attributes?.url}`}
+      image={`${blogData?.cover?.formats?.small?.url}`}
     />
   );
 };

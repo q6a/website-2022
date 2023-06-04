@@ -15,22 +15,33 @@ const HomeBlog = ({ data }: any) => {
         </H2>
         <div className="mt-5">
           <div className="row">
+            <code>{JSON.stringify(data.nodes)}</code>
             {data &&
-              data.map(({ id, attributes }: any) => (
-                <div
-                  key={`post-${id}`}
-                  className="col-12 col-md-6 col-lg-4 mb-4"
-                >
-                  <BlogCard
-                    cover={attributes?.cover?.data?.attributes?.url}
-                    coverAlt={attributes?.coverAlt}
-                    title={attributes?.title}
-                    slug={attributes?.slug}
-                    description={attributes?.description}
-                    postedDate={attributes?.postedDate}
-                  />
-                </div>
-              ))}
+              data.map(
+                ({
+                  id,
+                  cover,
+                  coverAlt,
+                  title,
+                  slug,
+                  description,
+                  postedDate,
+                }: any) => (
+                  <div
+                    key={`post-${id}`}
+                    className="col-12 col-md-6 col-lg-4 mb-4"
+                  >
+                    <BlogCard
+                      cover={cover}
+                      coverAlt={coverAlt}
+                      title={title}
+                      slug={slug}
+                      description={description}
+                      postedDate={postedDate}
+                    />
+                  </div>
+                )
+              )}
           </div>
           <div className="mt-3">
             <div className="text-center">

@@ -8,37 +8,35 @@ import Seo from "../components/Seo";
 import { H1 } from "../components/Typography";
 
 const CustomPage: React.FC<PageProps> = ({ data, pageContext }: any) => {
-  const allData = data?.fallbackCustomPage?.customPages?.data;
+  const allData = data?.fallbackCustomPage?.nodes;
   const localeCustomPage = allData.find(
-    (item: any) => item?.attributes?.locale === pageContext?.language
+    (item: any) => item?.locale === pageContext?.language
   );
-  const fallbackCustomPage = allData.find(
-    (item: any) => item?.attributes?.locale === "en"
-  );
+  const fallbackCustomPage = allData.find((item: any) => item?.locale === "en");
 
   return (
     <Layout>
-      {localeCustomPage?.attributes?.title ? (
+      {localeCustomPage?.title ? (
         <div className="container my-5 min-h-page">
-          <H1 classes={`mb-3 text-${localeCustomPage?.attributes?.align}`}>
-            {localeCustomPage?.attributes?.title}
+          <H1 classes={`mb-3 text-${localeCustomPage?.align}`}>
+            {localeCustomPage?.title}
           </H1>
           <div
             className="custom-page-content fw-light lh-lg py-3"
             dangerouslySetInnerHTML={{
-              __html: localeCustomPage?.attributes?.richContent,
+              __html: localeCustomPage?.richContent?.data?.richContent,
             }}
           />
         </div>
       ) : (
         <div className="container my-5 min-h-page">
-          <H1 classes={`mb-3 text-${fallbackCustomPage?.attributes?.align}`}>
-            {fallbackCustomPage?.attributes?.title}
+          <H1 classes={`mb-3 text-${fallbackCustomPage?.align}`}>
+            {fallbackCustomPage?.title}
           </H1>
           <div
             className="custom-page-content fw-light lh-lg py-3"
             dangerouslySetInnerHTML={{
-              __html: fallbackCustomPage?.attributes?.richContent,
+              __html: fallbackCustomPage?.richContent?.data?.richContent,
             }}
           />
         </div>
@@ -61,22 +59,20 @@ export const query = graphql`
         }
       }
     }
-    fallbackCustomPage: strapiQueries {
-      customPages(
-        filters: { pageName: { eq: $page } }
-        publicationState: LIVE
-        locale: "all"
-      ) {
-        data {
-          id
-          attributes {
-            pageName
-            title
-            align
+    fallbackCustomPage: allStrapiCustomPage(
+      filter: { pageName: { eq: $page } }
+    ) {
+      nodes {
+        id
+        pageName
+        title
+        align
+        richContent {
+          data {
             richContent
-            locale
           }
         }
+        locale
       }
     }
   }
@@ -85,24 +81,22 @@ export const query = graphql`
 export default CustomPage;
 
 export const Head: HeadFC = ({ data, pageContext }: any) => {
-  const allData = data?.fallbackCustomPage?.customPages?.data;
+  const allData = data?.fallbackCustomPage?.nodes;
   const localeCustomPage = allData.find(
-    (item: any) => item?.attributes?.locale === pageContext?.language
+    (item: any) => item?.locale === pageContext?.language
   );
-  const fallbackCustomPage = allData.find(
-    (item: any) => item?.attributes?.locale === "en"
-  );
-  const selectedCustomPage = localeCustomPage?.attributes?.title
+  const fallbackCustomPage = allData.find((item: any) => item?.locale === "en");
+  const selectedCustomPage = localeCustomPage?.title
     ? localeCustomPage
     : fallbackCustomPage;
 
   return (
     <Seo
-      title={selectedCustomPage?.attributes?.title}
+      title={selectedCustomPage?.title}
       url={
-        selectedCustomPage?.attributes?.locale === "en"
-          ? `/page/${selectedCustomPage?.attributes?.pageName}`
-          : `/${selectedCustomPage?.attributes?.locale}/page/${selectedCustomPage?.attributes?.pageName}`
+        selectedCustomPage?.locale === "en"
+          ? `/page/${selectedCustomPage?.pageName}`
+          : `/${selectedCustomPage?.locale}/page/${selectedCustomPage?.pageName}`
       }
     />
   );

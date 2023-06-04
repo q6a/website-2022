@@ -1,7 +1,6 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
-import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
@@ -14,17 +13,10 @@ import BottomCta from "../components/BottomCta";
 // import HomeDemo from "../components/HomeDemo";
 
 const IndexPage: React.FC<PageProps> = ({ data }: any) => {
-  const { language } = useI18next();
-  const blogPostId = data?.blogPostDataId?.blogs?.data;
-  const blogPostEn = data?.blogPostDataEn?.blogs?.data;
-  const blogPosts = language === "en" ? blogPostEn : blogPostId;
-  const caseStudiesId = data?.caseStudiesId?.blogs?.data;
-  const caseStudiesEn = data?.caseStudiesEn?.blogs?.data;
-  const caseStudies = language === "en" ? caseStudiesEn : caseStudiesId;
-  const partnerLogos =
-    data?.strapiQueries?.partnerLogo?.data?.attributes?.partnerLogos?.data;
-  const clientLogos =
-    data?.strapiQueries?.partnerLogo?.data?.attributes?.clientLogos?.data;
+  const blogPosts = data?.blogPostData?.nodes;
+  const caseStudies = data?.caseStudies?.nodes;
+  const partnerLogos = data?.strapiPartnerLogo?.partnerLogos;
+  const clientLogos = data?.strapiPartnerLogo?.clientLogos;
 
   return (
     <Layout>
@@ -61,142 +53,68 @@ export const query = graphql`
         keywords
       }
     }
-    blogPostDataId: strapiQueries {
-      blogs(
-        locale: "id"
-        publicationState: LIVE
-        pagination: { limit: 3 }
-        sort: "postedDate:desc"
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
+    blogPostData: allStrapiBlog(
+      filter: { locale: { eq: $language } }
+      sort: { postedDate: DESC }
+      limit: 3
+    ) {
+      nodes {
+        id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
             }
-            coverAlt
-            locale
-            createdAt
-            postedDate
           }
         }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
       }
     }
-    blogPostDataEn: strapiQueries {
-      blogs(
-        locale: "en"
-        publicationState: LIVE
-        pagination: { limit: 3 }
-        sort: "postedDate:desc"
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
+    caseStudies: allStrapiBlog(
+      filter: {
+        locale: { eq: $language }
+        strapi_id: { in: [97, 65, 104, 212, 213, 214] }
+      }
+      sort: { postedDate: DESC }
+      limit: 3
+    ) {
+      nodes {
+        id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
             }
-            coverAlt
-            locale
-            createdAt
-            postedDate
           }
         }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
       }
     }
-    caseStudiesEn: strapiQueries {
-      blogs(
-        filters: { id: { in: ["97", "65", "104"] } }
-        locale: "en"
-        publicationState: LIVE
-        pagination: { limit: 3 }
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            coverAlt
-            locale
-            createdAt
-            postedDate
+    strapiPartnerLogo {
+      partnerLogos {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData
           }
+          name
         }
       }
-    }
-    caseStudiesId: strapiQueries {
-      blogs(
-        filters: { id: { in: ["212", "213", "214"] } }
-        locale: "id"
-        publicationState: LIVE
-        pagination: { limit: 3 }
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            coverAlt
-            locale
-            createdAt
-            postedDate
+      clientLogos {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData
           }
-        }
-      }
-    }
-    strapiQueries {
-      partnerLogo {
-        data {
-          id
-          attributes {
-            partnerLogos {
-              data {
-                id
-                attributes {
-                  alternativeText
-                  url
-                }
-              }
-            }
-            clientLogos {
-              data {
-                id
-                attributes {
-                  alternativeText
-                  url
-                }
-              }
-            }
-          }
+          name
         }
       }
     }

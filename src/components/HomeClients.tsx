@@ -1,4 +1,6 @@
+// @ts-nocheck
 import React from "react";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { H2 } from "./Typography";
@@ -15,16 +17,18 @@ const HomeClients = ({ partners, clients }: any) => {
               {t("partnerSectionTitle")}
             </H2>
             <div className="row mt-5">
-              {partners.map(({ id, attributes }: any) => (
-                <div key={id} className="col-6 col-md-4 px-5">
-                  <img
-                    src={attributes?.url}
-                    alt={attributes?.alternativeText}
-                    className="px-4 py-2 logo-item"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              {partners.map(({ id, localFile }: any) => {
+                const image = getImage(localFile);
+                return (
+                  <div key={id} className="col-6 col-md-4 px-5">
+                    <GatsbyImage
+                      image={image}
+                      alt={localFile?.name}
+                      className="px-4 py-2 logo-item"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -36,16 +40,18 @@ const HomeClients = ({ partners, clients }: any) => {
               {t("clientSectionTitle")}
             </H2>
             <div className="row mt-5">
-              {clients.map(({ id, attributes }: any) => (
-                <div key={id} className="col-6 col-md-4 px-5">
-                  <img
-                    src={attributes?.url}
-                    alt={attributes?.alternativeText}
-                    className="px-4 py-2 logo-item"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              {clients.map(({ id, localFile }: any) => {
+                const image = getImage(localFile);
+                return (
+                  <div key={id} className="col-6 col-md-4 px-5">
+                    <GatsbyImage
+                      image={image}
+                      alt={localFile?.name}
+                      className="px-4 py-2 logo-item"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { withPrefix } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Link } from "gatsby-plugin-react-i18next";
 import dayjs from "dayjs";
 
@@ -7,7 +7,7 @@ interface IEditorPick {
   title: string;
   slug: string;
   description: string;
-  cover?: string;
+  cover?: any;
   coverAlt: string;
   postedDate: string;
 }
@@ -16,16 +16,18 @@ const EditorPick = ({
   title,
   slug,
   description,
-  cover = withPrefix("/images/no-image.jpg"),
+  cover,
   coverAlt,
   postedDate,
 }: IEditorPick) => {
+  const image = getImage(cover?.localFile);
   return (
     <div className="blog-card editors-pick">
       <Link className="pb-3" to={`/blog/${slug}`}>
         <div className="d-flex flex-column flex-lg-row align-items-center rounded-2 shadow">
           <div className="rounded-2 overflow-hidden">
-            <img src={cover} alt={coverAlt} width="100%" loading="lazy" />
+            {/* @ts-ignore */}
+            <GatsbyImage image={image} alt={coverAlt} />
           </div>
           <div className="blog-card-text px-3 px-lg-5 pt-3">
             <span className="badge fw-semibold bg-secondary">

@@ -1,11 +1,12 @@
 import React from "react";
-import { withPrefix } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Link } from "gatsby-plugin-react-i18next";
 
 import { H1, BodyContentText } from "./Typography";
 
 interface HomeContentItemProps {
-  img: string;
+  img: any;
+  imgAlt: string;
   title: any;
   description: string;
   link: string;
@@ -16,6 +17,7 @@ interface HomeContentItemProps {
 
 const HomeContentItem = ({
   img,
+  imgAlt,
   title,
   description,
   link,
@@ -23,6 +25,7 @@ const HomeContentItem = ({
   authorRoles,
   authorOrg,
 }: HomeContentItemProps) => {
+  const image = getImage(img?.localFile);
   return (
     <div className="mx-0 mx-md-5 mt-3">
       <div className="content-item rounded-2 text-white mx-4">
@@ -30,7 +33,8 @@ const HomeContentItem = ({
           <div className="col-12 col-lg-6 d-flex">
             <div className="px-4 py-4 w-100">
               <div className="rounded-2 overflow-hidden">
-                <img src={withPrefix(img)} alt={title} width="100%" />
+                {/* @ts-ignore */}
+                <GatsbyImage image={image} alt={imgAlt} />
               </div>
             </div>
           </div>

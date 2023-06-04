@@ -15,8 +15,8 @@ const sortByData = ["Newer to older", "Older to newer"];
 
 const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
   const { t } = useTranslation();
-  const blogPostDataDesc = data?.blogPostDataDesc?.blogs?.data;
-  const blogPostDataAsc = data?.blogPostDataAsc?.blogs?.data;
+  const blogPostDataDesc = data?.blogPostDataDesc?.nodes;
+  const blogPostDataAsc = data?.blogPostDataAsc?.nodes;
   const [blogPosts, setBlogPosts] = React.useState([]);
   const [sortAsc, setSortAsc] = React.useState(true);
   const blogPostData = sortAsc ? blogPostDataDesc : blogPostDataAsc;
@@ -30,10 +30,11 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
       }
     } else {
       // @ts-ignore
+      console.log("blogPostData", data?.blogPostDataDesc);
       const filterData = blogPostData.filter(
-        ({ attributes }: any) =>
-          attributes.title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
-          attributes.description.match(new RegExp(`\\b${params.q}\\b`, "i"))
+        ({ title, description }: any) =>
+          title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
+          description.match(new RegExp(`\\b${params.q}\\b`, "i"))
       );
       setTotalData(filterData.length);
       setBlogPosts(filterData);
@@ -42,9 +43,9 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
 
   React.useEffect(() => {
     const filterData = blogPostData.filter(
-      ({ attributes }: any) =>
-        attributes.title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
-        attributes.description.match(new RegExp(`\\b${params.q}\\b`, "i"))
+      ({ title, description }: any) =>
+        title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
+        description.match(new RegExp(`\\b${params.q}\\b`, "i"))
     );
     setBlogPosts(filterData);
   }, [sortAsc]);
@@ -97,21 +98,31 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
             </div>
 
             {totalData > 0 ? (
-              blogPosts.map(({ id, attributes }: any) => (
-                <div
-                  key={`post-${id}`}
-                  className="col-12 col-md-6 col-lg-4 mb-4"
-                >
-                  <BlogCard
-                    cover={attributes?.cover?.data?.attributes?.url}
-                    coverAlt={attributes?.coverAlt}
-                    title={attributes?.title}
-                    slug={attributes?.slug}
-                    description={attributes?.description}
-                    postedDate={attributes?.postedDate}
-                  />
-                </div>
-              ))
+              blogPosts.map(
+                ({
+                  id,
+                  cover,
+                  coverAlt,
+                  title,
+                  slug,
+                  description,
+                  postedDate,
+                }: any) => (
+                  <div
+                    key={`post-${id}`}
+                    className="col-12 col-md-6 col-lg-4 mb-4"
+                  >
+                    <BlogCard
+                      cover={cover}
+                      coverAlt={coverAlt}
+                      title={title}
+                      slug={slug}
+                      description={description}
+                      postedDate={postedDate}
+                    />
+                  </div>
+                )
+              )
             ) : (
               <div className="mx-0">
                 <div className="border rounded col-12 py-5 mx-auto text-center">
@@ -150,59 +161,53 @@ export const query = graphql`
         }
       }
     }
-    blogPostDataDesc: strapiQueries {
-      blogs(
-        locale: "all"
-        publicationState: LIVE
-        pagination: { limit: 1000 }
-        sort: "postedDate:desc"
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
+    blogPostDataDesc: allStrapiBlog(
+      filter: { locale: { eq: $language } }
+      sort: { postedDate: DESC }
+      limit: 1000
+    ) {
+      nodes {
+        id
+        strapi_id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
             }
-            coverAlt
-            locale
-            createdAt
-            postedDate
           }
+        }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
+        blogCategories {
+          categoryName
         }
       }
     }
-    blogPostDataAsc: strapiQueries {
-      blogs(
-        locale: "all"
-        publicationState: LIVE
-        pagination: { limit: 1000 }
-        sort: "postedDate:asc"
-      ) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            description
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
+    blogPostDataAsc: allStrapiBlog(
+      filter: { locale: { eq: $language } }
+      sort: { postedDate: ASC }
+      limit: 1000
+    ) {
+      nodes {
+        id
+        strapi_id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
             }
-            coverAlt
-            locale
-            createdAt
-            postedDate
           }
+        }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
+        blogCategories {
+          categoryName
         }
       }
     }

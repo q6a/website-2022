@@ -18,19 +18,22 @@ const HomeContents = ({ data }: any) => {
             aria-label="Contents"
           >
             {data &&
-              data.map(({ id, attributes }: any) => (
-                <SplideSlide key={`content-${id}`}>
-                  <HomeContentItem
-                    img={attributes?.cover?.data?.attributes?.url}
-                    title={attributes?.title}
-                    description={attributes?.description}
-                    link={`/blog/${attributes?.slug}`}
-                    authorName="Jeff Dormish"
-                    authorRoles="President"
-                    authorOrg="Slovenian Genealogy Society International"
-                  />
-                </SplideSlide>
-              ))}
+              data.map(
+                ({ id, cover, coverAlt, title, slug, description }: any) => (
+                  <SplideSlide key={`content-${id}`}>
+                    <HomeContentItem
+                      img={cover}
+                      imgAlt={coverAlt}
+                      title={title}
+                      description={description}
+                      link={`/blog/${slug}`}
+                      authorName="Jeff Dormish"
+                      authorRoles="President"
+                      authorOrg="Slovenian Genealogy Society International"
+                    />
+                  </SplideSlide>
+                )
+              )}
           </Splide>
         </div>
       </div>
