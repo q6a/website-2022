@@ -127,6 +127,18 @@ const config: GatsbyConfig = {
         includeInDevelopment: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `VideoTranslatorAI`,
+        short_name: `VT`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#6f32b5`,
+        display: `standalone`,
+        icon: `static/icon/android-chrome-512x512.png`,
+      },
+    },
     `gatsby-plugin-offline`,
   ],
 };
