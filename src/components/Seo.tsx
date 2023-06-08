@@ -74,21 +74,28 @@ function Seo({
       <meta name="twitter:title" content={defaultTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href={`${withPrefix("/")}icon/apple-touch-icon.png`}
+        rel="icon"
+        type="image/png"
+        href={`${withPrefix("/")}icon/icon-72x72.png`}
+        sizes="72x72"
       />
       <link
         rel="icon"
         type="image/png"
-        href={`${withPrefix("/")}icon/favicon-32x32.png`}
-        sizes="32x32"
+        href={`${withPrefix("/")}icon/icon-128x128.png`}
+        sizes="128x128"
       />
       <link
         rel="icon"
         type="image/png"
-        href={`${withPrefix("/")}icon/favicon-16x16.png`}
-        sizes="16x16"
+        href={`${withPrefix("/")}icon/icon-192x192.png`}
+        sizes="192x192"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        href={`${withPrefix("/")}icon/icon-512x512.png`}
+        sizes="512x512"
       />
       <link
         rel="manifest"
@@ -98,7 +105,7 @@ function Seo({
 
       <link
         rel="mask-icon"
-        href={`${withPrefix("/")}icon/android-chrome-192x192.png.svg`}
+        href={`${withPrefix("/")}icon/icon-192x192.png`}
         color="#6f32b5"
       />
       <meta name="msapplication-TileColor" content="#6f32b5" />

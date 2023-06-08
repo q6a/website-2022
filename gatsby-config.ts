@@ -136,7 +136,7 @@ const config: GatsbyConfig = {
         background_color: `#ffffff`,
         theme_color: `#6f32b5`,
         display: `standalone`,
-        icon: `static/icon/android-chrome-512x512.png`,
+        icon: `static/icon/icon-512x512.png`,
       },
     },
     `gatsby-plugin-offline`,
