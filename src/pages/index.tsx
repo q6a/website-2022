@@ -23,9 +23,9 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
       <HomeHero />
       <HomeBlog data={blogPosts} />
       <HomeContents data={caseStudies} />
-      <Helper />
       <HomeClients partners={partnerLogos} clients={clientLogos} />
       <BottomCta />
+      <Helper />
     </Layout>
   );
 };
