@@ -56,7 +56,7 @@ export const query = graphql`
     blogPostData: allStrapiBlog(
       filter: { locale: { eq: $language } }
       sort: { postedDate: DESC }
-      limit: 3
+      limit: 6
     ) {
       nodes {
         id
