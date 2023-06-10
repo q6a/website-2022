@@ -10,14 +10,14 @@ const HomeClients = ({ partners, clients }: any) => {
 
   return (
     <>
-      {partners && (
+      {clients && (
         <div className="section-sm bg-brand-light">
           <div className="container text-center">
             <H2 classes="text-gray" hasSeparator>
-              {t("partnerSectionTitle")}
+              {t("clientSectionTitle")}
             </H2>
             <div className="row mt-5">
-              {partners.map(({ id, localFile }: any) => {
+              {clients.map(({ id, localFile }: any) => {
                 const image = getImage(localFile);
                 return (
                   <div key={id} className="col-6 col-md-4 px-5">
@@ -33,14 +33,14 @@ const HomeClients = ({ partners, clients }: any) => {
           </div>
         </div>
       )}
-      {clients && (
+      {partners && (
         <div className="section-sm bg-brand-light">
           <div className="container text-center">
             <H2 classes="text-gray" hasSeparator>
-              {t("clientSectionTitle")}
+              {t("partnerSectionTitle")}
             </H2>
             <div className="row mt-5">
-              {clients.map(({ id, localFile }: any) => {
+              {partners.map(({ id, localFile }: any) => {
                 const image = getImage(localFile);
                 return (
                   <div key={id} className="col-6 col-md-4 px-5">

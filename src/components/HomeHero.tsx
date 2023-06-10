@@ -25,9 +25,16 @@ const HomeHero = () => {
               <BodyText classes="text-center">
                 <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
-              <button type="button" className="btn btn-primary" disabled>
-                {t("comingSoon")}
-              </button>
+              <div className="d-flex gap-3">
+                <button type="button" className="btn btn-primary" disabled>
+                  {t("comingSoon")}
+                </button>
+                <Link to="/contact">
+                  <button type="button" className="btn btn-outline-light">
+                    {t("footerMenuContact Us")}
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
