@@ -25,6 +25,7 @@
     "@popperjs/core": "^2.11.6",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
     "bootstrap": "^5.2.3",
     "cross-env": "^7.0.3",
     "flag-icons": "^6.6.6",

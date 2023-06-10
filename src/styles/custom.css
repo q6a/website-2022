@@ -401,6 +401,32 @@ span.fi {
   max-width: 320px;
 }
 
+.logo-marquee > div > div::before,
+.logo-marquee > div > div::after {
+  position: absolute;
+  background-image: linear-gradient(
+    to right,
+    rgba(241, 240, 236, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  content: "";
+  height: 100%;
+  width: 25%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo-marquee > div > div::before {
+  left: 0;
+  top: 0;
+}
+
+.logo-marquee > div > div::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
 /* Responsives */
 @media screen and (max-width: 768px) {
   .img-editor {
