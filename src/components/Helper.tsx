@@ -5,7 +5,11 @@ import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 import availableLanguage from "../common/languages";
 
-const Helper = () => {
+interface IHelper {
+  isHome?: boolean;
+}
+
+const Helper = ({ isHome = false }: IHelper) => {
   const { language, changeLanguage } = useI18next();
   const selectedLang = availableLanguage.find(
     ({ value }) => value === language
@@ -22,9 +26,13 @@ const Helper = () => {
 
   return (
     <div
-      className={`${
-        scroll ? "helper-bottom-limit" : ""
-      } position-fixed helper-bar`}
+      className={
+        isHome
+          ? scroll
+            ? "helper-bottom-limit position-fixed helper-bar"
+            : "position-fixed helper-bar"
+          : "sticky-bottom"
+      }
     >
       <div className="mx-3 py-3 d-none d-lg-flex justify-content-between align-items-center">
         <div className="btn-group dropup shadow">

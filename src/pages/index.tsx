@@ -25,7 +25,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
       <HomeContents data={caseStudies} />
       <HomeClients partners={partnerLogos} clients={clientLogos} />
       <BottomCta />
-      <Helper />
+      <Helper isHome />
     </Layout>
   );
 };
