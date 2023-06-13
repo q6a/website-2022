@@ -45,7 +45,6 @@ const HomeClients = ({ partners, clients }: any) => {
                           className="px-4 py-2 logo-item"
                           height={532}
                           width="auto"
-                          maxWidth="100%"
                           objectFit="contain"
                         />
                       </div>
