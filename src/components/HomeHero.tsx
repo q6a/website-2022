@@ -19,13 +19,13 @@ const HomeHero = () => {
                 className="img-hero"
                 loading="lazy"
               /> */}
-              <div className="hero-title fs-1 fw-bold">
+              <div className="hero-title text-center fs-1 fw-bold">
                 <Trans i18nKey="heroTitle" components={[<span />]} />
               </div>
               <BodyText classes="text-center">
                 <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
-              <div className="d-flex gap-3">
+              <div className="d-flex flex-column flex-md-row align-items-center gap-3">
                 <button type="button" className="btn btn-primary" disabled>
                   {t("comingSoon")}
                 </button>
