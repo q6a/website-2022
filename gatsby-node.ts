@@ -126,40 +126,10 @@ exports.createPages = ({ graphql, actions }) => {
           });
         });
 
-        // Handle fallback redirection for each language
-        // fetch(
-        //   `${process.env.STRAPI_API_URL}/api/blogs?locale=id&populate=localizations`
-        // )
-        //   .then((response) => response.json())
-        //   .then(({ data }) => {
-        //     if (data.length > 0) {
-        //       data
-        //         .filter(({ attributes }) => {
-        //           const localizations = attributes.localizations.data;
-        //           return localizations.length > 0;
-        //         })
-        //         .map(({ attributes }) => {
-        //           const localizations = attributes.localizations.data;
-        //           localizations.map(({ attributes: attr }) => {
-        //             console.info(
-        //               `/blog/${attributes.slug} => /blog/${attr.slug}`
-        //             );
-        //             console.info(
-        //               `/${attributes.locale}/blog/${attr.slug} => /${attributes.locale}/blog/${attributes.slug}`
-        //             );
-        //             createRedirect({
-        //               fromPath: `/blog/${attributes.slug}`,
-        //               toPath: `/blog/${attr.slug}`,
-        //             });
-        //             createRedirect({
-        //               fromPath: `/${attributes.locale}/blog/${attr.slug}`,
-        //               toPath: `/${attributes.locale}/blog/${attributes.slug}`,
-        //             });
-        //           });
-        //         });
-        //     }
-        //   })
-        //   .catch((error) => console.warn(error));
+        createRedirect({
+          fromPath: `/id/id/blog/*`,
+          toPath: `/id/blog/*`,
+        });
       })
     );
   });
