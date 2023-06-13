@@ -396,6 +396,7 @@ span.fi {
 .helper-bar {
   bottom: 0;
   transition: all 0.3s ease-in;
+  z-index: 999;
 }
 
 .helper-bottom-limit {
