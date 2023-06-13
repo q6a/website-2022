@@ -393,6 +393,15 @@ span.fi {
   transform: translateX(-50%);
 }
 
+.helper-bar {
+  bottom: 0;
+  transition: all 0.3s ease-in;
+}
+
+.helper-bottom-limit {
+  transform: translateY(-360px);
+}
+
 .img-editor {
   max-width: 1024px;
 }

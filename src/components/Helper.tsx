@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useI18next } from "gatsby-plugin-react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
@@ -10,9 +10,22 @@ const Helper = () => {
   const selectedLang = availableLanguage.find(
     ({ value }) => value === language
   );
+  const [scroll, setScroll] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", () => {
+        setScroll(window.scrollY > 3500);
+      });
+    }
+  }, []);
 
   return (
-    <div className="sticky-bottom">
+    <div
+      className={`${
+        scroll ? "helper-bottom-limit" : ""
+      } position-fixed helper-bar`}
+    >
       <div className="mx-3 py-3 d-none d-lg-flex justify-content-between align-items-center">
         <div className="btn-group dropup shadow">
           <button
