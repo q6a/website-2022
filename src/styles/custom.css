@@ -26,7 +26,7 @@
 }
 
 .bg-hero {
-  background: url("../../static/images/bg-hero.png");
+  background: url("../../static/images/bg-hero.webp");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -102,7 +102,7 @@
 }
 
 .join {
-  background-image: url("../../static/images/bg-bottom-cta.png");
+  background-image: url("../../static/images/bg-bottom-cta.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
