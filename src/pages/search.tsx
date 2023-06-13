@@ -30,7 +30,6 @@ const SearchPage: React.FC<PageProps> = ({ data, location }: any) => {
       }
     } else {
       // @ts-ignore
-      console.log("blogPostData", data?.blogPostDataDesc);
       const filterData = blogPostData.filter(
         ({ title, description }: any) =>
           title.match(new RegExp(`\\b${params.q}\\b`, "i")) ||
