@@ -24,6 +24,14 @@ const HomeClients = ({ partners, clients }: any) => {
                   perPage: 3,
                   arrows: false,
                   pagination: false,
+                  breakpoints: {
+                    768: {
+                      perPage: 2,
+                    },
+                    576: {
+                      perPage: 1,
+                    },
+                  },
                   autoScroll: {
                     speed: 1,
                     pauseOnHover: false,
@@ -68,6 +76,14 @@ const HomeClients = ({ partners, clients }: any) => {
                   perPage: 3,
                   arrows: false,
                   pagination: false,
+                  breakpoints: {
+                    768: {
+                      perPage: 2,
+                    },
+                    576: {
+                      perPage: 1,
+                    },
+                  },
                   autoScroll: {
                     speed: -1,
                     pauseOnHover: false,
