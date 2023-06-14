@@ -19,9 +19,9 @@ const HomeHero = () => {
                 className="img-hero"
                 loading="lazy"
               /> */}
-              <div className="hero-title text-center fs-1 fw-bold">
+              <h1 className="hero-title text-center fs-1 fw-bold">
                 <Trans i18nKey="heroTitle" components={[<span />]} />
-              </div>
+              </h1>
               <BodyText classes="text-center">
                 <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
