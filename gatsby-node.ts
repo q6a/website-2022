@@ -80,6 +80,11 @@ exports.createPages = ({ graphql, actions }) => {
                   fromPath: `/news/${slug}`,
                   toPath: `/${locale}/blog/${slug}`,
                 });
+                // Workaround issues when language changed on blog single page
+                createRedirect({
+                  fromPath: `/${locale}/${locale}/blog/${slug}`,
+                  toPath: `/${locale}/blog/${slug}`,
+                });
               }
 
               // Handle fallback redirection for each language
@@ -126,9 +131,10 @@ exports.createPages = ({ graphql, actions }) => {
           });
         });
 
+        // Redirect free-trial page to contact-us
         createRedirect({
-          fromPath: `/id/id/blog/*`,
-          toPath: `/id/blog/*`,
+          fromPath: `/free-trial`,
+          toPath: `/contact`,
         });
       })
     );
