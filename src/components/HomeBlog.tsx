@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 
 import BlogCard from "./BlogCard";
+import EmptyState from "./EmptyState";
 import { H2 } from "./Typography";
 
 const HomeBlog = ({ title = "", btnLink = "/blog", data }: any) => {
@@ -45,15 +46,22 @@ const HomeBlog = ({ title = "", btnLink = "/blog", data }: any) => {
                 )
               )}
           </div>
-          <div className="mt-3">
-            <div className="text-center">
-              <Link to={btnLink}>
-                <button type="button" className="btn btn-outline-primary">
-                  {t("more")}
-                </button>
-              </Link>
+          {data && data.length < 1 ? (
+            <EmptyState
+              title={t("emptyStateTitle")}
+              subtitle={t("emptyStateSubtitle")}
+            />
+          ) : (
+            <div className="mt-3">
+              <div className="text-center">
+                <Link to={btnLink}>
+                  <button type="button" className="btn btn-outline-primary">
+                    {t("more")}
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

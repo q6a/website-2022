@@ -1,0 +1,125 @@
+import * as React from "react";
+import { graphql } from "gatsby";
+import type { HeadFC, PageProps } from "gatsby";
+
+import Layout from "../../components/Layout";
+import Helper from "../../components/Helper";
+import Seo from "../../components/Seo";
+import HomeHero from "../../components/HomeHero";
+import HomeBlog from "../../components/HomeBlog";
+import HomeContents from "../../components/HomeContents";
+import HomeClients from "../../components/HomeClients";
+import BottomCta from "../../components/BottomCta";
+
+const EnterprisePage: React.FC<PageProps> = ({ data }: any) => {
+  const blogPosts = data?.blogPostData?.nodes;
+  const caseStudies = data?.caseStudies?.nodes;
+  const partnerLogos = data?.strapiPartnerLogo?.partnerLogos;
+  const clientLogos = data?.strapiPartnerLogo?.clientLogos;
+
+  return (
+    <Layout>
+      <HomeHero />
+      <HomeBlog data={blogPosts} />
+      <HomeContents data={caseStudies} />
+      <HomeClients partners={partnerLogos} clients={clientLogos} />
+      <BottomCta />
+      <Helper isHome />
+    </Layout>
+  );
+};
+
+export default EnterprisePage;
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(
+      filter: { ns: { in: ["index"] }, language: { eq: $language } }
+    ) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        siteUrl
+        description
+        keywords
+      }
+    }
+    blogPostData: allStrapiBlog(
+      filter: { locale: { eq: $language } }
+      sort: { postedDate: DESC }
+      limit: 6
+    ) {
+      nodes {
+        id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
+      }
+    }
+    caseStudies: allStrapiBlog(
+      filter: {
+        locale: { eq: $language }
+        strapi_id: { in: [97, 65, 104, 212, 213, 214] }
+      }
+      sort: { postedDate: DESC }
+      limit: 3
+    ) {
+      nodes {
+        id
+        title
+        slug
+        description
+        cover {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        coverAlt
+        postedDate(formatString: "MMM DD, YYYY")
+      }
+    }
+    strapiPartnerLogo {
+      partnerLogos {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+          name
+        }
+      }
+      clientLogos {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const Head: HeadFC = ({ data }: any) => (
+  <Seo title="Safety - Enterprise" />
+);
