@@ -3,6 +3,8 @@
     "signUp": "Sign up",
     "menuHome": "Home",
     "menuAbout Us": "About Us",
+    "menuEnterprise": "Enterprise",
+    "menuSafety": "Safety",
     "menuPricing": "Pricing",
     "menuLearn": "Learn",
     "menuBlog": "Blog",
@@ -35,5 +37,9 @@
     "footerMenuTerms of Use": "Terms of Use",
     "footerMenuSite Map": "Site Map",
     "footerMenuAvailable Languages": "Available Languages",
-    "footerMenuBlog": "Blog"
+    "footerMenuBlog": "Blog",
+    "oops": "Oops, page not found!",
+    "backToHomepage": "Back to homepage",
+    "emptyStateTitle": "Oops!",
+    "emptyStateSubtitle": "There is no data to show you right now"
 }
