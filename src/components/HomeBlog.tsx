@@ -4,18 +4,20 @@ import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 import BlogCard from "./BlogCard";
 import { H2 } from "./Typography";
 
-const HomeBlog = ({ data }: any) => {
+const HomeBlog = ({ title = "", btnLink = "/blog", data }: any) => {
   const { t } = useTranslation();
 
   return (
     <div className="section-sm bg-brand-light">
       <div className="container">
         <H2 classes="text-gray text-center" hasSeparator>
-          <Trans i18nKey="blogSectionHomeTitle" components={[<br />]} />
+          <Trans
+            i18nKey={!title ? "blogSectionHomeTitle" : title}
+            components={[<br />]}
+          />
         </H2>
         <div className="mt-5">
           <div className="row">
-            <code>{JSON.stringify(data.nodes)}</code>
             {data &&
               data.map(
                 ({
@@ -45,7 +47,7 @@ const HomeBlog = ({ data }: any) => {
           </div>
           <div className="mt-3">
             <div className="text-center">
-              <Link to="/blog">
+              <Link to={btnLink}>
                 <button type="button" className="btn btn-outline-primary">
                   {t("more")}
                 </button>
