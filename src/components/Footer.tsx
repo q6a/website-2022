@@ -14,6 +14,7 @@ import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
 import useFooterProductNavigation from "../hooks/useFooterProductNav";
 import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
+import useFooterEnterpriseNavigation from "../hooks/useFooterEnterpriseNav";
 import useSocialLinks from "../hooks/useSocialLinks";
 
 const Footer = () => {
@@ -21,6 +22,7 @@ const Footer = () => {
   const companyNavigation = useFooterCompanyNavigation();
   const productNavigation = useFooterProductNavigation();
   const resourcesNavigation = useFooterResourcesNavigation();
+  const enterpriseNavigation = useFooterEnterpriseNavigation();
   const socialLinks = useSocialLinks();
   const { t } = useTranslation();
 
@@ -40,7 +42,7 @@ const Footer = () => {
                 <span className="fs-14">{t("tagline")}</span>
               </div>
             </div>
-            <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
+            <div className="col-12 col-lg-2 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">{t("company")}</span>
               <ul className="footer-menu">
                 {companyNavigation?.map(({ node }: any) => (
@@ -54,7 +56,7 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-            <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
+            <div className="col-12 col-lg-2 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">{t("product")}</span>
               <ul className="footer-menu">
                 {productNavigation?.map(({ node }: any) => (
@@ -68,7 +70,23 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-            <div className="col-12 col-lg-3 ps-3 ps-lg-5 mt-5 mt-lg-0">
+            <div className="col-12 col-lg-2 ps-3 ps-lg-5 mt-5 mt-lg-0">
+              <span className="footer-title fw-semibold">
+                {t("menuEnterprise")}
+              </span>
+              <ul className="footer-menu">
+                {enterpriseNavigation?.map(({ node }: any) => (
+                  <li key={node?.id}>
+                    <WrapperLink
+                      condition={node?.menuAttached}
+                      to={node?.path}
+                      label={t(`footerMenu${node?.title}`)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="col-12 col-lg-2 ps-3 ps-lg-5 mt-5 mt-lg-0">
               <span className="footer-title fw-semibold">{t("resources")}</span>
               <ul className="footer-menu">
                 {resourcesNavigation?.map(({ node }: any) => (

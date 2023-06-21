@@ -70,6 +70,7 @@ const config: GatsbyConfig = {
           footerCompanyMenu: `api/navigation/render/footer-company`,
           footerProductMenu: `api/navigation/render/footer-product`,
           footerResourcesMenu: `api/navigation/render/footer-resources`,
+          footerEnterpriseMenu: `api/navigation/render/footer-enterprise`,
         },
         type: `TREE`,
       },
