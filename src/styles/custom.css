@@ -352,6 +352,7 @@ ul.footer-menu > li,
 ul.footer-menu > li > a {
   color: white;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .footer-title {
