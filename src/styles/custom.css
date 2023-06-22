@@ -438,6 +438,17 @@ span.fi {
   transform: rotateZ(180deg);
 }
 
+.enterprise-box {
+  background: white;
+  color: var(--bs-body-color);
+  min-height: 280px;
+  transition: all 0.2s ease-in-out;
+}
+
+.enterprise-box:hover {
+  transform: scale(1.05);
+}
+
 /* Responsives */
 @media screen and (max-width: 768px) {
   .img-editor {

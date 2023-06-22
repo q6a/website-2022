@@ -42,5 +42,6 @@
     "oops": "Oops, page not found!",
     "backToHomepage": "Back to homepage",
     "emptyStateTitle": "Oops!",
-    "emptyStateSubtitle": "There is no data to show you right now"
+    "emptyStateSubtitle": "There is no data to show you right now",
+    "enterpriseSectionTitle": "Enterprise"
 }

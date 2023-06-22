@@ -42,5 +42,6 @@
     "oops": "Ups, halaman tidak ditemukan!",
     "backToHomepage": "Kembali ke beranda",
     "emptyStateTitle": "Ups!",
-    "emptyStateSubtitle": "Tidak ada data yang dapat ditampilkan"
+    "emptyStateSubtitle": "Tidak ada data yang dapat ditampilkan",
+    "enterpriseSectionTitle": "Enterprise"
 }
