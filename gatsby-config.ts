@@ -12,7 +12,7 @@ const strapiToken = process.env.STRAPI_TOKEN || "";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `VideoTranslatorAI`,
-    description: `Video Translator provides a real time AI transcription, translation and dubbing. Transform your text, image, audio and video content with support for 150+ dialects and 60+ languages. Pricing starts at 15 cents/minute.`,
+    description: `Video Translator provides a real time AI transcription, translation and dubbing. Transform your text, image, audio and video content with support for 150+ dialects and 60+ languages.`,
     keywords: `video translation,video translator,caption maker,closed captioning software,open captioning software,add captions to video,video captions,subtitle maker,subtitles for video,embed subtitles in video,subtitles video,ai transcription,ai translation,ai dubbing,ai reader,`,
     siteUrl,
   },
