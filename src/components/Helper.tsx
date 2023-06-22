@@ -7,9 +7,10 @@ import availableLanguage from "../common/languages";
 
 interface IHelper {
   isHome?: boolean;
+  y?: number;
 }
 
-const Helper = ({ isHome = false }: IHelper) => {
+const Helper = ({ isHome = false, y = 3500 }: IHelper) => {
   const { language, changeLanguage } = useI18next();
   const selectedLang = availableLanguage.find(
     ({ value }) => value === language
@@ -17,9 +18,9 @@ const Helper = ({ isHome = false }: IHelper) => {
   const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && isHome) {
       window.addEventListener("scroll", () => {
-        setScroll(window.scrollY > 3500);
+        setScroll(window.scrollY > y);
       });
     }
   }, []);
