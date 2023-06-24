@@ -166,7 +166,7 @@ const BlogCategoryPage: React.FC<PageProps> = ({
               )}
           </div>
         </div>
-        {blogPosts.length > 0 && (
+        {totalPage > 1 && blogPosts.length > 0 && (
           <nav aria-label="Blog pagination" className="my-5">
             <ul className="pagination justify-content-center">
               <li className={`page-item ${activePage === 1 ? "disabled" : ""}`}>
