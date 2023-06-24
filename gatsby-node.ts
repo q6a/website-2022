@@ -2,6 +2,19 @@
 const path = require("path");
 const fetch = require("node-fetch");
 
+const availableLang = ["en", "id"];
+
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+};
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
   return new Promise((resolve, reject) => {
@@ -30,6 +43,9 @@ exports.createPages = ({ graphql, actions }) => {
                 }
               }
             }
+            blogCategories: allStrapiBlog(limit: 1000) {
+              distinct(field: { blogCategories: { categoryName: SELECT } })
+            }
             pages: allStrapiCustomPage {
               group(field: { locale: SELECT }) {
                 nodes {
@@ -47,6 +63,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const blogGroup = result.data.allStrapiBlog.group;
+        const blogCategories = result.data.blogCategories.distinct;
         const pageGroup = result.data.pages.group;
 
         blogGroup.forEach(({ nodes: blogs }) => {
@@ -107,6 +124,22 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           );
+        });
+
+        blogCategories.forEach((categoryName) => {
+          availableLang.forEach((locale) => {
+            createPage({
+              path:
+                locale === "en"
+                  ? `/blog/category/${slugify(categoryName)}`
+                  : `/${locale}/blog/category/${slugify(categoryName)}`,
+              component: path.resolve("src/templates/blog-category.tsx"),
+              context: {
+                category: categoryName,
+                language: locale,
+              },
+            });
+          });
         });
 
         pageGroup.forEach(({ nodes: pages }) => {
