@@ -2,13 +2,14 @@ import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { useTranslation } from "gatsby-plugin-react-i18next";
+import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
 import BlogCard from "../components/BlogCard";
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import Seo from "../components/Seo";
 import { H1, H2 } from "../components/Typography";
+import slugify from "../utils/slugify";
 
 const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
@@ -43,12 +44,13 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
           <div className="pt-5">
             <div className="d-flex flex-wrap gap-2">
               {blogData?.blogCategories.map((category: any) => (
-                <div
+                <Link
+                  to={`/blog/category/${slugify(category.categoryName)}`}
                   key={`${blogData?.id}-${category.categoryName}`}
                   className="btn btn-sm btn-outline-dark"
                 >
                   {category.categoryName}
-                </div>
+                </Link>
               ))}
             </div>
           </div>
