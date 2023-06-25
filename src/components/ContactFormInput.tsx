@@ -12,11 +12,13 @@ interface ContactFormInputProps {
   isEmbed?: boolean;
 }
 
-const contactSchema = z.object({
-  name: z.string().min(3),
-  email: z.string().email(),
-  message: z.string(),
-});
+const contactSchema = z
+  .object({
+    name: z.string().min(3),
+    email: z.string().email(),
+    message: z.string().min(30),
+  })
+  .required();
 
 const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const {
@@ -49,6 +51,9 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         setIsSubmit(true);
         reset();
       })
+      .finally(() => {
+        setBtnDisabled(true);
+      })
       .catch((error) => console.warn(error));
   };
 
@@ -74,6 +79,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
             type="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
             placeholder={t("placeholderEmail")}
+            required
             {...register("email")}
           />
           {errors.email && (
@@ -116,7 +122,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         </div>
       </form>
       {isSubmit && (
-        <div className="alert alert-success" role="alert">
+        <div className="alert alert-success mt-4" role="alert">
           {t("successNotification")}
         </div>
       )}
