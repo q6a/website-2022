@@ -39,6 +39,10 @@
   min-height: 360px;
 }
 
+.bg-related-post {
+  background: linear-gradient(var(--bg-clients), white);
+}
+
 .blog-authors {
   color: rgba(0, 0, 0, 0.5);
   font-size: 0.875rem;

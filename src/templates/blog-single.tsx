@@ -57,7 +57,7 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
         </div>
       </div>
       {relatedBlogPost && relatedBlogPost.length > 0 && (
-        <div className="bg-clients py-5">
+        <div className="bg-related-post py-5">
           <div className="container">
             <H2 classes="text-gray text-center mb-5" hasSeparator>
               {t("relatedBlogPost")}
