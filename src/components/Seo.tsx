@@ -11,6 +11,28 @@ interface ISeo {
   children?: React.ReactNode;
 }
 
+const formattedKeywords = (keywords: string): string => {
+  if (keywords.length > 3) {
+    if (keywords.includes(",")) {
+      return keywords
+        .split(",")
+        .map((item) => {
+          const itemClean = item.trim();
+          if (
+            (itemClean[0] === '"' && itemClean[itemClean.length - 1] === '"') ||
+            (itemClean[0] === "'" && itemClean[itemClean.length - 1] === "'")
+          ) {
+            return itemClean.substring(1, itemClean.length - 1);
+          }
+          return itemClean;
+        })
+        .join(", ");
+    }
+    return keywords.split(/\r?\n/).join(", ");
+  }
+  return keywords;
+};
+
 function Seo({
   title,
   description,
@@ -46,14 +68,9 @@ function Seo({
     ? `${title} | ${site.siteMetadata?.title}`
     : `
     ${site.siteMetadata?.title} | ${site.siteMetadata.description}`;
-  const key = keywords
-    ?.split(",")
-    .map((item) => {
-      const itemClean = item.trim();
-      return itemClean.substring(1, itemClean.length - 1);
-    })
-    .join(", ");
-  const metaKeywords = keywords ? key : site.siteMetadata?.keywords;
+  const metaKeywords = keywords
+    ? formattedKeywords(keywords)
+    : site.siteMetadata?.keywords;
 
   return (
     <>
