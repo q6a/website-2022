@@ -139,15 +139,11 @@
 
 .custom-page-content > h1,
 .custom-page-content > h2,
-.custom-page-content > h3 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
+.custom-page-content > h3,
 .blog-single > div > h1,
 .blog-single > div > h2,
 .blog-single > div > h3 {
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
