@@ -10,9 +10,9 @@ const ContactFormAddress = () => {
     <BodyContentText classes="lh-lg">
       <span className="fw-bolder">{t("officeLocation")}:</span>
       <br />
-      105/166D Glebel Point Road
+      105/166D Glebe Point Road
       <br />
-      Glebel, 2037
+      Glebe, 2037
       <br />
       Sydney, NSW, Australia.
       <br />
