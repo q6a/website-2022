@@ -127,6 +127,7 @@ function Seo({
       />
       <meta name="msapplication-TileColor" content="#6f32b5" />
       <meta name="theme-color" content="#6f32b5" />
+      <meta name="msvalidate.01" content="5287DC75A6ADE54F95718CFF2CB651C4" />
       {children}
     </>
   );
