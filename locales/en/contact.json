@@ -4,7 +4,7 @@
     "email": "Email",
     "placeholderName": "Name",
     "placeholderEmail": "Email",
-    "placeholderMessage": "Talk to us - what language would you like your content in? Can we help you in a different way?",
+    "placeholderMessage": "Message",
     "buttonSubmit": "Send",
     "successNotification": "Message successfully submitted!"
 }
