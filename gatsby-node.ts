@@ -174,6 +174,12 @@ exports.createPages = ({ graphql, actions }) => {
           fromPath: `/free-trial`,
           toPath: `/contact`,
         });
+
+        // Redirect old news path to blog
+        createRedirect({
+          fromPath: `/news`,
+          toPath: `/blog`,
+        });
       })
     );
   });
