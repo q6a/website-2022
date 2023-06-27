@@ -140,6 +140,11 @@ exports.createPages = ({ graphql, actions }) => {
               },
             });
           });
+
+          createRedirect({
+            fromPath: `/categories/${slugify(categoryName)}`,
+            toPath: `/blog/category/${slugify(categoryName)}`,
+          });
         });
 
         pageGroup.forEach(({ nodes: pages }) => {
