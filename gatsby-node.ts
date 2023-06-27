@@ -92,6 +92,10 @@ exports.createPages = ({ graphql, actions }) => {
                   fromPath: `/news/${slug}`,
                   toPath: `/blog/${slug}`,
                 });
+                createRedirect({
+                  fromPath: `/en/blog/${slug}`,
+                  toPath: `/blog/${slug}`,
+                });
               } else {
                 createRedirect({
                   fromPath: `/news/${slug}`,
@@ -145,6 +149,10 @@ exports.createPages = ({ graphql, actions }) => {
             fromPath: `/categories/${slugify(categoryName)}`,
             toPath: `/blog/category/${slugify(categoryName)}`,
           });
+          createRedirect({
+            fromPath: `/en/categories/${slugify(categoryName)}`,
+            toPath: `/blog/category/${slugify(categoryName)}`,
+          });
         });
 
         pageGroup.forEach(({ nodes: pages }) => {
@@ -166,6 +174,13 @@ exports.createPages = ({ graphql, actions }) => {
               fromPath: `/${pageName}`,
               toPath: `/page/${pageName}`,
             });
+
+            if (locale === "en") {
+              createRedirect({
+                fromPath: `/en/${pageName}`,
+                toPath: `/page/${pageName}`,
+              });
+            }
           });
         });
 
@@ -178,6 +193,10 @@ exports.createPages = ({ graphql, actions }) => {
         // Redirect old news path to blog
         createRedirect({
           fromPath: `/news`,
+          toPath: `/blog`,
+        });
+        createRedirect({
+          fromPath: `/en/blog`,
           toPath: `/blog`,
         });
       })
