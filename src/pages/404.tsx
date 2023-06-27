@@ -1,14 +1,13 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
-import { Link, useTranslation } from "gatsby-plugin-react-i18next";
 
 import EmptyState from "../components/EmptyState";
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
+import Seo from "../components/Seo";
 
 const NotFoundPage: React.FC<PageProps> = () => {
-  const { t } = useTranslation();
   return (
     <Layout>
       <div className="my-5">
@@ -37,4 +36,4 @@ export const query = graphql`
   }
 `;
 
-export const Head: HeadFC = () => <title>Not found</title>;
+export const Head: HeadFC = () => <Seo title="Not found" />;
