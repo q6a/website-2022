@@ -1,12 +1,11 @@
 // @ts-nocheck
 import * as React from "react";
 import { useTranslation } from "gatsby-plugin-react-i18next";
-import loadable from "@loadable/component";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-const RecaptchaLazy = loadable(() => import("react-google-recaptcha"));
+const RecaptchaLazy = React.lazy(() => import("react-google-recaptcha"));
 
 import encode from "../utils/encodeForm";
 
