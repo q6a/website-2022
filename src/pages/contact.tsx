@@ -8,6 +8,7 @@ import ContactFormAddress from "../components/ContactFormAddress";
 import ContactFormInput from "../components/ContactFormInput";
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
+import Seo from "../components/Seo";
 import { H1 } from "../components/Typography";
 
 const ContactPage: React.FC<PageProps> = () => {
@@ -49,4 +50,4 @@ export const query = graphql`
 
 export default ContactPage;
 
-export const Head: HeadFC = () => <title>Contact Page</title>;
+export const Head: HeadFC = () => <Seo title="Contact Us" />;
