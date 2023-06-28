@@ -21,7 +21,6 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
-    `gatsby-plugin-loadable-components-ssr`,
     `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,
