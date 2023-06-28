@@ -140,7 +140,6 @@ const config: GatsbyConfig = {
         icon: `static/icon/icon-512x512.png`,
       },
     },
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
