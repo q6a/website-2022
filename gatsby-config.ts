@@ -144,9 +144,8 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
-        host: `https://videotranslator.ai/`,
-        sitemap: `https://videotranslator.ai/sitemap-0.xml`,
         policy: [{ userAgent: "*", disallow: "" }],
+        sitemap: `sitemap-0.xml`,
       },
     },
   ],
