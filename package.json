@@ -29,6 +29,7 @@
     "bootstrap": "^5.2.3",
     "cross-env": "^7.0.3",
     "flag-icons": "^6.6.6",
+    "formik": "^2.4.2",
     "gatsby": "^5.2.0",
     "gatsby-plugin-google-tagmanager": "^5.9.0",
     "gatsby-plugin-image": "^3.10.0",
@@ -50,12 +51,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^2.1.0",
-    "react-hook-form": "^7.41.0",
     "react-i18next": "^12.1.5",
     "react-markdown": "^8.0.5",
     "react-select": "^5.7.1",
     "sass": "^1.57.0",
-    "zod": "^3.20.2"
+    "zod": "^3.20.2",
+    "zod-formik-adapter": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.10",
