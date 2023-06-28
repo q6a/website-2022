@@ -5,10 +5,13 @@ import { graphql } from "gatsby";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import ContactFormAddress from "../components/ContactFormAddress";
-import ContactFormInput from "../components/ContactFormInput";
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import { H1 } from "../components/Typography";
+
+const ContactInputLazy = React.lazy(
+  () => import("../components/ContactFormInput")
+);
 
 const ContactPage: React.FC<PageProps> = () => {
   const { t } = useTranslation();
@@ -22,7 +25,7 @@ const ContactPage: React.FC<PageProps> = () => {
             <ContactFormAddress />
           </div>
           <div className="col-12 col-md-8">
-            <ContactFormInput />
+            <ContactInputLazy />
           </div>
         </div>
       </div>

@@ -7,7 +7,10 @@ import Layout from "../../components/Layout";
 import Helper from "../../components/Helper";
 import Seo from "../../components/Seo";
 import HomeBlog from "../../components/HomeBlog";
-import ContactForm from "../../components/ContactForm";
+
+const ContactFormLazy = React.lazy(
+  () => import("../../components/ContactForm")
+);
 
 const SafetyPage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
@@ -20,7 +23,7 @@ const SafetyPage: React.FC<PageProps> = ({ data }: any) => {
         btnLink="/blog/category/safety"
         data={blogPosts}
       />
-      <ContactForm />
+      <ContactFormLazy />
       <Helper isHome y={900} />
     </Layout>
   );
