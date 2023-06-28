@@ -1,10 +1,12 @@
 // @ts-nocheck
 import * as React from "react";
 import { useTranslation } from "gatsby-plugin-react-i18next";
-import Recaptcha from "react-google-recaptcha";
+import loadable from "@loadable/component";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
+const RecaptchaLazy = loadable(() => import("react-google-recaptcha"));
 
 import encode from "../utils/encodeForm";
 
@@ -103,7 +105,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
           )}
         </div>
         <div className="mb-3">
-          <Recaptcha
+          <RecaptchaLazy
             ref={recaptchaRef}
             sitekey={process.env.GATSBY_RECAPTCHA_KEY}
             size="normal"
