@@ -141,6 +141,14 @@ const config: GatsbyConfig = {
       },
     },
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: `https://videotranslator.ai/`,
+        sitemap: `https://videotranslator.ai/sitemap-0.xml`,
+        policy: [{ userAgent: "*", disallow: "" }],
+      },
+    },
   ],
 };
 
