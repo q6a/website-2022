@@ -27,13 +27,24 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
     handleSubmit,
     reset,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: zodResolver(contactSchema),
   });
   const [isSubmit, setIsSubmit] = React.useState(false);
   const [btnDisabled, setBtnDisabled] = React.useState(true);
+  const [showCaptcha, setShowCaptcha] = React.useState(false);
   const recaptchaRef = React.createRef();
   const { t } = useTranslation();
+  const watchAll = watch();
+
+  React.useEffect(() => {
+    if (watchAll.name && watchAll.email && watchAll.message) {
+      setShowCaptcha(true);
+    } else {
+      setShowCaptcha(false);
+    }
+  }, [JSON.stringify(watchAll)]);
 
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
@@ -80,7 +91,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
             type="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
             placeholder={t("placeholderEmail")}
-            required
             {...register("email")}
           />
           {errors.email && (
@@ -94,7 +104,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
             className={`form-control ${errors.message ? "is-invalid" : ""}`}
             placeholder={t("placeholderMessage")}
             rows={5}
-            required
             {...register("message")}
           ></textarea>
           {errors.message && (
@@ -104,13 +113,15 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
           )}
         </div>
         <div className="mb-3">
-          <RecaptchaLazy
-            ref={recaptchaRef}
-            sitekey={process.env.GATSBY_RECAPTCHA_KEY}
-            size="normal"
-            id="recaptcha-google"
-            onChange={() => setBtnDisabled(false)}
-          />
+          {showCaptcha && (
+            <RecaptchaLazy
+              ref={recaptchaRef}
+              sitekey={process.env.GATSBY_RECAPTCHA_KEY}
+              size="normal"
+              id="recaptcha-google"
+              onChange={() => setBtnDisabled(false)}
+            />
+          )}
         </div>
         <div className="d-grid">
           <button
