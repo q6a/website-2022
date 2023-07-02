@@ -440,8 +440,11 @@ span.fi {
 
 .enterprise-box {
   background: white;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: var(--bs-body-color);
-  min-height: 280px;
+  min-height: 320px;
   transition: all 0.2s ease-in-out;
 }
 
