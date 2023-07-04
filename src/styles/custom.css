@@ -452,6 +452,10 @@ span.fi {
   transform: scale(1.05);
 }
 
+.menu-drodpown-content {
+  z-index: 9;
+}
+
 /* Responsives */
 @media screen and (max-width: 768px) {
   .img-editor {
