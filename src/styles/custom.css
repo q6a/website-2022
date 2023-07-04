@@ -492,4 +492,8 @@ span.fi {
   .text-404 {
     font-size: 10rem;
   }
+
+  .input-search-language {
+    max-width: 260px;
+  }
 }
