@@ -9,15 +9,15 @@ import Seo from "../../components/Seo";
 import HomeBlog from "../../components/HomeBlog";
 import ContactForm from "../../components/ContactForm";
 
-const SafetyPage: React.FC<PageProps> = ({ data }: any) => {
+const EducationPage: React.FC<PageProps> = ({ data }: any) => {
   const { t } = useTranslation();
   const blogPosts = data?.blogPostData?.nodes;
 
   return (
     <Layout>
       <HomeBlog
-        title={t("menuSafety")}
-        btnLink="/blog/category/safety"
+        title={t("menuEducation")}
+        btnLink="/blog/category/education"
         data={blogPosts}
       />
       <ContactForm />
@@ -26,7 +26,7 @@ const SafetyPage: React.FC<PageProps> = ({ data }: any) => {
   );
 };
 
-export default SafetyPage;
+export default EducationPage;
 
 export const query = graphql`
   query ($language: String!) {
@@ -52,7 +52,7 @@ export const query = graphql`
     blogPostData: allStrapiBlog(
       filter: {
         locale: { eq: $language }
-        blogCategories: { elemMatch: { categoryName: { in: "Safety" } } }
+        blogCategories: { elemMatch: { categoryName: { in: "Education" } } }
       }
       sort: { postedDate: DESC }
       limit: 6
@@ -76,4 +76,4 @@ export const query = graphql`
   }
 `;
 
-export const Head: HeadFC = () => <Seo title="Enterprise - Safety" />;
+export const Head: HeadFC = () => <Seo title="Enterprise - Education" />;
