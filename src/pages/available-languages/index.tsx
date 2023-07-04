@@ -89,7 +89,7 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
           </form>
         </div>
         <div className="row my-5">
-          <div className="col-12 col-md-6 col-lg-4">
+          <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
             <div className="mb-3 fw-bold">{t("transcription")}</div>
             <div className="d-flex flex-column gap-1">
               {transcriptionData.map(({ node }: any) => (
@@ -103,7 +103,7 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
               ))}
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-4">
+          <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
             <div className="mb-3 fw-bold">{t("translation")}</div>
             <div className="d-flex flex-column gap-1">
               {translationData.map(({ node }: any) => (
@@ -117,7 +117,7 @@ const AvailableLanguagesPage: React.FC<PageProps> = ({ data }: any) => {
               ))}
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-4">
+          <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
             <div className="mb-3 fw-bold">{t("dubbing")}</div>
             <div className="d-flex flex-column gap-1">
               {dubbingData.map(({ node }: any) => (
