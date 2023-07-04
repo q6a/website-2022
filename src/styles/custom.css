@@ -446,10 +446,27 @@ span.fi {
   color: var(--bs-body-color);
   min-height: 320px;
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  position: relative;
 }
 
 .enterprise-box:hover {
   transform: scale(1.05);
+}
+
+.enterprise-box-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0.2;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
+.enterprise-box-content {
+  position: relative;
 }
 
 .menu-drodpown-content {
