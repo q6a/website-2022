@@ -8,26 +8,30 @@ const data = [
   {
     id: 1,
     title: "Safety",
-    icon: "images/safety.webp",
+    icon: "images/safety.png",
     link: "/enterprise/safety",
+    bg: "images/safety-bg-sm.webp",
   },
   {
     id: 2,
     title: "Education",
-    icon: "images/education.webp",
-    link: null,
+    icon: "images/education.png",
+    link: "/enterprise/education",
+    bg: "images/education-bg-sm.webp",
   },
   {
     id: 3,
     title: "Custom",
-    icon: "images/custom.webp",
+    icon: "images/price.png",
     link: null,
+    bg: "images/custom-bg-sm.webp",
   },
   {
     id: 4,
     title: "Healthcare",
-    icon: "images/healthcare.webp",
+    icon: "images/doctors-bag.png",
     link: null,
+    bg: "images/healthcare-bg-sm.webp",
   },
 ];
 
