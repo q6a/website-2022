@@ -5,6 +5,8 @@ import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 import queryString from "query-string";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowDownWideShort,
+  faArrowUpWideShort,
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
@@ -113,15 +115,25 @@ const BlogPage: React.FC<PageProps> = ({ data, location }: any) => {
               <div className="dropdown text-end">
                 <button
                   type="button"
-                  className="btn btn-outline-primary dropdown-toggle"
+                  className="d-flex align-items-center btn btn-outline-primary dropdown-toggle"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   data-bs-offset="10,20"
                 >
-                  Sort by{" "}
-                  {!sortAsc
-                    ? sortByData[0].toLowerCase()
-                    : sortByData[1].toLowerCase()}
+                  <span className="d-none d-md-block">
+                    Sort by{" "}
+                    {!sortAsc
+                      ? sortByData[0].toLowerCase()
+                      : sortByData[1].toLowerCase()}
+                  </span>
+                  <span className="d-block d-md-none">
+                    {" "}
+                    {!sortAsc ? (
+                      <FontAwesomeIcon icon={faArrowDownWideShort} />
+                    ) : (
+                      <FontAwesomeIcon icon={faArrowUpWideShort} />
+                    )}
+                  </span>
                 </button>
                 <ul className="dropdown-menu">
                   <li>
