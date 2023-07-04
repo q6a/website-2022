@@ -132,6 +132,10 @@ function Seo({
       <link rel="preconnect" href="//www.gstatic.com" crossOrigin="true" />
       <link rel="dns-prefetch" href="//www.google.com" />
       <link rel="preconnect" href="//www.google.com" crossOrigin="true" />
+      <meta
+        name="viewport"
+        content="initial-scale=1, user-scalable=no, width=device-width"
+      />
       {children}
     </>
   );
