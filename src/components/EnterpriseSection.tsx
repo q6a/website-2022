@@ -22,7 +22,7 @@ const data = [
   {
     id: 3,
     title: "Custom",
-    icon: "images/price.png",
+    icon: "images/custom.png",
     link: null,
     bg: "images/custom-bg-sm.webp",
   },
