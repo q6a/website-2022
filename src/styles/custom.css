@@ -461,8 +461,6 @@ span.fi {
   width: 100%;
   height: auto;
   opacity: 0.2;
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
 }
 
 .enterprise-box-content {
