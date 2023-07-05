@@ -8,6 +8,7 @@ import BlogCard from "../components/BlogCard";
 import Layout from "../components/Layout";
 import Helper from "../components/Helper";
 import Seo from "../components/Seo";
+import Sharer from "../components/Sharer";
 import { H1, H2 } from "../components/Typography";
 import slugify from "../utils/slugify";
 
@@ -28,6 +29,11 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
           <span className="blog-posted-date ms-1">
             | {blogData?.postedDate}
           </span>
+          <Sharer
+            url={`https://videotranslator.ai/${
+              blogData.locale === "en" ? "" : `${blogData.locale}/`
+            }blog/${blogData.slug}`}
+          />
         </div>
         <div className="blog-cover">
           <div className="rounded-2 overflow-hidden">
