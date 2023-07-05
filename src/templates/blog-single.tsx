@@ -17,6 +17,11 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
   const blogData = data?.blogData;
   const relatedBlogPost = data?.relatedBlogPost?.nodes;
   const image = getImage(blogData?.cover?.localFile);
+  const innerHtml = blogData?.richContent?.data?.richContent;
+  const modifyInnerHtml = innerHtml.replaceAll(
+    /href/g,
+    'target="_blank" rel="noopener noreferrer" href'
+  );
 
   return (
     <Layout>
@@ -44,7 +49,7 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
         <div className="blog-single fw-light lh-lg py-5">
           <div
             dangerouslySetInnerHTML={{
-              __html: blogData?.richContent?.data?.richContent,
+              __html: modifyInnerHtml,
             }}
           />
           <div className="pt-5">
