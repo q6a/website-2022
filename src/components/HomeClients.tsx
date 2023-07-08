@@ -22,14 +22,14 @@ const HomeClients = ({ partners, clients }: any) => {
               <Splide
                 options={{
                   perPage: 3,
-                  arrows: false,
-                  pagination: false,
                   breakpoints: {
                     768: {
                       perPage: 2,
+                      pagination: false,
                     },
                     576: {
                       perPage: 1,
+                      pagination: false,
                     },
                   },
                   autoScroll: {
@@ -74,14 +74,14 @@ const HomeClients = ({ partners, clients }: any) => {
               <Splide
                 options={{
                   perPage: 3,
-                  arrows: false,
-                  pagination: false,
                   breakpoints: {
                     768: {
                       perPage: 2,
+                      pagination: false,
                     },
                     576: {
                       perPage: 1,
+                      pagination: false,
                     },
                   },
                   autoScroll: {
