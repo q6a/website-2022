@@ -34,11 +34,13 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
           <span className="blog-posted-date ms-1">
             | {blogData?.postedDate}
           </span>
-          <Sharer
-            url={`https://videotranslator.ai/${
-              blogData.locale === "en" ? "" : `${blogData.locale}/`
-            }blog/${blogData.slug}`}
-          />
+          <div className="mt-3">
+            <Sharer
+              url={`https://videotranslator.ai/${
+                blogData.locale === "en" ? "" : `${blogData.locale}/`
+              }blog/${blogData.slug}`}
+            />
+          </div>
         </div>
         <div className="blog-cover">
           <div className="rounded-2 overflow-hidden">
@@ -52,7 +54,7 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
               __html: modifyInnerHtml,
             }}
           />
-          <div className="pt-5">
+          <div className="pt-4 pb-5">
             <div className="d-flex flex-wrap gap-2">
               {blogData?.blogCategories.map((category: any) => (
                 <Link
@@ -64,6 +66,14 @@ const BlogSinglePage: React.FC<PageProps> = ({ data }: any) => {
                 </Link>
               ))}
             </div>
+          </div>
+          <div className="mt-3 d-flex flex-column align-items-center">
+            <span className="blog-posted-date mb-1">Share on</span>
+            <Sharer
+              url={`https://videotranslator.ai/${
+                blogData.locale === "en" ? "" : `${blogData.locale}/`
+              }blog/${blogData.slug}`}
+            />
           </div>
         </div>
       </div>

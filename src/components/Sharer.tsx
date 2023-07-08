@@ -18,7 +18,7 @@ const Sharer = ({ url }: { url: string }) => {
   const iconRound = true;
 
   return (
-    <div className="d-flex justify-content-center pt-3 gap-2">
+    <div className="d-flex justify-content-center gap-2">
       <LinkedinShareButton url={url}>
         <LinkedinIcon size={iconSize} round={iconRound} />
       </LinkedinShareButton>
