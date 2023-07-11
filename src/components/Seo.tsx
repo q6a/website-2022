@@ -134,7 +134,7 @@ function Seo({
       <link rel="preconnect" href="//www.google.com" crossOrigin="true" />
       <meta
         name="viewport"
-        content="initial-scale=1, user-scalable=no, width=device-width"
+        content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=1"
       />
       {children}
     </>
