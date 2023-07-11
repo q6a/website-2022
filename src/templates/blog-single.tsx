@@ -190,6 +190,11 @@ export const query = graphql`
         }
       }
     }
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
   }
 `;
 
@@ -197,6 +202,7 @@ export default BlogSinglePage;
 
 export const Head: HeadFC = ({ data }: any) => {
   const blogData = data?.blogData;
+  const siteData = data?.site?.siteMetadata;
 
   return (
     <Seo
@@ -209,6 +215,11 @@ export const Head: HeadFC = ({ data }: any) => {
           : `/${blogData?.locale}/blog/${blogData?.slug}`
       }
       image={`${blogData?.cover?.formats?.small?.url}`}
-    />
+    >
+      <link
+        rel="canonical"
+        href={`${siteData?.siteUrl}/news/${blogData?.slug}/`}
+      />
+    </Seo>
   );
 };

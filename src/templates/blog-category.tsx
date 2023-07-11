@@ -16,6 +16,7 @@ import Helper from "../components/Helper";
 import Seo from "../components/Seo";
 import { H1 } from "../components/Typography";
 import pagination from "../utils/pagination";
+import slugify from "../utils/slugify";
 
 const sortByData = ["Newer to older", "Older to newer"];
 
@@ -292,9 +293,24 @@ export const query = graphql`
         }
       }
     }
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
   }
 `;
 
-export const Head: HeadFC = ({ pageContext }: any) => (
-  <Seo title={`Blog Category: ${pageContext?.category}`} />
-);
+export const Head: HeadFC = ({ data, pageContext }: any) => {
+  const pageCategory = pageContext?.category;
+  const siteData = data?.site?.siteMetadata;
+
+  return (
+    <Seo title={`Blog Category: ${pageCategory}`}>
+      <link
+        rel="canonical"
+        href={`${siteData?.siteUrl}/categories/${slugify(pageCategory)}/`}
+      />
+    </Seo>
+  );
+};
