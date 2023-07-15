@@ -31,7 +31,7 @@ const Footer = () => {
       <footer className="bg-brand-purple text-white">
         <div className="container py-5">
           <div className="row">
-            <div className="col-12 col-lg-3">
+            <div className="col-12 col-lg-4">
               <div className="d-flex flex-column gap-3">
                 <img
                   src={withPrefix("images/logo-white.png")}
@@ -40,6 +40,25 @@ const Footer = () => {
                   loading="lazy"
                 />
                 <span className="fs-14">{t("tagline")}</span>
+                <span className="fs-14 fw-semibold">
+                  {t("subscribeNewsletter")}
+                </span>
+                <div className="input-group mb-3">
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder={t("inputNewsletterPlaceholder") || ""}
+                    aria-label={t("inputNewsletterPlaceholder") || ""}
+                    aria-describedby="button-subscribe"
+                  />
+                  <button
+                    className="btn btn-gradient"
+                    type="button"
+                    id="button-subscribe"
+                  >
+                    {t("subscribe")}
+                  </button>
+                </div>
               </div>
             </div>
             <div className="col-12 col-lg-2 ps-3 ps-lg-5 mt-5 mt-lg-0">
