@@ -2,6 +2,7 @@ import React from "react";
 import { withPrefix } from "gatsby";
 import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next";
 
+import Newsletter from "./Newsletter";
 import { H1, BodyText } from "./Typography";
 
 const HomeHero = () => {
@@ -25,15 +26,10 @@ const HomeHero = () => {
               <BodyText classes="text-center">
                 <Trans i18nKey="heroDescription" components={[<br />]} />
               </BodyText>
-              <div className="d-flex flex-column flex-md-row align-items-center gap-3">
-                <button type="button" className="btn btn-primary" disabled>
-                  {t("comingSoon")}
-                </button>
-                <Link to="/contact">
-                  <button type="button" className="btn btn-outline-light">
-                    {t("footerMenuContact Us")}
-                  </button>
-                </Link>
+              <div className="d-flex flex-column flex-lg-row gap-3">
+                <div className="hero-newsletter">
+                  <Newsletter showNotify />
+                </div>
               </div>
             </div>
           </div>
