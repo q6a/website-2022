@@ -1,6 +1,7 @@
 // @ts-nocheck
 import * as React from "react";
-import { useTranslation } from "gatsby-plugin-react-i18next";
+import { withPrefix } from "gatsby";
+import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -18,6 +19,14 @@ const contactSchema = z
     name: z.string().min(3),
     email: z.string().email(),
     message: z.string().min(30),
+    subscribe: z.boolean(),
+  })
+  .required();
+
+const emailSchema = z
+  .object({
+    email: z.string().email(),
+    locale: z.enum(["en", "id"]),
   })
   .required();
 
@@ -34,9 +43,30 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const [btnDisabled, setBtnDisabled] = React.useState(true);
   const recaptchaRef = React.createRef();
   const { t } = useTranslation();
+  const { language } = useI18next();
 
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
+    console.log("data", data);
+
+    if (data.subscribe) {
+      const newsletterParams = {
+        email: data.email,
+        locale: language,
+      };
+
+      const paramsValidation = emailSchema.safeParse(newsletterParams);
+
+      if (!paramsValidation.success) {
+        console.warn(paramsValidation.error);
+      } else {
+        fetch(
+          `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams(
+            newsletterParams
+          )}`
+        );
+      }
+    }
 
     fetch("/", {
       method: "POST",
@@ -102,6 +132,19 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
               {errors?.message?.message?.toString()}
             </div>
           )}
+        </div>
+        <div className="form-check mb-3">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="subscribe"
+            defaultChecked={true}
+            {...register("subscribe")}
+          />
+          <label className="fs-14 form-check-label" htmlFor="subscribe">
+            {t("subscribeCheck")}
+          </label>
         </div>
         <div className="mb-3">
           <RecaptchaLazy
