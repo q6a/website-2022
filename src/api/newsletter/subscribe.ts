@@ -52,7 +52,7 @@ export default async function handler(
               .json({ status: 401, data: { message: token.message } });
           }
 
-          // Sendpulse add email to list
+          // Sendpulse add email to GENERAL campaign
           sendpulse.addEmails(callbackHandler, process.env.SENDPULSE_EMAIL_ID, [
             {
               email,
@@ -61,6 +61,16 @@ export default async function handler(
               },
             },
           ]);
+
+          // Sendpulse add email to NEWSLETTER campaign
+          // sendpulse.addEmails(callbackHandler, process.env.SENDPULSE_NEWSLETTER_ID, [
+          //   {
+          //     email,
+          //     variables: {
+          //       locale,
+          //     },
+          //   },
+          // ]);
         }
       );
     }

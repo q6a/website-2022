@@ -7,5 +7,6 @@
     "placeholderMessage": "Message",
     "buttonSubmit": "Send",
     "successNotification": "Message successfully submitted!",
-    "subscribeCheck": "Subscribe to our newsletter"
+    "subscribeInfoCheck": "Send me more information",
+    "subscribeNewsletterCheck": "Sign me up to the mailing list"
 }
