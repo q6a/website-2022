@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withPrefix } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,7 +8,8 @@ import {
   faYoutube,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { useTranslation } from "gatsby-plugin-react-i18next";
+import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
+import * as yup from "yup";
 
 import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
@@ -17,7 +18,10 @@ import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
 import useFooterEnterpriseNavigation from "../hooks/useFooterEnterpriseNav";
 import useSocialLinks from "../hooks/useSocialLinks";
 
+const emailSchema = yup.string().email().required();
+
 const Footer = () => {
+  const { language } = useI18next();
   const currentYear = new Date().getFullYear();
   const companyNavigation = useFooterCompanyNavigation();
   const productNavigation = useFooterProductNavigation();
@@ -25,6 +29,41 @@ const Footer = () => {
   const enterpriseNavigation = useFooterEnterpriseNavigation();
   const socialLinks = useSocialLinks();
   const { t } = useTranslation();
+  const [inputEmail, setInputEmail] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const subscribeNewUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const isValid = await emailSchema.isValid(inputEmail);
+      if (isValid) {
+        fetch(
+          `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams({
+            email: inputEmail,
+            locale: language,
+          })}`
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to subsribe");
+            }
+            return response.json();
+          })
+          .then((response) => {
+            if (response.status === 200) {
+              setInputEmail("");
+              setIsSuccess(true);
+            }
+          });
+      } else {
+        setIsError(true);
+      }
+    } catch (err) {
+      setIsError(true);
+    }
+  };
 
   return (
     <>
@@ -32,7 +71,7 @@ const Footer = () => {
         <div className="container py-5">
           <div className="row">
             <div className="col-12 col-lg-4">
-              <div className="d-flex flex-column gap-3">
+              <div className="d-flex flex-column gap-3 pe-lg-3">
                 <img
                   src={withPrefix("images/logo-white.png")}
                   alt="VideoTranslator"
@@ -43,22 +82,38 @@ const Footer = () => {
                 <span className="fs-14 fw-semibold">
                   {t("subscribeNewsletter")}
                 </span>
-                <div className="input-group mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder={t("inputNewsletterPlaceholder") || ""}
-                    aria-label={t("inputNewsletterPlaceholder") || ""}
-                    aria-describedby="button-subscribe"
-                  />
-                  <button
-                    className="btn btn-gradient"
-                    type="button"
-                    id="button-subscribe"
-                  >
-                    {t("subscribe")}
-                  </button>
-                </div>
+                <form onSubmit={(e: React.FormEvent) => subscribeNewUser(e)}>
+                  <div className="input-group">
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder={t("inputNewsletterPlaceholder") || ""}
+                      aria-label={t("inputNewsletterPlaceholder") || ""}
+                      aria-describedby="button-subscribe"
+                      value={inputEmail}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setInputEmail(e.target.value)
+                      }
+                    />
+                    <button
+                      className="btn btn-gradient"
+                      type="submit"
+                      id="button-subscribe"
+                    >
+                      {t("subscribe")}
+                    </button>
+                  </div>
+                </form>
+                {isSuccess && (
+                  <span className="fs-14 fw-semibold text-success mb-3">
+                    Thank you for subscribing!
+                  </span>
+                )}
+                {isError && (
+                  <span className="fs-14 fw-semibold text-danger mb-3">
+                    Failed to subscribing
+                  </span>
+                )}
               </div>
             </div>
             <div className="col-12 col-lg-2 ps-3 ps-lg-5 mt-5 mt-lg-0">
