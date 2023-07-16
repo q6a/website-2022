@@ -19,7 +19,8 @@ const contactSchema = z
     name: z.string().min(3),
     email: z.string().email(),
     message: z.string().min(30),
-    subscribe: z.boolean(),
+    subscribeInfo: z.boolean(),
+    subscribeNewsletter: z.boolean(),
   })
   .required();
 
@@ -48,7 +49,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
 
-    if (data.subscribe) {
+    if (data.subscribeNewsletter) {
       const newsletterParams = {
         email: data.email,
         locale: language,
@@ -132,17 +133,33 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
             </div>
           )}
         </div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="subscribeInfo"
+            defaultChecked={true}
+            {...register("subscribeInfo")}
+          />
+          <label className="fs-14 form-check-label" htmlFor="subscribeInfo">
+            {t("subscribeInfoCheck")}
+          </label>
+        </div>
         <div className="form-check mb-3">
           <input
             className="form-check-input"
             type="checkbox"
             value=""
-            id="subscribe"
+            id="subscribeNewsletter"
             defaultChecked={true}
-            {...register("subscribe")}
+            {...register("subscribeNewsletter")}
           />
-          <label className="fs-14 form-check-label" htmlFor="subscribe">
-            {t("subscribeCheck")}
+          <label
+            className="fs-14 form-check-label"
+            htmlFor="subscribeNewsletter"
+          >
+            {t("subscribeNewsletterCheck")}
           </label>
         </div>
         <div className="mb-3">
