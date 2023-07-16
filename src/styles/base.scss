@@ -12,4 +12,8 @@ $btn-padding-y: 10px;
 // Navbar
 $navbar-light-toggler-border-color: transparent;
 
+// Checkbox
+$form-check-input-checked-bg-color: $secondary;
+$form-check-input-checked-border-color: $form-check-input-checked-bg-color;
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

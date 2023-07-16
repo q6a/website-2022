@@ -6,5 +6,6 @@
     "placeholderEmail": "Email",
     "placeholderMessage": "Message",
     "buttonSubmit": "Send",
-    "successNotification": "Message successfully submitted!"
+    "successNotification": "Message successfully submitted!",
+    "subscribeCheck": "Subscribe to our newsletter"
 }
