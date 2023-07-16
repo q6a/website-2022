@@ -47,7 +47,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
 
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
-    console.log("data", data);
 
     if (data.subscribe) {
       const newsletterParams = {

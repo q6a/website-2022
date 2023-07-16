@@ -9,7 +9,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
-import * as yup from "yup";
+import * as z from "zod";
 
 import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
@@ -18,7 +18,12 @@ import useFooterResourcesNavigation from "../hooks/useFooterResourcesNav";
 import useFooterEnterpriseNavigation from "../hooks/useFooterEnterpriseNav";
 import useSocialLinks from "../hooks/useSocialLinks";
 
-const emailSchema = yup.string().email().required();
+const emailSchema = z
+  .object({
+    email: z.string().email(),
+    locale: z.enum(["en", "id"]),
+  })
+  .required();
 
 const Footer = () => {
   const { language } = useI18next();
@@ -37,8 +42,16 @@ const Footer = () => {
     e.preventDefault();
 
     try {
-      const isValid = await emailSchema.isValid(inputEmail);
-      if (isValid) {
+      const newsletterParams = {
+        email: inputEmail,
+        locale: language,
+      };
+
+      const paramsValidation = emailSchema.safeParse(newsletterParams);
+
+      if (!paramsValidation.success) {
+        setIsError(true);
+      } else {
         fetch(
           `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams({
             email: inputEmail,
@@ -57,8 +70,6 @@ const Footer = () => {
               setIsSuccess(true);
             }
           });
-      } else {
-        setIsError(true);
       }
     } catch (err) {
       setIsError(true);
