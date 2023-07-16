@@ -250,6 +250,10 @@
   width: 100%;
 }
 
+.hero-newsletter {
+  min-width: 420px;
+}
+
 .logo-item {
   max-width: 100%;
 }
@@ -499,9 +503,18 @@ span.fi {
     width: auto;
     height: 100%;
   }
+
+  .hero-newsletter {
+    min-width: auto;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 576px) {
+  .bg-focus-hero {
+    min-height: 280px;
+  }
+
   .img-hero {
     width: 100%;
   }
