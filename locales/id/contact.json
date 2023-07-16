@@ -7,5 +7,6 @@
     "placeholderMessage": "Pesan",
     "buttonSubmit": "Kirim",
     "successNotification": "Pesan berhasil dikirimkan!",
-    "subscribeCheck": "Berlangganan newsletter kami"
+    "subscribeInfoCheck": "Kirimkan saya informasi lebih lanjut",
+    "subscribeNewsletterCheck": "Daftarkan saya ke newsletter"
 }
