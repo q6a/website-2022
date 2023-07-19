@@ -58,7 +58,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         subscribeNewsletter: data.subscribeNewsletter,
         locale: language,
       };
-      console.log(sendpulseParams);
 
       const paramsValidation = sendpulseParamsSchema.safeParse(sendpulseParams);
 

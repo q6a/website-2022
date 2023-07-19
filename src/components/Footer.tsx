@@ -111,7 +111,6 @@ const Footer = () => {
       <div className="bg-subfooter text-white">
         <div className="container py-3">
           <div className="d-flex flex-column flex-lg-row justify-content-between">
-            <div style={{ width: "106px" }} />
             <span className="fs-12">
               &copy; Video Translator {currentYear} (ABN: 73 602 663 141) -{" "}
               {t("allRights")}
