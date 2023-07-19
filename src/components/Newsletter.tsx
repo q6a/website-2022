@@ -43,7 +43,7 @@ const Newsletter = ({ showNotify = false }: NewsletterProps) => {
         )
           .then((response) => {
             if (!response.ok) {
-              throw new Error("Failed to subsribe");
+              throw new Error("Failed to subscribe");
             }
             return response.json();
           })

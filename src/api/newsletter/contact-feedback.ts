@@ -37,7 +37,7 @@ export default async function handler(
             data: data,
           });
         } else {
-          console.info("validation", data);
+          console.info("bad request 2", data);
           res.status(400).json({
             status: 400,
             data: "Bad request",
