@@ -24,12 +24,13 @@ const contactSchema = z
   })
   .required();
 
-const emailSchema = z
-  .object({
-    email: z.string().email(),
-    locale: z.enum(["en", "id"]),
-  })
-  .required();
+const sendpulseParamsSchema = z.object({
+  name: z.string().min(3),
+  email: z.string().email(),
+  subscribeInfo: z.boolean(),
+  subscribeNewsletter: z.boolean(),
+  locale: z.enum(["en", "id"]),
+});
 
 const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const {
@@ -49,21 +50,24 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
 
-    if (data.subscribeNewsletter) {
-      const newsletterParams = {
-        email: data.email,
+    if (data.subscribeInfo || data.subscribeNewsletter) {
+      const sendpulseParams = {
+        name: data.name,
+        email: data.name,
+        subscribeInfo: data.subscribeInfo,
+        subscribeNewsletter: data.subscribeNewsletter,
         locale: language,
       };
 
-      const paramsValidation = emailSchema.safeParse(newsletterParams);
+      const paramsValidation = sendpulseParamsSchema.safeParse(sendpulseParams);
 
       if (!paramsValidation.success) {
         console.warn(paramsValidation.error);
       } else {
         fetch(
-          `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams(
-            newsletterParams
-          )}`
+          `${withPrefix(
+            "/api/newsletter/contact-feedback"
+          )}?${new URLSearchParams(sendpulseParams)}`
         );
       }
     }
