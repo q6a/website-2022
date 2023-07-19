@@ -32,8 +32,8 @@ const Footer = () => {
       <footer className="bg-brand-purple text-white">
         <div className="container py-5">
           <div className="row">
-            <div className="col-12 col-lg-4">
-              <div className="d-flex flex-column gap-3 pe-lg-3">
+            <div className="col-12 col-lg-3">
+              <div className="d-flex flex-column gap-3">
                 <img
                   src={withPrefix("images/logo-white.png")}
                   alt="VideoTranslator"
