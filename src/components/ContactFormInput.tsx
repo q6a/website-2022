@@ -53,11 +53,12 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
     if (data.subscribeInfo || data.subscribeNewsletter) {
       const sendpulseParams = {
         name: data.name,
-        email: data.name,
+        email: data.email,
         subscribeInfo: data.subscribeInfo,
         subscribeNewsletter: data.subscribeNewsletter,
         locale: language,
       };
+      console.log(sendpulseParams);
 
       const paramsValidation = sendpulseParamsSchema.safeParse(sendpulseParams);
 
