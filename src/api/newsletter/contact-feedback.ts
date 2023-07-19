@@ -37,7 +37,6 @@ export default async function handler(
             data: data,
           });
         } else {
-          console.info("bad request 2", data);
           res.status(400).json({
             status: 400,
             data: "Bad request",
@@ -61,7 +60,7 @@ export default async function handler(
           if (subscribeInfo === "true") {
             sendpulse.addEmails(
               callbackHandler,
-              process.env.SENDPULSE_EMAIL_NEWS_ID,
+              process.env.SENDPULSE_EMAIL_PRODUCT_ID,
               [
                 {
                   email,
@@ -78,7 +77,7 @@ export default async function handler(
           if (subscribeNewsletter === "true") {
             sendpulse.addEmails(
               callbackHandler,
-              process.env.SENDPULSE_EMAIL_PRODUCT_ID,
+              process.env.SENDPULSE_EMAIL_NEWS_ID,
               [
                 {
                   email,
