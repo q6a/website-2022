@@ -107,7 +107,8 @@ const Footer = () => {
         <div className="container py-3">
           <div className="d-flex flex-column flex-lg-row justify-content-between">
             <span className="fs-12">
-              &copy; Video Translator {currentYear} - {t("allRights")}
+              &copy; Video Translator {currentYear} (ABN: 73 602 663 141) -{" "}
+              {t("allRights")}
             </span>
             <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
               {socialLinks?.facebookActive && (
