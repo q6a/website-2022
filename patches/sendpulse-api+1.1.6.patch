@@ -1,0 +1,61 @@
+diff --git a/node_modules/sendpulse-api/api/sendpulse.js b/node_modules/sendpulse-api/api/sendpulse.js
+index 4d34504..5d56b34 100644
+--- a/node_modules/sendpulse-api/api/sendpulse.js
++++ b/node_modules/sendpulse-api/api/sendpulse.js
+@@ -458,6 +458,23 @@ function addEmails(callback, id, emails) {
+     sendRequest('addressbooks/' + id + '/emails', 'POST', data, true, callback);
+ }
+ 
++/**
++ * Add new emails to address book double opt-in (with confirmation)
++ *
++ * @param callback
++ * @param id
++ * @param emails
++ * @params sender
++ * @params template_id
++ */
++function addEmailsConfirm(callback, id, emails, sender, template_id) {
++    if ((id === undefined) || (emails === undefined) || (sender === undefined) || (template_id === undefined) || (!emails.length)) {
++        return callback(returnError('Empty email or book id'));
++    }
++    var data = {emails: serialize(emails), confirmation: "force", sender_email: sender, template_id: template_id, message_lang: "en"};
++    sendRequest('addressbooks/' + id + '/emails', 'POST', data, true, callback);
++}
++
+ /**
+  * Remove email addresses from book
+  *
+@@ -1307,6 +1324,7 @@ exports.getEmailTemplate = getEmailTemplate;
+ exports.getBookInfo = getBookInfo;
+ exports.getEmailsFromBook = getEmailsFromBook;
+ exports.addEmails = addEmails;
++exports.addEmailsConfirm = addEmailsConfirm;
+ exports.removeEmails = removeEmails;
+ exports.getEmailInfo = getEmailInfo;
+ exports.updateEmailVariables = updateEmailVariables;
+diff --git a/node_modules/sendpulse-api/example.js b/node_modules/sendpulse-api/example.js
+index ea9ae42..66aca58 100644
+--- a/node_modules/sendpulse-api/example.js
++++ b/node_modules/sendpulse-api/example.js
+@@ -39,6 +39,7 @@ sendpulse.init(API_USER_ID, API_SECRET, TOKEN_STORAGE, function(token) {
+     sendpulse.getBookInfo(answerGetter,123456);
+     sendpulse.getEmailsFromBook(answerGetter,123456);
+     sendpulse.addEmails(answerGetter, 123456, [{email:'some@domain.com',variables:{}}]);
++    sendpulse.addEmailsConfirm(answerGetter, 123456, [{email:'some@domain.com',variables:{}}], 'sender@domain.com', 'template_id');
+     sendpulse.removeEmails(answerGetter, 123456, ['some@domain.com']);
+     sendpulse.getEmailInfo(answerGetter,123456,'some@domain.com');
+     sendpulse.campaignCost(answerGetter,123456);
+diff --git a/node_modules/sendpulse-api/index.d.ts b/node_modules/sendpulse-api/index.d.ts
+index a0d9380..05db181 100644
+--- a/node_modules/sendpulse-api/index.d.ts
++++ b/node_modules/sendpulse-api/index.d.ts
+@@ -4,6 +4,8 @@ export function activateSender(callback: any, senderEmail: any, code: any): any;
+ 
+ export function addEmails(callback: any, id: any, emails: any): any;
+ 
++export function addEmailsConfirm(callback: any, id: any, emails: any, sender: any, template_id: any): any;
++
+ export function addSender(callback: any, senderName: any, senderEmail: any): any;
+ 
+ export function addToBlackList(callback: any, emails: any, comment: any): any;
