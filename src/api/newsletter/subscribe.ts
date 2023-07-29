@@ -53,7 +53,7 @@ export default async function handler(
           }
 
           // Sendpulse add email to GENERAL campaign
-          sendpulse.addEmails(
+          sendpulse.addEmailsConfirm(
             callbackHandler,
             process.env.SENDPULSE_EMAIL_NEWS_ID,
             [
@@ -63,7 +63,9 @@ export default async function handler(
                   Locale: locale,
                 },
               },
-            ]
+            ],
+            process.env.SENDPULSE_SENDER,
+            process.env.SENDPULSE_TEMPLATE_ID
           );
         }
       );
