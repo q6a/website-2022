@@ -8,6 +8,7 @@
     "gatsby"
   ],
   "scripts": {
+    "postinstall": "npx patch-package",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
