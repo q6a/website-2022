@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/q6a/website-2022/compare/v1.1.0...v1.1.1) (2023-07-29)
+
+
+### Bug Fixes
+
+* enable double opt-in on newsletter subscribe ([15add3b](https://github.com/q6a/website-2022/commit/15add3b3a6d6c7870685fe456f96b8461d1c89a9))
+* patch sendpulse-api double opt-in ([1d50c3c](https://github.com/q6a/website-2022/commit/1d50c3ce672b901af94aca7a545f749173922ef3))
+
 ## 1.1.0 (2023-07-29)
 
 
