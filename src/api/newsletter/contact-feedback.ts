@@ -69,13 +69,15 @@ export default async function handler(
                     Locale: locale,
                   },
                 },
-              ]
+              ],
+              undefined,
+              undefined
             );
           }
 
           // Sendpulse add email to NEWSLETTER campaign
           if (subscribeNewsletter === "true") {
-            sendpulse.addEmailsConfirm(
+            sendpulse.addEmails(
               callbackHandler,
               process.env.SENDPULSE_EMAIL_NEWS_ID,
               [
