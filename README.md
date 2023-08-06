@@ -47,6 +47,7 @@ $ npm run serve
 - [How to add item on available languages?](docs/how-to-add-item-on-available-languages.md)
 - [How to modify partner/client logos?](docs/how-to-modify-partner-client-logos.md)
 - [How to modify social media links?](docs/how-to-modify-social-media-links.md)
+- [How to modify case studies?](docs/how-to-modify-case-studies.md)
 
 ## Useful links
 
