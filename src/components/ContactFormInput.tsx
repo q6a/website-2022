@@ -146,7 +146,10 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
             defaultChecked={true}
             {...register("subscribeInfo")}
           />
-          <label className="fs-14 form-check-label" htmlFor="subscribeInfo">
+          <label
+            className={`fs-14 form-check-label ${isEmbed ? "text-black" : ""}`}
+            htmlFor="subscribeInfo"
+          >
             {t("subscribeInfoCheck")}
           </label>
         </div>
@@ -160,7 +163,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
             {...register("subscribeNewsletter")}
           />
           <label
-            className="fs-14 form-check-label"
+            className={`fs-14 form-check-label ${isEmbed ? "text-black" : ""}`}
             htmlFor="subscribeNewsletter"
           >
             {t("subscribeNewsletterCheck")}
