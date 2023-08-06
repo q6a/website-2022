@@ -115,7 +115,19 @@ const config: GatsbyConfig = {
             singularName: `available-language`,
           },
         ],
-        singleTypes: [`pricing`, `social-link`, `partner-logo`],
+        singleTypes: [
+          `pricing`,
+          `social-link`,
+          `partner-logo`,
+          {
+            singularName: `case-study`,
+            pluginOptions: {
+              i18n: {
+                locale: "all",
+              },
+            },
+          },
+        ],
       },
     },
     {
