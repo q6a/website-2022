@@ -218,7 +218,9 @@ export const Head: HeadFC = ({ data }: any) => {
     >
       <link
         rel="canonical"
-        href={`${siteData?.siteUrl}/news/${blogData?.slug}/`}
+        href={`${siteData?.siteUrl}/${
+          blogData?.locale === "en" ? "" : blogData?.locale + "/"
+        }blog/${blogData?.slug}`}
       />
     </Seo>
   );
