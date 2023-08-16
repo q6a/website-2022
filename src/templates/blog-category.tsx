@@ -309,7 +309,9 @@ export const Head: HeadFC = ({ data, pageContext }: any) => {
     <Seo title={`Blog Category: ${pageCategory}`}>
       <link
         rel="canonical"
-        href={`${siteData?.siteUrl}/categories/${slugify(pageCategory)}/`}
+        href={`${siteData?.siteUrl}/${
+          pageContext.language === "en" ? "" : `${pageContext.language}/`
+        }blog/category/${slugify(pageCategory)}/`}
       />
     </Seo>
   );
