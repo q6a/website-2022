@@ -28,7 +28,7 @@ const HomeHero = () => {
               </BodyText>
               <div className="d-flex flex-column flex-lg-row gap-3">
                 <div className="hero-newsletter">
-                  <Newsletter showNotify />
+                  <Newsletter />
                 </div>
               </div>
             </div>

@@ -10,11 +10,7 @@ const emailSchema = z
   })
   .required();
 
-type NewsletterProps = {
-  showNotify?: boolean;
-};
-
-const Newsletter = ({ showNotify = false }: NewsletterProps) => {
+const Newsletter = () => {
   const [inputEmail, setInputEmail] = useState("");
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -79,7 +75,7 @@ const Newsletter = ({ showNotify = false }: NewsletterProps) => {
             type="submit"
             id="button-subscribe"
           >
-            {showNotify ? t("notifyMe") : t("subscribe")}
+            {t("subscribe")}
           </button>
         </div>
       </form>
