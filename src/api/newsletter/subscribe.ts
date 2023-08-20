@@ -4,7 +4,9 @@ import sendpulse from "sendpulse-api";
 
 const emailSchema = z
   .object({
+    name: z.string().min(3),
     email: z.string().email(),
+    subscribeInfo: z.enum(["true", "false"]),
     locale: z.enum(["en", "id"]),
   })
   .required();
@@ -18,6 +20,7 @@ export default async function handler(
 
     const paramsValidation = await emailSchema.safeParse(req.query);
     const TOKEN_STORAGE = "/tmp/";
+    console.log(paramsValidation);
 
     if (!paramsValidation.success) {
       res.status(400).json({
@@ -25,7 +28,7 @@ export default async function handler(
         data: "Bad request",
       });
     } else {
-      const { email, locale } = req.query;
+      const { name, email, subscribeInfo, locale } = req.query;
       const callbackHandler = (data: any) => {
         if ("result" in data && data.result) {
           res.status(200).json({
@@ -53,6 +56,25 @@ export default async function handler(
           }
 
           // Sendpulse add email to GENERAL campaign
+          if (subscribeInfo === "true") {
+            sendpulse.addEmails(
+              callbackHandler,
+              process.env.SENDPULSE_EMAIL_PRODUCT_ID,
+              [
+                {
+                  email,
+                  variables: {
+                    Name: name,
+                    Locale: locale,
+                  },
+                },
+              ],
+              undefined,
+              undefined
+            );
+          }
+
+          // Sendpulse add email to GENERAL campaign
           sendpulse.addEmails(
             callbackHandler,
             process.env.SENDPULSE_EMAIL_NEWS_ID,
@@ -60,6 +82,7 @@ export default async function handler(
               {
                 email,
                 variables: {
+                  Name: name,
                   Locale: locale,
                 },
               },
