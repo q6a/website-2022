@@ -30,6 +30,7 @@ const Newsletter = () => {
 
       if (!paramsValidation.success) {
         setIsError(true);
+        setIsSuccess(false);
       } else {
         fetch(
           `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams({
@@ -46,12 +47,14 @@ const Newsletter = () => {
           .then((response) => {
             if (response.status === 200) {
               setInputEmail("");
+              setIsError(false);
               setIsSuccess(true);
             }
           });
       }
     } catch (err) {
       setIsError(true);
+      setIsSuccess(false);
     }
   };
 
