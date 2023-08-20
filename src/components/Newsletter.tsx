@@ -1,73 +1,28 @@
-import React, { useState } from "react";
-import { withPrefix } from "gatsby";
-import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
-import * as z from "zod";
+import React, { useContext, useState } from "react";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
-const emailSchema = z
-  .object({
-    email: z.string().email(),
-    locale: z.enum(["en", "id"]),
-  })
-  .required();
+import EmailContext from "../context/EmailContext";
 
 const Newsletter = () => {
+  const userEmail = useContext(EmailContext);
   const [inputEmail, setInputEmail] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { language } = useI18next();
   const { t } = useTranslation();
 
-  const subscribeNewUser = async (e: React.FormEvent) => {
+  const validateInput = (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const newsletterParams = {
-        email: inputEmail,
-        locale: language,
-      };
-
-      const paramsValidation = emailSchema.safeParse(newsletterParams);
-
-      if (!paramsValidation.success) {
-        setIsError(true);
-        setIsSuccess(false);
-      } else {
-        fetch(
-          `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams({
-            email: inputEmail,
-            locale: language,
-          })}`
-        )
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to subscribe");
-            }
-            return response.json();
-          })
-          .then((response) => {
-            if (response.status === 200) {
-              setInputEmail("");
-              setIsError(false);
-              setIsSuccess(true);
-            }
-          });
-      }
-    } catch (err) {
-      setIsError(true);
-      setIsSuccess(false);
-    }
+    userEmail.setUserEmail(inputEmail);
   };
 
   return (
     <>
-      <form onSubmit={(e: React.FormEvent) => subscribeNewUser(e)}>
+      <form onSubmit={(e: React.FormEvent) => validateInput(e)}>
         <div className="input-group">
           <input
-            type="email"
+            type="text"
             className="form-control"
             placeholder={t("inputNewsletterPlaceholder") || ""}
             aria-label={t("inputNewsletterPlaceholder") || ""}
-            aria-describedby="button-subscribe"
+            aria-describedby="input-subscribe"
             value={inputEmail}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setInputEmail(e.target.value)
@@ -77,21 +32,13 @@ const Newsletter = () => {
             className="btn btn-gradient"
             type="submit"
             id="button-subscribe"
+            data-bs-toggle="modal"
+            data-bs-target="#newsletterPopup"
           >
             {t("subscribe")}
           </button>
         </div>
       </form>
-      {isSuccess && (
-        <span className="fs-14 fw-semibold text-light mb-3">
-          Thank you for subscribing!
-        </span>
-      )}
-      {isError && (
-        <span className="fs-14 fw-semibold text-danger mb-3">
-          Failed to subscribing
-        </span>
-      )}
     </>
   );
 };

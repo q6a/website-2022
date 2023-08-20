@@ -11,6 +11,7 @@ import {
 import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import Newsletter from "./Newsletter";
+import NewsletterPopup from "./NewsletterPopup";
 import WrapperLink from "./WrapperLink";
 import useFooterCompanyNavigation from "../hooks/useFooterCompanyNav";
 import useFooterProductNavigation from "../hooks/useFooterProductNav";
@@ -170,6 +171,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <NewsletterPopup />
     </>
   );
 };

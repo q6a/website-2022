@@ -2,11 +2,7 @@
     "contactUs": "Contact us",
     "officeLocation": "Office location",
     "email": "Email",
-    "placeholderName": "Name",
-    "placeholderEmail": "Email",
     "placeholderMessage": "Message",
     "buttonSubmit": "Send",
-    "successNotification": "Message successfully submitted!",
-    "subscribeInfoCheck": "Send me more information",
-    "subscribeNewsletterCheck": "Add me to the mailing list"
+    "successNotification": "Message successfully submitted!"
 }

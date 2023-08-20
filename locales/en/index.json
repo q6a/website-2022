@@ -47,5 +47,10 @@
     "backToHomepage": "Back to homepage",
     "emptyStateTitle": "Oops!",
     "emptyStateSubtitle": "There is no data to show you right now",
-    "enterpriseSectionTitle": "Enterprise"
+    "enterpriseSectionTitle": "Enterprise",
+    "newsletterPopupTitle": "Join our newsletter",
+    "placeholderName": "Name",
+    "placeholderEmail": "Email",
+    "subscribeInfoCheck": "Send me more information",
+    "subscribeNewsletterCheck": "Add me to the mailing list"
 }
