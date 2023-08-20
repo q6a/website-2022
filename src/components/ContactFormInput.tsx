@@ -49,16 +49,15 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
 
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
+    const sendpulseParams = {
+      name: data.name,
+      email: data.email,
+      subscribeInfo: data.subscribeInfo,
+      subscribeNewsletter: data.subscribeNewsletter,
+      locale: language,
+    };
 
     if (data.subscribeInfo || data.subscribeNewsletter) {
-      const sendpulseParams = {
-        name: data.name,
-        email: data.email,
-        subscribeInfo: data.subscribeInfo,
-        subscribeNewsletter: data.subscribeNewsletter,
-        locale: language,
-      };
-
       const paramsValidation = sendpulseParamsSchema.safeParse(sendpulseParams);
 
       if (!paramsValidation.success) {
@@ -80,6 +79,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         "form-name": "contact",
         "g-recaptcha-response": recaptchaValue,
         ...data,
+        locale: language,
       }),
     })
       .then(() => {
@@ -138,34 +138,33 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
           )}
         </div>
         <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value=""
-            id="subscribeInfo"
-            defaultChecked={true}
-            {...register("subscribeInfo")}
-          />
           <label
             className={`fs-14 form-check-label ${isEmbed ? "text-black" : ""}`}
-            htmlFor="subscribeInfo"
           >
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="subscribeInfo"
+              defaultChecked={true}
+              {...register("subscribeInfo")}
+            />
             {t("subscribeInfoCheck")}
           </label>
         </div>
         <div className="form-check mb-3">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value=""
-            id="subscribeNewsletter"
-            defaultChecked={true}
-            {...register("subscribeNewsletter")}
-          />
           <label
             className={`fs-14 form-check-label ${isEmbed ? "text-black" : ""}`}
             htmlFor="subscribeNewsletter"
           >
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="subscribeNewsletter"
+              defaultChecked={true}
+              {...register("subscribeNewsletter")}
+            />
             {t("subscribeNewsletterCheck")}
           </label>
         </div>
