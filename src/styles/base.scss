@@ -16,4 +16,7 @@ $navbar-light-toggler-border-color: transparent;
 $form-check-input-checked-bg-color: $secondary;
 $form-check-input-checked-border-color: $form-check-input-checked-bg-color;
 
+// Modal
+$modal-fade-transform: scale(0.8);
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

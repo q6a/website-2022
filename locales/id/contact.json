@@ -2,11 +2,7 @@
     "contactUs": "Hubungi Kami",
     "officeLocation": "Lokasi kantor",
     "email": "Surel",
-    "placeholderName": "Nama",
-    "placeholderEmail": "Email",
     "placeholderMessage": "Pesan",
     "buttonSubmit": "Kirim",
-    "successNotification": "Pesan berhasil dikirimkan!",
-    "subscribeInfoCheck": "Kirimkan saya informasi lebih lanjut",
-    "subscribeNewsletterCheck": "Daftarkan saya ke newsletter"
+    "successNotification": "Pesan berhasil dikirimkan!"
 }

@@ -47,5 +47,10 @@
     "backToHomepage": "Kembali ke beranda",
     "emptyStateTitle": "Ups!",
     "emptyStateSubtitle": "Tidak ada data yang dapat ditampilkan",
-    "enterpriseSectionTitle": "Enterprise"
+    "enterpriseSectionTitle": "Enterprise",
+    "newsletterPopupTitle": "Berlangganan newsletter",
+    "placeholderName": "Nama",
+    "placeholderEmail": "Email",
+    "subscribeInfoCheck": "Kirimkan saya informasi lebih lanjut",
+    "subscribeNewsletterCheck": "Daftarkan saya ke newsletter"
 }
