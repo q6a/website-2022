@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/q6a/website-2022/compare/v1.4.0...v1.5.0) (2023-08-21)
+
+
+### Features
+
+* newsletter popup ([74e7c7d](https://github.com/q6a/website-2022/commit/74e7c7d1b60313074068646e45509f04ecffb653))
+
+
+### Bug Fixes
+
+* checkbox values excluded from contact form ([e29b13d](https://github.com/q6a/website-2022/commit/e29b13d4a80f373fed1bf7cbed219a710a8283dc))
+* contact form send attibutes ([6243d6c](https://github.com/q6a/website-2022/commit/6243d6cdaab39b3c0bc2a503edbad648a3658eb3))
+* error and success newsletter notification stacking ([37e2aff](https://github.com/q6a/website-2022/commit/37e2affc1552e47bfc7cd5faea7b1513d5ca89f3))
+* popup close after submit ([f99c8e7](https://github.com/q6a/website-2022/commit/f99c8e791cada9ca2ef56f11d489046ee85c6522))
+* remove show-notify props from newsletter component ([4dfae35](https://github.com/q6a/website-2022/commit/4dfae359d82388ffd9907a06d5a520d497b18d61))
+* replace notify-me with subscribe ([2cf1986](https://github.com/q6a/website-2022/commit/2cf1986954f2be26a8a195e1665e349f02daa6c0))
+
 ## 1.4.0 (2023-08-16)
 
 
