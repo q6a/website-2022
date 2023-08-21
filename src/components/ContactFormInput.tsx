@@ -1,5 +1,5 @@
 // @ts-nocheck
-import * as React from "react";
+import React, { useEffect } from "react";
 import { withPrefix } from "gatsby";
 import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 import { useForm } from "react-hook-form";
@@ -19,6 +19,7 @@ const contactSchema = z
     name: z.string().min(3),
     email: z.string().email(),
     message: z.string().min(30),
+    attributes: z.string(),
     subscribeInfo: z.boolean(),
     subscribeNewsletter: z.boolean(),
   })
@@ -37,6 +38,8 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(contactSchema),
@@ -46,6 +49,15 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const recaptchaRef = React.createRef();
   const { t } = useTranslation();
   const { language } = useI18next();
+  const watchCheckboxes = watch(["subscribeInfo", "subscribeNewsletter"]);
+
+  useEffect(() => {
+    const [info, newsletter] = watchCheckboxes;
+    setValue(
+      "attributes",
+      `subscribeInfo: ${info} | subscribeNewsletter: ${newsletter} | locale: ${language}`
+    );
+  }, [JSON.stringify(watchCheckboxes)]);
 
   const sendMessage = (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
@@ -79,7 +91,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         "form-name": "contact",
         "g-recaptcha-response": recaptchaValue,
         ...data,
-        locale: language,
       }),
     })
       .then(() => {
@@ -178,6 +189,11 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
           />
         </div>
         <div className="d-grid">
+          <input
+            type="text"
+            style={{ display: "none" }}
+            {...register("attributes")}
+          />
           <button
             type="submit"
             className="btn btn-secondary"
