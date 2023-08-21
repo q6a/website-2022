@@ -21,8 +21,8 @@ const data = [
   },
   {
     id: 3,
-    title: "Custom",
-    icon: "images/custom.png",
+    title: "AI Agency",
+    icon: "images/ai.png",
     link: null,
     bg: "images/custom-bg-sm.webp",
   },
