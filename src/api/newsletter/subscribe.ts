@@ -20,12 +20,11 @@ export default async function handler(
 
     const paramsValidation = await emailSchema.safeParse(req.query);
     const TOKEN_STORAGE = "/tmp/";
-    console.log(paramsValidation);
 
     if (!paramsValidation.success) {
-      res.status(400).json({
+      res.status(200).json({
         status: 400,
-        data: "Bad request",
+        data: "Invalid parameters",
       });
     } else {
       const { name, email, subscribeInfo, locale } = req.query;
@@ -36,7 +35,7 @@ export default async function handler(
             data: data,
           });
         } else {
-          res.status(400).json({
+          res.status(200).json({
             status: 400,
             data: "Bad request",
           });
