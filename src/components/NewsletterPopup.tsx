@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { withPrefix } from "gatsby";
 import { useI18next, useTranslation } from "gatsby-plugin-react-i18next";
 import { useForm } from "react-hook-form";
@@ -28,18 +28,33 @@ const NewsletterPopup = () => {
     resolver: zodResolver(newsletterSchema),
   });
   const { t } = useTranslation();
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const newsletterPopup = document.getElementById("newsletterPopup");
 
     newsletterPopup?.addEventListener("show.bs.modal", () => {
       reset();
+      setIsError(false);
+      setIsSuccess(false);
     });
 
     return () => {
       newsletterPopup?.removeEventListener("show.bs.modal", () => {});
     };
   }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      const notifTimeout = setTimeout(() => {
+        // @ts-ignore
+        buttonRef.current.click();
+      }, 2500);
+      return () => {
+        clearTimeout(notifTimeout);
+      };
+    }
+  }, [isSuccess]);
 
   const subscribeNewsletter = (data: any) => {
     try {
@@ -56,9 +71,13 @@ const NewsletterPopup = () => {
         })
         .then((response) => {
           if (response.status === 200) {
+            reset();
             userEmail.setUserEmail("");
             setIsError(false);
             setIsSuccess(true);
+          } else {
+            setIsError(true);
+            setIsSuccess(false);
           }
         });
     } catch (err) {
@@ -75,6 +94,7 @@ const NewsletterPopup = () => {
             <div className="modal-header">
               <h5 className="modal-title">{t("newsletterPopupTitle")}</h5>
               <button
+                ref={buttonRef}
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
