@@ -24,7 +24,18 @@ const Navigation = () => {
               {hasChild ? (
                 <div className="menu-dropdown position-relative d-inline-block">
                   <button className="border-0 bg-transparent nav-link d-flex align-items-center gap-1">
-                    {t(`menu${node?.title}`)}
+                    {node?.title === "Enterprise" ? (
+                      <Link
+                        to="/enterprise"
+                        className="text-decoration-none"
+                        style={{ color: "inherit" }}
+                      >
+                        {t(`menu${node?.title}`)}
+                      </Link>
+                    ) : (
+                      t(`menu${node?.title}`)
+                    )}
+
                     <FontAwesomeIcon icon={faChevronDown} />
                   </button>
                   <div className="menu-drodpown-content position-absolute rounded-2 shadow p-2">
