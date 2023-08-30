@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/q6a/website-2022/compare/v1.5.0...v1.5.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* add data-netlify attribute into contact form ([a85c60b](https://github.com/q6a/website-2022/commit/a85c60b68268107b4727f2bbccfdf586a6d0821b))
+* header enterprise menu is clickable ([95ce2e9](https://github.com/q6a/website-2022/commit/95ce2e9b5a2c7c6c127282c9dbbe40c9d1fbacb1))
+* replace custom to ai-agency on enterprise page ([27b7fcd](https://github.com/q6a/website-2022/commit/27b7fcdea6540becb43d881f26d8534a5745a1de))
+* update wording on checkbox product info ([19189f0](https://github.com/q6a/website-2022/commit/19189f0838618516cca4271e4b56274fda47b6ff))
+* update wording on popup newsletter ([6d29786](https://github.com/q6a/website-2022/commit/6d29786dfb3e274606ca057ac625d8d14c787d87))
+
 ## [1.5.0](https://github.com/q6a/website-2022/compare/v1.4.0...v1.5.0) (2023-08-21)
 
 
