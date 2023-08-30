@@ -52,11 +52,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const watchCheckboxes = watch(["subscribeInfo", "subscribeNewsletter"]);
 
   useEffect(() => {
-    const [info, newsletter] = watchCheckboxes;
-    setValue(
-      "attributes",
-      `subscribeInfo: ${info} | subscribeNewsletter: ${newsletter} | locale: ${language}`
-    );
+    setValue("attributes", `locale: ${language}`);
   }, [JSON.stringify(watchCheckboxes)]);
 
   const sendMessage = (data: any) => {
@@ -105,8 +101,13 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
 
   return (
     <div className={isEmbed ? "bg-light p-4 p-lg-5 rounded-2 shadow" : ""}>
-      <form onSubmit={handleSubmit(sendMessage)} data-netlify-recaptcha="true">
-        <input type="hidden" name="form-name" value="contact" />
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        onSubmit={handleSubmit(sendMessage)}
+        data-netlify-recaptcha="true"
+      >
         <div className="mb-3">
           <input
             type="text"
@@ -166,7 +167,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         <div className="form-check mb-3">
           <label
             className={`fs-14 form-check-label ${isEmbed ? "text-black" : ""}`}
-            htmlFor="subscribeNewsletter"
           >
             <input
               className="form-check-input"
