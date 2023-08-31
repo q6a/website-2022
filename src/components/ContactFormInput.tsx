@@ -158,7 +158,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
               type="checkbox"
               value=""
               id="subscribeInfo"
-              defaultChecked={true}
+              defaultChecked={false}
               {...register("subscribeInfo")}
             />
             {t("subscribeInfoCheck")}

@@ -150,7 +150,7 @@ const NewsletterPopup = () => {
                     type="checkbox"
                     value=""
                     id="subscribeInfo"
-                    defaultChecked={true}
+                    defaultChecked={false}
                     {...register("subscribeInfo")}
                   />
                   {t("subscribeInfoCheck")}
