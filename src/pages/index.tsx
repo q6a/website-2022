@@ -14,7 +14,7 @@ import BottomCta from "../components/BottomCta";
 
 const IndexPage: React.FC<PageProps> = ({ data }: any) => {
   const blogPosts = data?.blogPostData?.nodes;
-  const caseStudies = data?.caseStudies?.nodes[0]?.blogs;
+  const caseStudies = data?.caseStudies?.nodes;
   const partnerLogos = data?.strapiPartnerLogo?.partnerLogos;
   const clientLogos = data?.strapiPartnerLogo?.clientLogos;
 
@@ -74,9 +74,9 @@ export const query = graphql`
         postedDate(formatString: "MMM DD, YYYY")
       }
     }
-    caseStudies: allStrapiCaseStudy(filter: { locale: { eq: $language } }) {
+    caseStudies: allStrapiCaseStudyAlt(filter: { locale: { eq: $language } }) {
       nodes {
-        blogs {
+        blog {
           id
           title
           slug

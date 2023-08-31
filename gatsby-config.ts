@@ -114,6 +114,14 @@ const config: GatsbyConfig = {
           {
             singularName: `available-language`,
           },
+          {
+            singularName: `case-study-alt`,
+            pluginOptions: {
+              i18n: {
+                locale: "all",
+              },
+            },
+          },
         ],
         singleTypes: [
           `pricing`,

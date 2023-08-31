@@ -19,7 +19,9 @@ const HomeContents = ({ data }: any) => {
           >
             {data &&
               data.map(
-                ({ id, cover, coverAlt, title, slug, description }: any) => (
+                ({
+                  blog: { id, cover, coverAlt, title, slug, description },
+                }: any) => (
                   <SplideSlide key={`content-${id}`}>
                     <HomeContentItem
                       img={cover}
