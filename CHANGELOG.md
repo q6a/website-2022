@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/q6a/website-2022/compare/v1.4.0...v1.6.0) (2023-08-31)
+
+
+### Features
+
+* newsletter popup ([bee18ad](https://github.com/q6a/website-2022/commit/bee18ad0db4c6418572a64815faa0fb677632714))
+
+
+### Bug Fixes
+
+* add data-netlify attribute into contact form ([af79bd8](https://github.com/q6a/website-2022/commit/af79bd8ec0ca2a418a514d8691804f649242bb1b))
+* checkbox values excluded from contact form ([f343542](https://github.com/q6a/website-2022/commit/f343542e74a9d0cfd774bcb3e3121193e610ae82))
+* contact form send attibutes ([f4a2ef1](https://github.com/q6a/website-2022/commit/f4a2ef1ae422bcc0afe1f1cfbec5c386c79b2911))
+* error and success newsletter notification stacking ([49a22d6](https://github.com/q6a/website-2022/commit/49a22d6fa972aa55e198635a58145c48b52f5e7e))
+* header enterprise menu is clickable ([2c607b0](https://github.com/q6a/website-2022/commit/2c607b0eeb42bde77e8df877c14a6bc4267b9bd5))
+* popup close after submit ([6c48e5b](https://github.com/q6a/website-2022/commit/6c48e5b9c5d44701e28021ca9620627c8a9b7097))
+* remove previous case-study query ([1e8aad0](https://github.com/q6a/website-2022/commit/1e8aad078c7a6113b76537320ee35950c722ebd9))
+* remove show-notify props from newsletter component ([01f1c34](https://github.com/q6a/website-2022/commit/01f1c340889d1ae82b26f2a17f42cf2568751a1f))
+* remove tick from product info checkbox ([bc41365](https://github.com/q6a/website-2022/commit/bc413652b0cd4268e7be69f069aa37794a925290))
+* replace custom to ai-agency on enterprise page ([7162851](https://github.com/q6a/website-2022/commit/716285130571a132a58aaa64ae40d48f04d8e9cf))
+* replace notify-me with subscribe ([6f179e6](https://github.com/q6a/website-2022/commit/6f179e69896f4c4e8a6c31544ea83411cdac2fc9))
+* update case-studies query ([030b99c](https://github.com/q6a/website-2022/commit/030b99cdc68df1761057091ef0c495d9d3f19f26))
+* update wording on checkbox product info ([3799594](https://github.com/q6a/website-2022/commit/3799594328657e861188d4a73e546584e722dbd2))
+* update wording on popup newsletter ([fd9e739](https://github.com/q6a/website-2022/commit/fd9e739ed2e3f4a3667d8b71483f4a5100af06da))
+
 ### [1.5.1](https://github.com/q6a/website-2022/compare/v1.5.0...v1.5.1) (2023-08-30)
 
 
