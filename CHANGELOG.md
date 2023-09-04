@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/q6a/website-2022/compare/v1.6.0...v1.7.0) (2023-09-04)
+
+
+### Features
+
+* single automation flow for email ([7b65f75](https://github.com/q6a/website-2022/commit/7b65f750b57435a14ce6f62077ae4b9b1c6839cb))
+
 ## [1.6.0](https://github.com/q6a/website-2022/compare/v1.4.0...v1.6.0) (2023-08-31)
 
 
