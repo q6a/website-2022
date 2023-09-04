@@ -54,35 +54,18 @@ export default async function handler(
               .json({ status: 401, data: { message: token.message } });
           }
 
-          // Sendpulse add email to GENERAL campaign
-          if (subscribeInfo === "true") {
-            sendpulse.addEmails(
-              callbackHandler,
-              process.env.SENDPULSE_EMAIL_PRODUCT_ID,
-              [
-                {
-                  email,
-                  variables: {
-                    Name: name,
-                    Locale: locale,
-                  },
-                },
-              ],
-              undefined,
-              undefined
-            );
-          }
-
-          // Sendpulse add email to GENERAL campaign
+          // Sendpulse add email to "Onboarding" mailing list
           sendpulse.addEmails(
             callbackHandler,
-            process.env.SENDPULSE_EMAIL_NEWS_ID,
+            process.env.SENDPULSE_EMAIL_ONBOARD_ID,
             [
               {
                 email,
                 variables: {
                   Name: name,
                   Locale: locale,
+                  Newsletter: "true",
+                  Product: subscribeInfo,
                 },
               },
             ],
