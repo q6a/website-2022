@@ -52,5 +52,7 @@
     "placeholderName": "Nama",
     "placeholderEmail": "Email",
     "subscribeInfoCheck": "Kirimkan saya informasi produk lebih lanjut",
-    "subscribeNewsletterCheck": "Daftarkan saya ke newsletter"
+    "subscribeNewsletterCheck": "Daftarkan saya ke newsletter",
+    "thankYouTitle": "Terima kasih!",
+    "thankYouSubtitle": "Terima kasih banyak telah berlangganan pada newsletter atau informasi produk kami."
 }
