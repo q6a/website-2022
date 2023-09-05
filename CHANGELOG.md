@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/q6a/website-2022/compare/v1.7.0...v1.8.0) (2023-09-05)
+
+
+### Features
+
+* add thank you page ([03f3c2b](https://github.com/q6a/website-2022/commit/03f3c2b8f284efcf323456ca5d7c2e514c3a7c64))
+
 ## [1.7.0](https://github.com/q6a/website-2022/compare/v1.6.0...v1.7.0) (2023-09-04)
 
 
