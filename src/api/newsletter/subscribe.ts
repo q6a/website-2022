@@ -8,6 +8,9 @@ const emailSchema = z
     email: z.string().email(),
     subscribeInfo: z.enum(["true", "false"]),
     locale: z.enum(["en", "id"]),
+    app_version: z.string(),
+    browser_language: z.string(),
+    ip_address: z.string(),
   })
   .required();
 
@@ -27,7 +30,15 @@ export default async function handler(
         data: "Invalid parameters",
       });
     } else {
-      const { name, email, subscribeInfo, locale } = req.query;
+      const {
+        name,
+        email,
+        subscribeInfo,
+        locale,
+        app_version,
+        browser_language,
+        ip_address,
+      } = req.query;
       const callbackHandler = (data: any) => {
         if ("result" in data && data.result) {
           res.status(200).json({
@@ -66,6 +77,9 @@ export default async function handler(
                   Locale: locale,
                   Newsletter: "true",
                   Product: subscribeInfo,
+                  App_Version: app_version,
+                  Browser_Language: browser_language,
+                  IP_Address: ip_address,
                 },
               },
             ],
