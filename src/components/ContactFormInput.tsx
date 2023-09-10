@@ -9,6 +9,7 @@ import * as z from "zod";
 const RecaptchaLazy = React.lazy(() => import("react-google-recaptcha"));
 
 import encode from "../utils/encodeForm";
+import app from "../../package.json";
 
 interface ContactFormInputProps {
   isEmbed?: boolean;
@@ -46,13 +47,25 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   });
   const [isSubmit, setIsSubmit] = React.useState(false);
   const [btnDisabled, setBtnDisabled] = React.useState(true);
+  const [ip, setIp] = React.useState("");
   const recaptchaRef = React.createRef();
   const { t } = useTranslation();
   const { language } = useI18next();
   const watchCheckboxes = watch(["subscribeInfo", "subscribeNewsletter"]);
+  const browserLang =
+    typeof navigator !== "undefined" ? navigator.language : "unknown";
 
   useEffect(() => {
-    setValue("attributes", `locale: ${language}`);
+    fetch("https://api.ipify.org?format=json")
+      .then((response) => response.json())
+      .then((data) => setIp(data.ip));
+  }, []);
+
+  useEffect(() => {
+    setValue(
+      "attributes",
+      `locale: ${language}\ncode_version: ${app.version}\nbrowser_language: ${browserLang}\nip_address: ${ip}`
+    );
   }, [JSON.stringify(watchCheckboxes)]);
 
   const sendMessage = (data: any) => {
@@ -63,6 +76,9 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
       subscribeInfo: data.subscribeInfo,
       subscribeNewsletter: data.subscribeNewsletter,
       locale: language,
+      app_version: app.version,
+      browser_language: browserLang,
+      ip_address: ip,
     };
 
     if (data.subscribeInfo || data.subscribeNewsletter) {

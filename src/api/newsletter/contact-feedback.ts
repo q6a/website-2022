@@ -9,6 +9,9 @@ const emailSchema = z
     subscribeInfo: z.enum(["true", "false"]),
     subscribeNewsletter: z.enum(["true", "false"]),
     locale: z.enum(["en", "id"]),
+    app_version: z.string(),
+    browser_language: z.string(),
+    ip_address: z.string(),
   })
   .required();
 
@@ -28,8 +31,16 @@ export default async function handler(
         data: "Bad request",
       });
     } else {
-      const { name, email, subscribeInfo, subscribeNewsletter, locale } =
-        req.query;
+      const {
+        name,
+        email,
+        subscribeInfo,
+        subscribeNewsletter,
+        locale,
+        app_version,
+        browser_language,
+        ip_address,
+      } = req.query;
       const callbackHandler = (data: any) => {
         if ("result" in data && data.result) {
           res.status(200).json({
@@ -69,6 +80,9 @@ export default async function handler(
                     Locale: locale,
                     Newsletter: subscribeNewsletter,
                     Product: subscribeInfo,
+                    App_Version: app_version,
+                    Browser_Language: browser_language,
+                    IP_Address: ip_address,
                   },
                 },
               ],

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import EmailContext from "../context/EmailContext";
+import app from "../../package.json";
 
 const newsletterSchema = z.object({
   name: z.string().min(3),
@@ -18,6 +19,7 @@ const NewsletterPopup = () => {
   const userEmail = useContext(EmailContext);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [ip, setIp] = useState("");
   const { language } = useI18next();
   const {
     register,
@@ -29,6 +31,14 @@ const NewsletterPopup = () => {
   });
   const { t } = useTranslation();
   const buttonRef = useRef(null);
+  const browserLang =
+    typeof navigator !== "undefined" ? navigator.language : "unknown";
+
+  useEffect(() => {
+    fetch("https://api.ipify.org?format=json")
+      .then((response) => response.json())
+      .then((data) => setIp(data.ip));
+  }, []);
 
   useEffect(() => {
     const newsletterPopup = document.getElementById("newsletterPopup");
@@ -58,9 +68,15 @@ const NewsletterPopup = () => {
 
   const subscribeNewsletter = (data: any) => {
     try {
+      const dataAttr = {
+        ...data,
+        app_version: app.version,
+        browser_language: browserLang,
+        ip_address: ip,
+      };
       fetch(
         `${withPrefix("/api/newsletter/subscribe")}?${new URLSearchParams(
-          data
+          dataAttr
         )}`
       )
         .then((response) => {
