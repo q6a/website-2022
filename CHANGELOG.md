@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/q6a/website-2022/compare/v1.6.0...v1.9.0) (2023-09-11)
+
+
+### Features
+
+* add thank you page ([5ab7fec](https://github.com/q6a/website-2022/commit/5ab7fecebe836678403f102bd7397dedfd159970))
+* send ip address, browser language, and code version ([ca7b965](https://github.com/q6a/website-2022/commit/ca7b9656d32a9e347522609bed11a08426cb04ab))
+* single automation flow for email ([8921c47](https://github.com/q6a/website-2022/commit/8921c47498b8f66ee42bacdd4170714aed3fbd93))
+
 ## [1.8.0](https://github.com/q6a/website-2022/compare/v1.7.0...v1.8.0) (2023-09-05)
 
 
