@@ -76,10 +76,7 @@ const BlogCategoryPage: React.FC<PageProps> = ({
   const generatePosts = () => {
     const indexStart = (activePage - 1) * postPerLoad;
     const indexEnd = activePage * postPerLoad;
-    const filterByLimit =
-      activePage > 1 && !sortAsc
-        ? blogPostData.slice(indexStart + 1, indexEnd + 1)
-        : blogPostData.slice(indexStart, indexEnd);
+    const filterByLimit = blogPostData.slice(indexStart, indexEnd);
     const total = Math.ceil(blogPostData.length / postPerLoad);
     // @ts-ignore
     setBlogPosts(filterByLimit);
