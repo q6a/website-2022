@@ -75,13 +75,10 @@ const BlogPage: React.FC<PageProps> = ({ data, location }: any) => {
   const generatePosts = () => {
     const indexStart = (activePage - 1) * postPerLoad;
     const indexEnd = activePage * postPerLoad;
-    const filterByLang = blogPostData.filter(({ strapi_id }: any) =>
-      activePage > 1 ? true : strapi_id !== editorPick[0]?.strapi_id
+    const filterByLang = blogPostData.filter(
+      ({ strapi_id }: any) => strapi_id !== editorPick[0]?.strapi_id
     );
-    const filterByLimit =
-      activePage > 1 && !sortAsc
-        ? filterByLang.slice(indexStart + 1, indexEnd + 1)
-        : filterByLang.slice(indexStart, indexEnd);
+    const filterByLimit = filterByLang.slice(indexStart, indexEnd);
     const total = Math.ceil(filterByLang.length / postPerLoad);
     // @ts-ignore
     setBlogPosts(filterByLimit);
