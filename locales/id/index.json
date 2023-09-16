@@ -54,5 +54,9 @@
     "subscribeInfoCheck": "Kirimkan saya informasi produk lebih lanjut",
     "subscribeNewsletterCheck": "Daftarkan saya ke newsletter",
     "thankYouTitle": "Terima kasih!",
-    "thankYouSubtitle": "Selamat! alamat email anda berhasil dikonfirmasi."
+    "thankYouSubtitle": "Selamat! alamat email anda berhasil dikonfirmasi.",
+    "enterpriseSafety": "Keamanan",
+    "enterpriseEducation": "Pendidikan",
+    "enterpriseAI Agency": "Agensi AI",
+    "enterpriseHealthcare": "Kesehatan"
 }

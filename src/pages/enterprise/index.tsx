@@ -21,7 +21,7 @@ export default EnterprisePage;
 export const query = graphql`
   query ($language: String!) {
     locales: allLocale(
-      filter: { ns: { in: ["index", "contact"] }, language: { eq: $language } }
+      filter: { ns: { in: ["index"] }, language: { eq: $language } }
     ) {
       edges {
         node {
