@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/q6a/website-2022/compare/v1.9.0...v1.9.1) (2023-09-16)
+
+
+### Bug Fixes
+
+* pagination issue on blog pages ([2ce6f88](https://github.com/q6a/website-2022/commit/2ce6f88869924befc1c7a48ac0026deb4219898a))
+* pagination issue on blog-category pages ([44bf95f](https://github.com/q6a/website-2022/commit/44bf95fb3f079cb1210d9e67f0a09252ce5734a8))
+* translate titles on enterprise page ([9cc33c8](https://github.com/q6a/website-2022/commit/9cc33c8477afb92fa658e7f3c9eaf12772f45580))
+
 ## [1.9.0](https://github.com/q6a/website-2022/compare/v1.6.0...v1.9.0) (2023-09-11)
 
 
