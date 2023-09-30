@@ -31,7 +31,6 @@ const Newsletter = () => {
           <button
             className="btn btn-gradient"
             type="submit"
-            id="button-subscribe"
             data-bs-toggle="modal"
             data-bs-target="#newsletterPopup"
           >

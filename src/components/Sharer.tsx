@@ -33,7 +33,6 @@ const Sharer = ({ url }: { url: string }) => {
         >
           <FontAwesomeIcon icon={faXTwitter} color="white" fontSize={14} />
         </div>
-        {/* <TwitterIcon size={iconSize} round={iconRound} /> */}
       </TwitterShareButton>
       <EmailShareButton url={url}>
         <EmailIcon size={iconSize} round={iconRound} />
