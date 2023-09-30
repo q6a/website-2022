@@ -16,6 +16,8 @@ const Navbar = () => {
             src={withPrefix("images/logo.svg")}
             alt="VideoTranslator.AI"
             loading="eager"
+            width="260"
+            height="64"
           />
         </Link>
         <button
