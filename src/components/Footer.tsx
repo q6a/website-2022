@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faLinkedinIn,
-  faTwitter,
+  faXTwitter,
   faYoutube,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
@@ -144,7 +144,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   aria-label="Twitter"
                 >
-                  <FontAwesomeIcon icon={faTwitter} />
+                  <FontAwesomeIcon icon={faXTwitter} />
                 </a>
               )}
               {socialLinks?.youtubeActive && (

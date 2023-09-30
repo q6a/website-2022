@@ -8,10 +8,11 @@ import {
   WhatsappShareButton,
   LinkedinIcon,
   FacebookIcon,
-  TwitterIcon,
   EmailIcon,
   WhatsappIcon,
 } from "react-share";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Sharer = ({ url }: { url: string }) => {
   const iconSize = 32;
@@ -26,7 +27,13 @@ const Sharer = ({ url }: { url: string }) => {
         <FacebookIcon size={iconSize} round={iconRound} />
       </FacebookShareButton>
       <TwitterShareButton url={url}>
-        <TwitterIcon size={iconSize} round={iconRound} />
+        <div
+          className="rounded-circle p-1"
+          style={{ backgroundColor: "#14171A", width: "32px", height: "32px" }}
+        >
+          <FontAwesomeIcon icon={faXTwitter} color="white" fontSize={14} />
+        </div>
+        {/* <TwitterIcon size={iconSize} round={iconRound} /> */}
       </TwitterShareButton>
       <EmailShareButton url={url}>
         <EmailIcon size={iconSize} round={iconRound} />
