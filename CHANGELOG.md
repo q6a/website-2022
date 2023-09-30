@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/q6a/website-2022/compare/v1.9.1...v1.9.2) (2023-09-30)
+
+
+### Bug Fixes
+
+* update twitter new icon ([0a49381](https://github.com/q6a/website-2022/commit/0a493817b543d8c8d1a3ae762159527ae5010c05))
+
 ### [1.9.1](https://github.com/q6a/website-2022/compare/v1.9.0...v1.9.1) (2023-09-16)
 
 
