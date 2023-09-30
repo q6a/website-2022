@@ -40,6 +40,8 @@ const Footer = () => {
                   alt="VideoTranslator"
                   className="footer-logo"
                   loading="lazy"
+                  width="260"
+                  height="58"
                 />
                 <span className="fs-14">{t("tagline")}</span>
                 <span className="fs-14 fw-semibold">
