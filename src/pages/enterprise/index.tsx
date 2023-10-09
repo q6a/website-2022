@@ -11,7 +11,7 @@ const EnterprisePage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <EnterpriseSection />
-      <Helper isHome y={150} />
+      <Helper isHome />
     </Layout>
   );
 };

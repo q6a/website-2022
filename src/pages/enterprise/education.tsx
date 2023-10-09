@@ -21,7 +21,7 @@ const EducationPage: React.FC<PageProps> = ({ data }: any) => {
         data={blogPosts}
       />
       <ContactForm />
-      <Helper isHome y={900} />
+      <Helper isHome />
     </Layout>
   );
 };
