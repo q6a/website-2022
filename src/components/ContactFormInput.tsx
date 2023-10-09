@@ -68,7 +68,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
     );
   }, [JSON.stringify(watchCheckboxes)]);
 
-  const sendMessage = (data: any) => {
+  const sendMessage = async (data: any) => {
     const recaptchaValue = recaptchaRef.current.getValue();
     const sendpulseParams = {
       name: data.name,
@@ -95,7 +95,21 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
       }
     }
 
-    fetch("/", {
+    const geo = await fetch(`${withPrefix(`/api/geolocation?ip=${ip}`)}`)
+      .then((response) => response.json())
+      .then((response) => {
+        const data = response?.data;
+        return {
+          continent: data.continent_name,
+          country: data.country_name,
+          city: data.city,
+          zip: data.zip,
+          languages_code: data.location.languages.map((lang) => lang?.code),
+          languages_name: data.location.languages.map((lang) => lang?.name),
+        };
+      });
+
+    await fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       // @ts-ignore
@@ -103,6 +117,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         "form-name": "contact",
         "g-recaptcha-response": recaptchaValue,
         ...data,
+        ...geo,
       }),
     })
       .then(() => {
