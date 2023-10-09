@@ -30,7 +30,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-brand-purple text-white">
+      <footer id="footer" className="bg-brand-purple text-white">
         <div className="container py-5">
           <div className="row">
             <div className="col-12 col-lg-3">
@@ -111,7 +111,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <div className="bg-subfooter text-white">
+      <div id="subfooter" className="bg-subfooter text-white">
         <div className="container py-3">
           <div className="d-flex flex-column flex-lg-row justify-content-between">
             <span className="fs-12">

@@ -7,10 +7,9 @@ import availableLanguage from "../common/languages";
 
 interface IHelper {
   isHome?: boolean;
-  y?: number;
 }
 
-const Helper = ({ isHome = false, y = 3500 }: IHelper) => {
+const Helper = ({ isHome = false }: IHelper) => {
   const { language, changeLanguage } = useI18next();
   const selectedLang = availableLanguage.find(
     ({ value }) => value === language
@@ -18,9 +17,17 @@ const Helper = ({ isHome = false, y = 3500 }: IHelper) => {
   const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && isHome) {
+    if (typeof window !== "undefined") {
+      const { scrollHeight, clientWidth } = document.body;
+      const footerEl = document.getElementById("footer");
+      const subfooterEl = document.getElementById("subfooter");
+      const y =
+        scrollHeight -
+        (Number(footerEl?.offsetHeight) +
+          Number(subfooterEl?.offsetHeight) +
+          600);
       window.addEventListener("scroll", () => {
-        setScroll(window.scrollY > y);
+        if (clientWidth >= 960) setScroll(window.scrollY > y);
       });
     }
   }, []);
@@ -35,7 +42,7 @@ const Helper = ({ isHome = false, y = 3500 }: IHelper) => {
           : "sticky-bottom"
       }
     >
-      <div className="mx-3 py-3 d-none d-lg-flex justify-content-between align-items-center">
+      <div className="mx-3 py-3 d-flex justify-content-between align-items-center">
         <div className="btn-group dropup shadow">
           <button
             type="button"
@@ -44,7 +51,7 @@ const Helper = ({ isHome = false, y = 3500 }: IHelper) => {
             aria-expanded="false"
           >
             <span className={`fi fi-${selectedLang?.flag}`}></span>
-            {selectedLang?.name}
+            <span className="d-none d-lg-block">{selectedLang?.name}</span>
           </button>
           <ul className="dropdown-menu">
             {availableLanguage
