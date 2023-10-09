@@ -100,12 +100,28 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
       .then((response) => {
         const data = response?.data;
         return {
-          continent: data.continent_name,
-          country: data.country_name,
-          city: data.city,
-          zip: data.zip,
-          languages_code: data.location.languages.map((lang) => lang?.code),
-          languages_name: data.location.languages.map((lang) => lang?.name),
+          geo_continent: data.continent_name,
+          geo_country: data.country_name,
+          geo_city: data.city,
+          geo_zip: data.zip,
+          geo_languages_code: data.location.languages.map((lang) => lang?.code),
+          geo_languages_name: data.location.languages.map((lang) => lang?.name),
+        };
+      });
+
+    const detect = await fetch(
+      `${withPrefix(`/api/detect?message=${encodeURI(data.message)}`)}`
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        const data = response?.data?.detections;
+        return {
+          detections: data
+            .map(
+              (item) =>
+                `language: ${item.language} -> confidence: ${item.confidence}`
+            )
+            .join(", "),
         };
       });
 
@@ -118,6 +134,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         "g-recaptcha-response": recaptchaValue,
         ...data,
         ...geo,
+        ...detect,
       }),
     })
       .then(() => {
