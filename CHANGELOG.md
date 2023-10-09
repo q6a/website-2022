@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/q6a/website-2022/compare/v1.9.2...v1.10.0) (2023-10-09)
+
+
+### Features
+
+* add language detections ([7efd179](https://github.com/q6a/website-2022/commit/7efd179ebbd3d4f7cfba9032f6223b6de9b486c9))
+* ip geolocation ([ae700c0](https://github.com/q6a/website-2022/commit/ae700c00b9ce4decdcd3d9317cee70eb39e2db65))
+
+
+### Bug Fixes
+
+* add dimension into header logo ([db66c47](https://github.com/q6a/website-2022/commit/db66c47b15d735a300a5c115cbac5e8d616e158a))
+* show language helper on mobile ([fb31116](https://github.com/q6a/website-2022/commit/fb3111653f1afbe204ae228987d8467e2a9d2e4b))
+* web accessibilities ([38f1379](https://github.com/q6a/website-2022/commit/38f1379738d97bb63e5b74b8b40f1f4fca9a6098))
+
 ### [1.9.2](https://github.com/q6a/website-2022/compare/v1.9.1...v1.9.2) (2023-09-30)
 
 
