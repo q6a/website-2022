@@ -61,7 +61,16 @@ const Helper = ({ isHome = false }: IHelper) => {
                   <button
                     className="dropdown-item d-flex align-items-center gap-1"
                     type="button"
-                    onClick={() => changeLanguage(value)}
+                    onClick={() => {
+                      changeLanguage(value);
+                      if (typeof window !== "undefined") {
+                        // @ts-ignore
+                        window.dataLayer.push({
+                          event: "change_language",
+                          button_name: `Set default language to ${value}`,
+                        });
+                      }
+                    }}
                   >
                     <span className={`fi fi-${flag}`}></span>
                     {name}
