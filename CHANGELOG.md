@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/q6a/website-2022/compare/v1.10.0...v1.11.0) (2023-10-11)
+
+
+### Features
+
+* contact form language detector ([2aa08e7](https://github.com/q6a/website-2022/commit/2aa08e76d9138a23588e20895cf185de69cc92f4))
+
 ## [1.10.0](https://github.com/q6a/website-2022/compare/v1.9.2...v1.10.0) (2023-10-09)
 
 

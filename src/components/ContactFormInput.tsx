@@ -120,7 +120,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
         ? data
         : {
             ...data,
-            message: `Message:\n${messageValue}\n\nDetection:\n${detect}\n\n`,
+            message: `${messageValue}\n\nDetection:\n${detect}`,
           };
 
     if (data.subscribeInfo || data.subscribeNewsletter) {
