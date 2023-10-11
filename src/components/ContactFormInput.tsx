@@ -41,6 +41,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
     reset,
     watch,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(contactSchema),
@@ -48,6 +49,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
   const [btnDisabled, setBtnDisabled] = React.useState(true);
   const [ip, setIp] = React.useState("");
+  const [geo, setGeo] = React.useState({});
   const recaptchaRef = React.createRef();
   const { t } = useTranslation();
   const { language } = useI18next();
@@ -62,9 +64,27 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   }, []);
 
   useEffect(() => {
+    if (!!ip) {
+      fetch(`${withPrefix(`/api/geolocation?ip=${ip}`)}`)
+        .then((response) => response.json())
+        .then((response) => setGeo(response?.data));
+    }
+  }, [ip]);
+
+  useEffect(() => {
     setValue(
       "attributes",
-      `locale: ${language}\ncode_version: ${app.version}\nbrowser_language: ${browserLang}\nip_address: ${ip}`
+      `locale: ${language}\ncode_version: ${
+        app.version
+      }\nbrowser_language: ${browserLang}\nip_address: ${ip}\ngeo_continent: ${
+        geo.continent_name
+      }\ngeo_country: ${geo.country_name}\ngeo_city: ${geo.city}\ngeo_zip: ${
+        geo.zip
+      }\ngeo_languages_code: ${geo?.location?.languages?.map(
+        (lang) => lang?.code
+      )}\ngeo_languages_name: ${geo?.location?.languages?.map(
+        (lang) => lang?.name
+      )}`
     );
   }, [JSON.stringify(watchCheckboxes)]);
 
@@ -80,6 +100,28 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
       browser_language: browserLang,
       ip_address: ip,
     };
+    const messageValue = await getValues("message");
+    const detect = await fetch(
+      `${withPrefix(`/api/detect?message=${encodeURI(messageValue)}`)}`
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        const data = response?.data?.detections;
+        return data
+          .map(
+            (item) =>
+              `language: [${item.language}] -> confidence: ${item.confidence}`
+          )
+          .join(", ");
+      });
+
+    const newData =
+      detect.includes("[en]") || detect.includes("[id]")
+        ? data
+        : {
+            ...data,
+            message: `Message:\n${messageValue}\n\nDetection:\n${detect}\n\n`,
+          };
 
     if (data.subscribeInfo || data.subscribeNewsletter) {
       const paramsValidation = sendpulseParamsSchema.safeParse(sendpulseParams);
@@ -95,36 +137,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
       }
     }
 
-    const geo = await fetch(`${withPrefix(`/api/geolocation?ip=${ip}`)}`)
-      .then((response) => response.json())
-      .then((response) => {
-        const data = response?.data;
-        return {
-          geo_continent: data.continent_name,
-          geo_country: data.country_name,
-          geo_city: data.city,
-          geo_zip: data.zip,
-          geo_languages_code: data.location.languages.map((lang) => lang?.code),
-          geo_languages_name: data.location.languages.map((lang) => lang?.name),
-        };
-      });
-
-    const detect = await fetch(
-      `${withPrefix(`/api/detect?message=${encodeURI(data.message)}`)}`
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        const data = response?.data?.detections;
-        return {
-          detections: data
-            .map(
-              (item) =>
-                `language: ${item.language} -> confidence: ${item.confidence}`
-            )
-            .join(", "),
-        };
-      });
-
     await fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -132,9 +144,7 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
       body: encode({
         "form-name": "contact",
         "g-recaptcha-response": recaptchaValue,
-        ...data,
-        ...geo,
-        ...detect,
+        ...newData,
       }),
     })
       .then(() => {
