@@ -10,11 +10,11 @@ const ContactFormAddress = () => {
     <BodyContentText classes="lh-lg">
       <span className="fw-bolder">{t("officeLocation")}:</span>
       <br />
-      105/166D Glebe Point Road
+      Suite 3/540 Botany Rd
       <br />
-      Glebe, 2037
+      Alexandria NSW 2015
       <br />
-      Sydney, NSW, Australia.
+      Australia
       <br />
       <br />
       <span className="fw-bolder">{t("email")}:</span>
