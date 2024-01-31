@@ -32,7 +32,7 @@ const EnterpriseSection = () => {
       id: 4,
       title: t("enterpriseHealthcare"),
       icon: "images/doctors-bag.png",
-      link: null,
+      link: "/enterprise/healthcare",
       bg: "images/healthcare-bg-sm.webp",
     },
   ];
