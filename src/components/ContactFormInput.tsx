@@ -49,7 +49,6 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
   const [btnDisabled, setBtnDisabled] = React.useState(true);
   const [ip, setIp] = React.useState("");
-  const [geo, setGeo] = React.useState({});
   const recaptchaRef = React.createRef();
   const { t } = useTranslation();
   const { language } = useI18next();
@@ -64,27 +63,9 @@ const ContactFormInput = ({ isEmbed = false }: ContactFormInputProps) => {
   }, []);
 
   useEffect(() => {
-    if (!!ip) {
-      fetch(`${withPrefix(`/api/geolocation?ip=${ip}`)}`)
-        .then((response) => response.json())
-        .then((response) => setGeo(response?.data));
-    }
-  }, [ip]);
-
-  useEffect(() => {
     setValue(
       "attributes",
-      `locale: ${language}\ncode_version: ${
-        app.version
-      }\nbrowser_language: ${browserLang}\nip_address: ${ip}\ngeo_continent: ${
-        geo.continent_name
-      }\ngeo_country: ${geo.country_name}\ngeo_city: ${geo.city}\ngeo_zip: ${
-        geo.zip
-      }\ngeo_languages_code: ${geo?.location?.languages?.map(
-        (lang) => lang?.code
-      )}\ngeo_languages_name: ${geo?.location?.languages?.map(
-        (lang) => lang?.name
-      )}`
+      `locale: ${language}\nuser_agent: ${navigator.userAgent}\ncode_version: ${app.version}\nbrowser_language: ${browserLang}\nip_address: ${ip}`
     );
   }, [JSON.stringify(watchCheckboxes)]);
 
