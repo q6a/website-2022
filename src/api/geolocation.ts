@@ -1,3 +1,7 @@
+/**
+ * DEPRECATED
+ * Todo: remove this file later
+ */
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
 import * as z from "zod";
 
