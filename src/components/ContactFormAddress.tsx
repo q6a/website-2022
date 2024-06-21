@@ -10,9 +10,9 @@ const ContactFormAddress = () => {
     <BodyContentText classes="lh-lg">
       <span className="fw-bolder">{t("officeLocation")}:</span>
       <br />
-      Suite 3/540 Botany Rd
+      180 Katoomba Street
       <br />
-      Alexandria NSW 2015
+      Katoomba NSW 2780
       <br />
       Australia
       <br />
