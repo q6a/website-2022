@@ -2,24 +2,22 @@ import React from "react";
 import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { BodyContentText } from "../components/Typography";
+import useContactInfo from "../hooks/useContactInfo";
 
 const ContactFormAddress = () => {
   const { t } = useTranslation();
+  const contactInfo = useContactInfo();
 
   return (
-    <BodyContentText classes="lh-lg">
+    <BodyContentText classes="lh-lg whitespace-pre-line">
       <span className="fw-bolder">{t("officeLocation")}:</span>
       <br />
-      180 Katoomba Street
-      <br />
-      Katoomba NSW 2780
-      <br />
-      Australia
+      {contactInfo?.address?.data?.address}
       <br />
       <br />
       <span className="fw-bolder">{t("email")}:</span>
       <br />
-      hello@videotranslator.ai
+      {contactInfo?.email}
     </BodyContentText>
   );
 };
