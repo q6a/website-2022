@@ -48,6 +48,7 @@ $ npm run serve
 - [How to modify partner/client logos?](docs/how-to-modify-partner-client-logos.md)
 - [How to modify social media links?](docs/how-to-modify-social-media-links.md)
 - [How to modify case studies?](docs/how-to-modify-case-studies.md)
+- [How to modify contact info?](docs/how-to-modify-contact-info.md)
 
 ## Useful links
 
