@@ -1,4 +1,4 @@
-# How to modify social media links?
+# How to modify contact info links?
 
 1. First, open the [Strapi URL](https://sea-turtle-app-33ffu.ondigitalocean.app/admin) and login using **Super Admin** roles.
    ![Strapi login page](assets/q1-1.png)

@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/q6a/website-2022/compare/v1.10.0...v1.14.0) (2024-06-25)
+
+
+### Features
+
+* contact form language detector ([2aa08e7](https://github.com/q6a/website-2022/commit/2aa08e76d9138a23588e20895cf185de69cc92f4))
+* create page for enterprise - healthcare ([c755fde](https://github.com/q6a/website-2022/commit/c755fde115c5257e2f55d1cc2fadbf742331a6fd))
+* get contact info value from strapi ([5150cca](https://github.com/q6a/website-2022/commit/5150cca0759fa1fd696895330a80d52ef3d517f7))
+
+
+### Bug Fixes
+
+* remove ipstack's geolocation services ([9beadf8](https://github.com/q6a/website-2022/commit/9beadf8cf977764e52566a4782501bb458fb3d38))
+* update office address ([5f12ae0](https://github.com/q6a/website-2022/commit/5f12ae061174db4d60fa4dcfba7d753a4a8fa448))
+* updated address on contact-us page/form ([bd256ea](https://github.com/q6a/website-2022/commit/bd256ea055be2e2a15d2d0ca8d30130d4dcd305e))
+
 ## [1.13.0](https://github.com/q6a/website-2022/compare/v1.10.0...v1.13.0) (2024-06-21)
 
 
