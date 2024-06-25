@@ -475,6 +475,10 @@ span.fi {
   z-index: 9;
 }
 
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+
 /* Responsives */
 @media screen and (max-width: 768px) {
   .img-editor {

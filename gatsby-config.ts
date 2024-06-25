@@ -123,7 +123,7 @@ const config: GatsbyConfig = {
             },
           },
         ],
-        singleTypes: [`pricing`, `social-link`, `partner-logo`],
+        singleTypes: [`pricing`, `social-link`, `partner-logo`, `contact`],
       },
     },
     {
